@@ -2,17 +2,19 @@
 
 ## Thông tin nhóm
 
-- Tên nhóm:
-- Lớp: L3A / L3B
-- Repo nhóm: `K5-L3A-DAY03-TenNhom-ResearchAgentToolEval` hoặc `K5-L3B-DAY03-TenNhom-ResearchAgentToolEval` (xem [SUBMISSION.md](SUBMISSION.md))
-- URL repo, nhánh nộp, commit chốt:
+- Tên nhóm: ABC
+- Lớp: L3B
+- Repo nhóm: `K5-L3B-DAY03-ABCm-ResearchAgentToolEval` (xem [SUBMISSION.md](SUBMISSION.md))
+- URL repo, nhánh nộp, commit chốt: https://github.com/K0heii/K5-L3B-DAY03-ABC-ResearchAgentToolEval nhánh main
 
 ## Thành viên
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 |        |      |       |        |         |
+|   1 | Nguyễn Như Duy An | 2A202603783| 26ai.annnd@vinuni.edu.vn | K0heii | Nhóm trưởng|
 |   2 |        |      |       |        |         |
+|   3 |        |      |       |        |         |
+|   4 |        |      |       |        |         |
 
 ## Cá nhân
 
