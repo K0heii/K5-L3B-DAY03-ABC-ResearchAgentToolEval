@@ -18,6 +18,9 @@ from .social_search.tool import search_tweets
 from .send.tool import send_telegram
 from .lookup.tool import web_search
 from .summarize.tool import summarize_text
+from .keywords.tool import extract_keywords
+from .extract_links.tool import extract_links
+from .merge_sources.tool import merge_sources
 
 
 # NOTE (starter_v0): tool names here are intentionally vague. These keys are the
@@ -37,6 +40,9 @@ TOOL_FUNCTIONS = {
     "papers": arxiv_search,
     "paper_text": get_arxiv_paper_text,
     "summarize": summarize_text,
+    "keywords": extract_keywords,
+    "extract_links": extract_links,
+    "merge_sources": merge_sources,
 }
 
 
