@@ -12,6 +12,27 @@
   ],
   "cases": [
     {
+      "id": "G01_summarize_pasted_text",
+      "phase": "B",
+      "query": "Mình dán sẵn đoạn ghi chú dưới đây, rút gọn còn đúng 2 câu chính giúp mình nhé: Các mô hình ngôn ngữ lớn ngày càng được dùng làm trợ lý nghiên cứu. Chúng có thể gọi công cụ để tìm kiếm web và đọc tài liệu. Tuy nhiên mô hình vẫn có thể chọn sai công cụ hoặc truyền sai tham số. Vì vậy các nhóm phát triển cần bộ đánh giá để đo độ chính xác khi gọi công cụ. Kết quả đánh giá giúp nhóm sửa prompt và mô tả công cụ theo từng phiên bản.",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "summarize",
+            "args": {
+              "max_sentences": 2
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "routing_new_tool_summarize",
+        "difficulty": "medium",
+        "what_it_tests": "Tool mới của nhóm: văn bản đã được dán sẵn trong hội thoại và cần rút gọn → summarize(max_sentences=2); không gọi fetch/lookup vì không có URL hay nhu cầu tìm kiếm."
+      }
+    },
+    {
       "id": "G02_handle_and_limit",
       "phase": "B",
       "query": "Lấy 7 tweet mới nhất của Yann LeCun giúp mình",

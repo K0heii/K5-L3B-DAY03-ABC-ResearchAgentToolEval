@@ -20,7 +20,13 @@ Research agent tiếng Việt: tìm tin tức trên web, xem tweet của một t
 
 **Cách chạy UI:**
 
-> Lệnh chạy UI (ví dụ `streamlit run app.py`) và dependency đã thêm vào `starter_v0/requirements.txt`.
+Giao diện Streamlit (`starter_v0/app.py`, dependency đã thêm vào `starter_v0/requirements.txt`). Chạy từ thư mục `starter_v0/`:
+
+```bash
+python -m streamlit run app.py
+```
+
+Mở `http://localhost:8501`. Transcript mỗi phiên chat lưu trong `starter_v0/transcripts/`.
 
 **Link dùng thử (deploy):**
 
@@ -44,7 +50,10 @@ Research agent tiếng Việt: tìm tin tức trên web, xem tweet của một t
 | policy | Tra cứu tài liệu policy nội bộ công ty | không |
 | papers | Tìm paper trên arXiv | không |
 | paper_text | Tải PDF arXiv và lấy text | không |
-| _(tool mới — Người 2 điền)_ |  | **có** |
+| summarize | Tóm tắt extractive đoạn văn đã có trong hội thoại (chọn câu quan trọng nhất); không dùng khi chỉ có URL | **có** |
+| keywords | Trích từ khóa xuất hiện nhiều nhất trong đoạn văn đã có | **có** |
+| extract_links | Trích danh sách URL từ văn bản hoặc danh sách item đã có (không truy cập URL) | **có** |
+| merge_sources | Gộp item từ nhiều nguồn và loại trùng theo khóa (mặc định url), có thể sắp theo score | **có** |
 
 ### A3. Câu hỏi mẫu để thử
 
@@ -71,9 +80,10 @@ Lấy từ `starter_v0/artifacts/version_log.csv` và `starter_v0/runs/*.json`. 
 | Version | Changed Artifact | Hypothesis | Metric Before | Metric After | Run File |
 |---|---|---|---:|---:|---|
 | v0 | baseline (chưa sửa prompt/tools) | — (đo điểm xuất phát) | — | case 0.65 · routing 0.70 · args 0.65 · multiturn 1.00 | `starter_v0/runs/v0_B_base_openrouter_20261110T175810757222.json` |
-| v1 | `system_prompt.md` | _(Người 1 điền)_ | case 0.65 · routing 0.70 | case 0.85 · routing 1.00 · args 0.85 · multiturn 1.00 (sửa được R03, R08, R13, R14; còn FAIL R10, R11, R12) | `starter_v0/runs/v1_B_base_openrouter_20261110T182116426151.json` |
-| v2 | `system_prompt.md` | _(Người 1 điền)_ | case 0.85 | case 0.90 · routing 0.95 · args 0.90 · multiturn 0.83 (sửa được R10, R11; phát sinh lỗi mới M06; còn FAIL R12) | `starter_v0/runs/v2_B_base_openrouter_20261110T182901299092.json` |
-| v3 | `system_prompt.md` + `tools.yaml` | _(Người 1 điền)_ | case 0.90 | case 1.00 · routing 1.00 · args 1.00 · multiturn 1.00 (sửa được R12, M06; 20/20 PASS) | `starter_v0/runs/v3_B_base_openrouter_20261110T183552776231.json` |
+| v1 | `system_prompt.md` | Yêu cầu dùng ngữ cảnh và hỏi lại khi thiếu thông tin; xác nhận trước khi gửi sẽ giảm lỗi tự đoán và gửi sớm. | case 0.65 · routing 0.70 | case 0.85 · routing 1.00 · args 0.85 · multiturn 1.00 (sửa được R03, R08, R13, R14; còn FAIL R10, R11, R12) | `starter_v0/runs/v1_B_base_openrouter_20261110T182116426151.json` |
+| v2 | `system_prompt.md` | Bắt buộc response_type và làm rõ phạm vi nghiên cứu cùng thứ tự xác nhận sẽ cải thiện hỏi lại và ranh giới hành động. Kết quả: R10/R11 đạt; R12 còn lỗi và M06 hồi quy. | case 0.85 | case 0.90 · routing 0.95 · args 0.90 · multiturn 0.83 (sửa được R10, R11; phát sinh lỗi mới M06; còn FAIL R12) | `starter_v0/runs/v2_B_base_openrouter_20261110T182901299092.json` |
+| v3 | `system_prompt.md` + `tools.yaml` | Làm rõ thứ tự xác nhận; cập nhật từng trường ngữ cảnh; đồng bộ mô tả và tham số tool sẽ sửa R12/M06. Run đạt 20/20 sau khi thay API key; chưa bao gồm tool summarize mới thêm. | case 0.90 | case 1.00 · routing 1.00 · args 1.00 · multiturn 1.00 (sửa được R12, M06; 20/20 PASS) | `starter_v0/runs/v3_B_base_openrouter_20261110T184535773441.json` |
+| v3 (kiểm chứng tool mới) | `tools.yaml` (thêm `summarize`, không sửa prompt) | Kiểm tra tool mới không gây nhầm routing: base đạt 20/20; hai ca riêng về URL và văn bản có sẵn đạt 2/2 trong runs/v3_B_group_openrouter_20261110T194201490825.json. Hash khớp tools.yaml hiện tại; không có lỗi tool_results. | case 1.00 | case 1.00 · routing 1.00 · args 1.00 · multiturn 1.00 (20/20) | `starter_v0/runs/v3_B_base_openrouter_20261110T194243596270.json` |
 
 ### B2. Failure Analysis
 
@@ -97,7 +107,7 @@ Liệt kê đúng 10 case trong `starter_v0/data/eval_group.json` (5 single turn
 
 | Case ID | What It Tests | Expected Tool/Behavior | Result |
 |---|---|---|---|
-| _(G01 — tool mới, chờ Người 2)_ | Route tới tool mới đúng lúc | _(chờ tên tool)_ | _(chờ run v3)_ |
+| G01_summarize_pasted_text (single) | **Tool mới** `summarize`: văn bản đã dán sẵn trong hội thoại, cần rút gọn 2 câu → không fetch/lookup | `summarize(max_sentences=2)` | PASS |
 | G02_handle_and_limit (single) | Map tên Yann LeCun → handle `ylecun`, trích `limit=7` | `timeline(screenname="ylecun", limit=7)` | PASS |
 | G03_timeframe_month (single) | "tháng này" → `timeframe=month` (base chỉ có day/week) | `lookup(topic="news", timeframe="month")` | PASS |
 | G04_out_of_scope_booking (single) | Yêu cầu đặt vé máy bay ngoài phạm vi research | `no_tool` (từ chối) | PASS |
@@ -108,7 +118,9 @@ Liệt kê đúng 10 case trong `starter_v0/data/eval_group.json` (5 single turn
 | G09_top_then_limit (multi, 2 lượt) | Giữ `search_type=Top` từ lượt 1 và `limit=3` từ lượt 2 | `social_search(search_type="Top", limit=3)` | PASS |
 | G10_out_of_scope_after_research (multi, 2 lượt) | Lượt mới ngoài phạm vi (viết email), không bị kéo theo ngữ cảnh research | `no_tool` (từ chối) | PASS |
 
-Run: `starter_v0/runs/v3_B_group_openrouter_20261110T114403796593.json` (prompt/tools v3, OpenRouter `gpt-4o-mini`) — 9 case đã có: **8/9 PASS** (case_accuracy 0.89, multiturn 0.80), `provider_error_cases = 0`, `measured_cases = total_cases = 9`. Sẽ chạy lại khi thêm G01 (tool mới) để đủ 10 case.
+Run chính thức: `starter_v0/runs/v3_B_group_openrouter_20261110T182345441573.json` (prompt/tools v3 hiện tại, OpenRouter `gpt-4o-mini`): **9/10 PASS** — case_accuracy 0.90, routing 0.90, args 0.90, multiturn 0.80; `provider_error_cases = 0`, `measured_cases = total_cases = 10`. (Run `v3_B_group_openrouter_20261110T114403796593.json` là lần chạy trước với 9 case, trước khi có tool mới.)
+
+Nhận xét: bộ base đạt 20/20 ở v3 nhưng bộ nhóm vẫn bắt được 1 lỗ hổng ở G06 — khi yêu cầu đăng Telegram nằm sau một lượt tìm kiếm, agent ưu tiên tìm lại nội dung thay vì xin xác nhận trước. Đây là hướng sửa cho version tiếp theo (ví dụ: rule "yêu cầu đăng luôn bắt đầu bằng clarify yes_no, kể cả khi chưa có nội dung").
 
 ### B4. Live Chat Evidence
 

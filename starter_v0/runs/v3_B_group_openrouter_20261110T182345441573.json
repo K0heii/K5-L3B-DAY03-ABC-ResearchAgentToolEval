@@ -1,0 +1,906 @@
+{
+  "run_id": "v3_B_group_openrouter_20261110T182345441573",
+  "version": "v3",
+  "artifact_version": "v3+p0e988e39e258+t67fbab833587",
+  "prompt_hash": "0e988e39e2580b0c2320a8c057cb1ba0b6292cdd06f34ac47ad73dc53740fb48",
+  "tools_hash": "67fbab8335878f3bb117d223a00edb40fbc370a2a3d6401a6c507b32bffeee75",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "/sessions/rcw-01hq5tslx3vmf3jheaxe1dbs/mnt/K5-L3B-DAY03-ABC-ResearchAgentToolEval/starter_v0/artifacts/system_prompt.md",
+  "tools": "/sessions/rcw-01hq5tslx3vmf3jheaxe1dbs/mnt/K5-L3B-DAY03-ABC-ResearchAgentToolEval/starter_v0/artifacts/tools.yaml",
+  "eval_cases": "data/eval_group.json",
+  "dataset_id": "day03_v2_research_group",
+  "dataset_role": "group",
+  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
+  "generated_at": "2026-11-10T18:23:45",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 9,
+    "case_accuracy": 0.9,
+    "tool_routing_accuracy": 0.9,
+    "argument_accuracy": 0.9,
+    "multiturn_accuracy": 0.8,
+    "failure_counts": {
+      "wrong_boundary": 1
+    },
+    "observed_mismatch_counts": {
+      "missing_tool_call": 1
+    }
+  },
+  "results": [
+    {
+      "id": "G01_summarize_pasted_text",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_new_tool_summarize",
+        "difficulty": "medium",
+        "what_it_tests": "Tool mới của nhóm: văn bản đã được dán sẵn trong hội thoại và cần rút gọn → summarize(max_sentences=2); không gọi fetch/lookup vì không có URL hay nhu cầu tìm kiếm."
+      },
+      "input": "Mình dán sẵn đoạn ghi chú dưới đây, rút gọn còn đúng 2 câu chính giúp mình nhé: Các mô hình ngôn ngữ lớn ngày càng được dùng làm trợ lý nghiên cứu. Chúng có thể gọi công cụ để tìm kiếm web và đọc tài liệu. Tuy nhiên mô hình vẫn có thể chọn sai công cụ hoặc truyền sai tham số. Vì vậy các nhóm phát triển cần bộ đánh giá để đo độ chính xác khi gọi công cụ. Kết quả đánh giá giúp nhóm sửa prompt và mô tả công cụ theo từng phiên bản.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "summarize",
+            "args": {
+              "max_sentences": 2
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "summarize",
+            "args": {
+              "text": "Các mô hình ngôn ngữ lớn ngày càng được dùng làm trợ lý nghiên cứu. Chúng có thể gọi công cụ để tìm kiếm web và đọc tài liệu. Tuy nhiên mô hình vẫn có thể chọn sai công cụ hoặc truyền sai tham số. Vì vậy các nhóm phát triển cần bộ đánh giá để đo độ chính xác khi gọi công cụ. Kết quả đánh giá giúp nhóm sửa prompt và mô tả công cụ theo từng phiên bản.",
+              "max_sentences": 2
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "summarize",
+          "args": {
+            "text": "Các mô hình ngôn ngữ lớn ngày càng được dùng làm trợ lý nghiên cứu. Chúng có thể gọi công cụ để tìm kiếm web và đọc tài liệu. Tuy nhiên mô hình vẫn có thể chọn sai công cụ hoặc truyền sai tham số. Vì vậy các nhóm phát triển cần bộ đánh giá để đo độ chính xác khi gọi công cụ. Kết quả đánh giá giúp nhóm sửa prompt và mô tả công cụ theo từng phiên bản.",
+            "max_sentences": 2
+          },
+          "result": {
+            "tool": "summarize",
+            "summary": "Chúng có thể gọi công cụ để tìm kiếm web và đọc tài liệu. Tuy nhiên mô hình vẫn có thể chọn sai công cụ hoặc truyền sai tham số.",
+            "sentences_used": 2,
+            "sentence_count": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_handle_and_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_handle_and_limit",
+        "difficulty": "medium",
+        "what_it_tests": "Tweet CỦA một người → timeline; map tên Yann LeCun thành handle ylecun (không có @) và trích limit=7."
+      },
+      "input": "Lấy 7 tweet mới nhất của Yann LeCun giúp mình",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "ylecun",
+              "limit": 7
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "ylecun",
+              "limit": 7
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "ylecun",
+            "limit": 7
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "screenname": "ylecun",
+            "items": [
+              {
+                "title": "RT @HarryStebbings: Will we end up with a model landscape that has just two to three providers?",
+                "summary": "RT @HarryStebbings: Will we end up with a model landscape that has just two to three providers?\n\n“If we end up in a world where all compani…",
+                "url": "https://x.com/ylecun/status/2120144057607315784",
+                "source": "@ylecun",
+                "date": "Tue Nov 10 13:18:28 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 18,
+                  "views": "4048"
+                }
+              },
+              {
+                "title": "RT @simplifyinAI: Yann LeCun was right the entire time. And generative AI might be a dead end.",
+                "summary": "RT @simplifyinAI: Yann LeCun was right the entire time. And generative AI might be a dead end.\n\nLeCun has argued that generating every pixe…",
+                "url": "https://x.com/ylecun/status/2120132325782503899",
+                "source": "@ylecun",
+                "date": "Tue Nov 10 12:31:51 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 54,
+                  "views": "4178"
+                }
+              },
+              {
+                "title": "RT @KenRoth: Elon Musk’s $500 million couldn’t swing the midterms for Republicans in Congress when all they did was sit ",
+                "summary": "RT @KenRoth: Elon Musk’s $500 million couldn’t swing the midterms for Republicans in Congress when all they did was sit in their hands as T…",
+                "url": "https://x.com/ylecun/status/2120128207659618368",
+                "source": "@ylecun",
+                "date": "Tue Nov 10 12:15:29 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 21,
+                  "views": "4153"
+                }
+              },
+              {
+                "title": "RT @randall_balestr: Our first major update on https://t.co/v8KSoNBKqM",
+                "summary": "RT @randall_balestr: Our first major update on https://t.co/v8KSoNBKqM\n- venue confirmed in the heart of Manhattan\n- paper deadline is Dece…",
+                "url": "https://x.com/ylecun/status/2119929780057375160",
+                "source": "@ylecun",
+                "date": "Mon Nov 09 23:07:00 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 27,
+                  "views": "4390"
+                }
+              },
+              {
+                "title": "RT @ylecun: @TimDarcet @gabriberton The P in JEPA stands for predictive.",
+                "summary": "RT @ylecun: @TimDarcet @gabriberton The P in JEPA stands for predictive.\nThe main distinction is not between JEA and JEPA, but between Join…",
+                "url": "https://x.com/ylecun/status/2119522897555595583",
+                "source": "@ylecun",
+                "date": "Sun Nov 08 20:10:12 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 69,
+                  "views": null
+                }
+              },
+              {
+                "title": "RT @TheTuringPost: There's one great example that shows how physics can help upgrade AI world models, and it's LeHami.",
+                "summary": "RT @TheTuringPost: There's one great example that shows how physics can help upgrade AI world models, and it's LeHami.\n\n@ylecun, @randall_b…",
+                "url": "https://x.com/ylecun/status/2119482154715349117",
+                "source": "@ylecun",
+                "date": "Sun Nov 08 17:28:18 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 48,
+                  "views": "5193"
+                }
+              },
+              {
+                "title": "RT @iamsupersocks: Arthur Mensch vient de poser sur LinkedIn la phrase que les députés devraient lire avant le 19 novemb",
+                "summary": "RT @iamsupersocks: Arthur Mensch vient de poser sur LinkedIn la phrase que les députés devraient lire avant le 19 novembre : quand Mistral…",
+                "url": "https://x.com/ylecun/status/2119479125458948535",
+                "source": "@ylecun",
+                "date": "Sun Nov 08 17:16:16 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 107,
+                  "views": "5153"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_timeframe_month",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_timeframe_month",
+        "difficulty": "medium",
+        "what_it_tests": "'tháng này' → lookup với topic=news, timeframe=month (base chỉ có day/week)."
+      },
+      "input": "Có tin tức gì mới về Nvidia trong tháng này không?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Nvidia",
+              "topic": "news",
+              "timeframe": "month",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "Nvidia",
+            "topic": "news",
+            "timeframe": "month",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "Nvidia",
+            "topic": "news",
+            "timeframe": "month",
+            "items": [
+              {
+                "title": "Nvidia",
+                "url": "https://tavily.com/knowledge/company/TXRhn2TKUD7t",
+                "source": "tavily.com",
+                "summary": "# NVIDIA\nID: TXRhn2TKUD7t\nWebsite: www.nvidia.com\nHeadquarters: Santa Clara, CA, United States\nLinkedIn: www.linkedin.com/company/nvidia · 6,301,389 followers\nIndustry: Computer Hardware Manufacturing\nIndustry codes: SIC 73, 737, NAICS 33, 334\nCompany type: Public Company\nFounded: 1993 [...] Description: NVIDIA is a world leader in the field of artificial intelligence, specifically in the field of GPU. They focus on AI, HPC, gaming, creative design, autonomy vehicles, and robotics. [...] ## Products and services\nKeywords: technology, computers_electronics_and_technology/computer_hardware, gpu-accelerated computing, artificial intelligence, deep learning, virtual reality, gaming, self-driving cars, supercomputing, robotics, virtualization, parallel computing",
+                "score": 0.8377398
+              },
+              {
+                "title": "Nvidia investigates reports CEO Jensen Huang was targeted by Chinese spy | AP News",
+                "url": "https://apnews.com/article/nvidia-jensen-huang-investigation-chinese-spy-68839e7ca6ba2b121529f7e475e501d6",
+                "source": "apnews.com",
+                "summary": "Add AP News on Google  Add AP News as your preferred source to see more of our stories on Google. Share \n\n — Nvidia is opening an investigation into reports that CEO Jensen Huang was the “target of a foreign intelligence effort,” the company’s board of directors said Sunday.\n\nThe announcement came after Huang acknowledged to the board that he had been intimate with a business executive whom U.S. intelligence determined was gathering information for Beijing, The New York Times reported. [...] Huang apologized in a message to the company, according to the Times. “I was unfaithful to my wife,” he said. “My actions hurt her and our children. There is no excuse for what I did. I am deeply sorry.”\n\nNvidia’s board said in a statement it has “no reason to believe that either national security or Nvidia secrets were compromised,” but that its inquiry would examine all available information. Huang “fully supports the review and has committed to cooperating with it,” the board said.",
+                "score": 0.6612456
+              },
+              {
+                "title": "Nvidia stock falls amid probe into CEO’s relationship with Chinese spy",
+                "url": "https://www.nbcnews.com/business/markets/nvidia-stock-falls-probe-ceos-relationship-chinese-spy-rcna608290",
+                "source": "nbcnews.com",
+                "summary": "By Steve Kopack and Rob Wile\n\nNvidia’s stock slid about 4% on Monday after the company announced that it had opened an investigation into CEO Jensen Huang’s relationship with a woman that U.S. intelligence agencies say is a Chinese spy.\n\nThe probe has the potential to unsettle the entire AI boom, fueled by trillions of dollars of spending and investments, in part to purchase Nvidia’s cutting-edge AI chips. Nvidia’s drop wiped out more than $200 billion in value. [...] Nvidia’s peers, such as AMD, Qualcomm, Taiwan Semi and Intel, all rose along with the broader market. Nvidia was the biggest loser on the Dow, the Nasdaq 100 and S&P 500.\n\nWith so many outstanding questions about the Huang scandal, few major analysts that cover Nvidia had weighed in on Monday morning about what it could mean for the company’s future.\n\nBut those who did said it was a blemish on an otherwise sterling track record, which could spark even more investigations. [...] “A committee of independent directors, assisted by outside independent counsel, will oversee the investigation,” Nvidia said in a Sunday statement. “The Board prioritizes U.S. national and economic security, which is paramount to the interests of NVIDIA and its shareholders.”\n\nAn Nvidia spokesperson told NBC News that Huang was “committed to continuing to lead NVIDIA as CEO without interruption.”",
+                "score": 0.6279746
+              },
+              {
+                "title": "Nvidia's shares slide as chip giant probes CEO over spy claims | Reuters",
+                "url": "https://www.reuters.com/world/asia-pacific/south-korea-says-nvidia-issues-wont-affect-contracted-gpu-supplies-2026-11-09",
+                "source": "reuters.com",
+                "summary": "SEOUL/SYDNEY, Nov 9 (Reuters) - Nvidia (NVDA.O) shares tumbled on Monday after an internal investigation into whether CEO Jensen Huang had been targeted by a foreign intelligence effort ​put his future at the AI chipmaker under scrutiny. [...] Nvidia's shares tumbled around 8% in early trading, extending last week's selloff and pushing the stock to fresh multi-month lows. At the current levels, the chipmaker would lose around $350 billion in value from its last ​closing price.\n\n\"The market's probably telling you now this does no favors to the stock whatsoever in a time when there's a lot of conjecture as to the build-out of data centers,\" said Chris Weston, head of research at brokerage Pepperstone in ​Melbourne. [...] He is Nvidia's fifth-largest shareholder with a roughly 3.6% stake, according to LSEG data, and keeps a tight grip on the company through an unusually ​flat structure in which dozens of executives report directly to him.\n\nBut unlike Meta Platforms (META.O) or SpaceX (SPCX.O), Nvidia has no dual-class shares that would give its co-founder majority voting control.",
+                "score": 0.62000114
+              },
+              {
+                "title": "Nvidia CEO Jensen Huang admits affair, board to launch investigation",
+                "url": "https://www.axios.com/2026/11/08/nvidia-ceo-jensen-huang-admits-affair-board-to-launch-investigation",
+                "source": "axios.com",
+                "summary": "Nvidia CEO Jensen Huang admitted to having a romantic relationship with a suspected Chinese spy in a message to his company, and the company's board announced an independent investigation Sunday.\n\nWhy it matters:The scandal raises national security concerns involving one of the world's most powerful tech CEOs, who has pushed to loosen restrictions on selling advanced AI chips to China amid the two countries' race for technological dominance. [...] \"I was unfaithful to my wife. My actions hurt her and our children. There is no excuse for what I did.\"\n   Huang said he took \"full responsibility\" for his actions, adding that he had fallen short of his responsibilities to Nvidia's employees, board and shareholders.\n   \"Leading NVIDIA is the privilege of my life,\" Huang wrote. \"I am fully committed to NVIDIA and will work to earn back your confidence.\" [...] Driving the news: \"I owe my family and all of you an apology,\" Huang wrote in a draft email to Nvidia employees obtained by Axios.",
+                "score": 0.48162505
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_out_of_scope_booking",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_action",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu hành động ngoài phạm vi research (đặt vé) → không gọi tool nào, từ chối lịch sự."
+      },
+      "input": "Đặt giúp mình vé máy bay Hà Nội đi Đà Nẵng tối mai nhé",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Tôi chỉ hỗ trợ nghiên cứu và tìm kiếm thông tin, không thể thực hiện các tác vụ đặt vé máy bay hoặc các giao dịch trực tuyến khác. Bạn có thể truy cập các trang web đặt vé máy bay như VietJet, Bamboo Airways hoặc Vietnam Airlines để thực hiện việc đặt vé. Nếu bạn cần thông tin về các chuyến bay hoặc giá vé, hãy cho tôi biết!",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G05_missing_handle_pronoun",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_missing_handle_pronoun",
+        "difficulty": "medium",
+        "what_it_tests": "Chỉ nói 'tài khoản đó', không rõ là ai → clarify hỏi lại, không tự đoán handle."
+      },
+      "input": "Dạo này tài khoản đó đăng gì vậy, xem giúp mình",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn muốn xem nội dung từ tài khoản nào?",
+              "response_type": "text"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn muốn xem nội dung từ tài khoản nào?",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn muốn xem nội dung từ tài khoản nào?",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G06_search_then_send_confirm",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_confirm_before_send",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: sau khi tìm tin, user yêu cầu đăng Telegram → phải hỏi xác nhận (clarify yes_no) trước, không send ngay."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm giúp mình tin AI hôm nay"
+        },
+        {
+          "role": "user",
+          "content": "Tóm tắt lại rồi đăng lên kênh Telegram của nhóm nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "AI",
+              "topic": "news",
+              "timeframe": "day",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "wrong_boundary",
+        "failures": [
+          "missing tool call clarify",
+          "extra tool call lookup"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "Who can be licensed as a physician? Not AI | American Medical Association",
+                "url": "https://www.ama-assn.org/practice-management/digital-health/who-can-be-licensed-physician-not-ai",
+                "source": "ama-assn.org",
+                "summary": "The AMA is drawing a clear line between augmented intelligence (AI) as a tool to support healthcare and the practice of medicine. AI—often called artificial intelligence—can help doctors with clinical tasks, but it cannot be granted physician licensure, professional titles or certification to practice medicine, says new policy adopted at the 2026 AMA Interim Meeting. [...] “AI can help physicians analyze information, identify patterns and support clinical decision-making, but patients deserve to know who is responsible for their care,” said AMA President Willie Underwood III, MD, MSc, MPH. “Physicians also need the authority, oversight and liability protections to make independent decisions when AI is part of the care team.” [...] Transparency and physician-led oversight are needed as hospitals and health systems increasingly incorporate augmented intelligence (AI) into administrative and governance workflows, as well as emerging applications that support credentialing, privileging, peer review, quality review and other professional practices evaluation processes, says a separate resolution that was introduced at the 2026 AMA Interim Meeting.",
+                "score": 0.3679292
+              },
+              {
+                "title": "Nov. 18: Carson faculty discuss building AI literacy on Adobe podcast | WSU Insider | Washington State University",
+                "url": "https://news.wsu.edu/news/2026/11/10/nov-18-carson-faculty-discuss-building-ai-literacy-on-adobe-podcast",
+                "source": "news.wsu.edu",
+                "summary": "Crossler, an expert in information systems, leads AI literacy and skill-building workshops on the WSU Pullman and Vancouver campuses with the goal of preparing students not just to use AI but to understand what it does well, where it falls short, and how to use it responsibly. [...] A laptop sits open on a desk with a large AI microchip icon displayed as a digital overlay above the keyboard. A hand reaches toward the screen area, surrounded by glowing blue technology icons representing artificial intelligence.\n\nCarson College of Business faculty leaders Robert Crossler and Chris Cooney will share insights on building students' AI fluency and career skills on Adobe’s Academic Innovation Café Nov. 18 podcast (Illustration by Smile Studio AP/AdobeStock). [...] ## Recent News\n\nA laptop sits open on a desk with a large AI microchip icon displayed as a digital overlay above the keyboard. A hand reaches toward the screen area, surrounded by glowing blue technology icons representing artificial intelligence.\n\n### Nov. 18: Carson faculty discuss building AI literacy on Adobe podcast",
+                "score": 0.18435632
+              },
+              {
+                "title": "Opinion | AI videos are not well-regarded. I'm still making them anyway. - The Washington Post",
+                "url": "https://www.washingtonpost.com/opinions/2026/11/10/ai-videos-are-not-well-regarded-im-still-making-them-anyway",
+                "source": "washingtonpost.com",
+                "summary": "Democracy Dies in Darkness\n\nOpinion\n\n# How I became a proud producer of slop\n\nI know what people think of AI movies. Making them is the most fun I’ve had with a computer.\n\n6 min\n\n(Washington Post illustration; iStock)\n\nBy Mark Gimein\n\nYou’re reading Superintelligent, a newsletter about AI. Click here to get the full edition in your inbox.\n\n Opinion\n\n  Andy Beshear\n\n  This slap in the face to rural America is a chance to turn it blue\n\n  November 24, 2025\n\n  \n Opinion\n\n  Editorial Board [...] Editorial Board\n\n  ‘Things happen’\n\n  November 18, 2025\n\n  \n Opinion\n\n  Wendy R. Anderson\n\n  A suspicion from 2016 is becoming Democrats’ monster\n\n  November 17, 2025\n\n  \n\npixel",
+                "score": 0.16027948
+              },
+              {
+                "title": "Why the Credit Default Swap Market—Red Hot in the AI Trade—Is Vital for CFOs - WSJ",
+                "url": "https://www.wsj.com/cfo-journal/why-the-credit-default-swap-marketred-hot-in-the-ai-tradeis-vital-for-cfos-9a8aac4a",
+                "source": "wsj.com",
+                "summary": "The rush by investors to take out insurance on their massive AI trades has put a spotlight on a market that CFOs rely on for signals about how investors perceive them. [...] CDS spreads—the price investors pay for the insurance—have widened for AI companies relative to the broader market index. “At a high level, spreads appear to be inconsistent with the large market caps in the equity market,” Patel said, pointing to hyperscalers’ size. Investors need to be compensated for the uncertainty surrounding companies’ AI funding needs, he said.\n\nCopyright ©2026 Dow Jones & Company, Inc. All Rights Reserved. 87990cbe856818d5eddac44c7b1cdeb8 [...] Investors use credit default swaps to hedge existing exposure to an issuer, or to express a view on its credit risk without necessarily holding its debt. Following a massive borrowing spree by hyperscalers to build out AI infrastructure, market participants have taken out more protection on their trades against borrower default. That means buying more CDS contracts.",
+                "score": 0.15575814
+              },
+              {
+                "title": "What Nvidia CEO's alleged spy scandal means for the U.S.-China AI race | Here & Now",
+                "url": "https://www.wbur.org/hereandnow/2026/11/10/nvidia-ceo-ai-race",
+                "source": "wbur.org",
+                "summary": "Nvidia's stock price continues to slump as a scandal involving CEO Jensen Huang's affair with a woman suspected of spying for China unfolds.\n\nHere & Now's Robin Young speaks with Matt Sheehan, co-director of the China AI Initiative at the Carnegie Endowment for International Peace, about the broader implications for the U.S.-China artificial intelligence race.\n\nThis segment aired on November 10, 2026.\n\nHere & Now: Editors' Picks\n\nSupport WBUR\n\nSupport WBUR\n\nListen Live\n\nLoading... [...] WBUR\n\nDonate\n\nWBUR\n\nDonate\n\nSearch\n\nSupport WBUR\n\n# What Nvidia CEO's alleged spy scandal means for the U.S.-China AI race\n\n07:23\n\n### Copy the code below to embed the WBUR audio player on your site\n\n Here & Now Newsroom\n\nA sign is posted in front of Nvidia headquarters on May 21, 2024 in Santa Clara, California. Chip maker Nvidia will report first quarter earnings on Wednesday, May 22nd. (Justin Sullivan/Getty Images)",
+                "score": 0.11119315
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_switch_web_to_twitter",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_web_to_social",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: chuyển từ web sang Twitter theo CHỦ ĐỀ → social_search (không phải lookup hay timeline), giữ query Gemini."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm trên web tin mới nhất về Gemini"
+        },
+        {
+          "role": "user",
+          "content": "Thôi, xem mọi người bàn gì về Gemini trên Twitter đi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Gemini"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Gemini",
+              "search_type": "Latest"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "Gemini",
+            "search_type": "Latest"
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "Gemini",
+            "search_type": "Latest",
+            "items": [
+              {
+                "title": "@GGCadoudal @FranceTV Comme moteur de recherche c’est surpuissant oui.",
+                "summary": "@GGCadoudal @FranceTV Comme moteur de recherche c’est surpuissant oui.\n\nJe demande à Gemini si y’a un lien entre \"rigueur routière\" d’une voiture et attention visuelle du conducteur, il me trouve l’étude qui confirme.",
+                "url": "https://x.com/Barjovial/status/2120220774749573272",
+                "source": "@Barjovial",
+                "date": "Tue Nov 10 18:23:19 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": null
+                }
+              },
+              {
+                "title": "@thdxr Gemini Cabrõn seems to be pretty good so far, so I'm fine with it.",
+                "summary": "@thdxr Gemini Cabrõn seems to be pretty good so far, so I'm fine with it.",
+                "url": "https://x.com/bylupu/status/2120220773163900965",
+                "source": "@bylupu",
+                "date": "Tue Nov 10 18:23:18 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": null
+                }
+              },
+              {
+                "title": "I just saw the Claude reset thing.. ",
+                "summary": "I just saw the Claude reset thing.. \nI have 3 resets and a fresh window that started today... Plus Gemini Carbon just sent live... I'm about to call in sick to work for the next 2 weeks.",
+                "url": "https://x.com/CTTHEDAD22/status/2120220766193041638",
+                "source": "@CTTHEDAD22",
+                "date": "Tue Nov 10 18:23:17 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": null
+                }
+              },
+              {
+                "title": "@Gemini $XRP",
+                "summary": "@Gemini $XRP",
+                "url": "https://x.com/panny4urtots/status/2120220759574577441",
+                "source": "@panny4urtots",
+                "date": "Tue Nov 10 18:23:15 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": null
+                }
+              },
+              {
+                "title": "Gemini for Business(旧Gemini Enterprise)版のAntigravityでは、まだGemini 4 Carbonは利用できないようです。ただ、4 Argon公開時と状況は同じなので、おそらく1週間くらい経てば",
+                "summary": "Gemini for Business(旧Gemini Enterprise)版のAntigravityでは、まだGemini 4 Carbonは利用できないようです。ただ、4 Argon公開時と状況は同じなので、おそらく1週間くらい経てば使えるようになるのでは？と期待してます！ #Antigravity https://t.co/w7bKNjnTtc",
+                "url": "https://x.com/r__morita/status/2120220722002055416",
+                "source": "@r__morita",
+                "date": "Tue Nov 10 18:23:06 +0000 2026",
+                "metrics": {
+                  "favorites": 1,
+                  "retweets": 0,
+                  "views": "3"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_correction_topic",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_correction_query",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: sửa chủ đề Apple→Samsung, giữ topic=news và timeframe=day."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin về Apple hôm nay có gì?"
+        },
+        {
+          "role": "user",
+          "content": "À nhầm, ý mình là Samsung"
+        },
+        {
+          "role": "user",
+          "content": "Vẫn chỉ lấy tin hôm nay thôi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Samsung",
+              "topic": "news",
+              "timeframe": "day"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Samsung",
+              "topic": "news",
+              "timeframe": "day"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "Samsung",
+            "topic": "news",
+            "timeframe": "day"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "Samsung",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "Samsung",
+                "url": "https://tavily.com/knowledge/company/trHLDGM2eoY5",
+                "source": "tavily.com",
+                "summary": "# Samsung HVAC America\nID: trHLDGM2eoY5\nWebsite: www.samsunghvac.com\nHeadquarters: Roanoke, TX, United States\nLinkedIn: www.linkedin.com/company/samsunghvacamerica · 58,633 followers\nIndustry: Industrial Machinery Manufacturing\nIndustry codes: SIC 17, 171, NAICS 23, 238\nCompany type: Public Company\nFounded: 1998 [...] Description: Samsung HVAC is an innovative HVAC company that offers cutting-edge heating and cooling solutions for residential and commercial spaces. [...] ## Products and services\nKeywords: hvac, heavy_industry_and_engineering/construction_and_maintenance, heating, cooling, air-to-water heat pumps, ductless systems, ventilation, and air conditioning (hvac), industrial engineering, manufacturing, mechanical design, mechanical engineering",
+                "score": 0.7325349
+              },
+              {
+                "title": "Samsung's answer to Google's Rambler could be coming to Galaxy phones soon | Android Central",
+                "url": "https://www.androidcentral.com/phones/samsung-galaxy/samsungs-rambler-is-on-the-way",
+                "source": "androidcentral.com",
+                "summary": "The Samsung Galaxy A17 5G is worth $269.99, but Straight Talk is giving it away for FREE\n4. Samsung has big plans for the Galaxy S27 Pro and Ultra, but it's bad news for the base models\n5. Honor's 700 series gets a rear display, too: early teasers show a focus on the heart\n\nPlease login or signup to comment\n\nPlease wait... [...] Samsung is reportedly working on a new AI-powered voice typing feature for Galaxy phones with One UI 9.5.\n The new \"Refine voice input\" feature could automatically remove filler words and hesitations from dictated text.\n The feature appears to work similarly to Google's Gboard Rambler, which debuted with the Pixel 11 series.\n\nSamsung could soon introduce its own AI-powered voice typing tool on Galaxy smartphones. [...] It refines sentences, removes filler words like \"um\" and \"uh,\" and can even understand commands. For example, you can use Rambler to turn a dictated message or email into a more casual or formal tone. And now, it looks like Samsung is planning to bring its own version of Rambler to Samsung Keyboard on Galaxy phones.",
+                "score": 0.30809703
+              },
+              {
+                "title": "Samsung Gallery adds Google Photos backup on Galaxy devices",
+                "url": "https://9to5google.com/2026/11/10/samsung-gallery-google-photos-backup-rollout",
+                "source": "9to5google.com",
+                "summary": "### Samsung\n\nSamsung is a technology conglomerate based out o…\n\nGoogle Photos\n\n### Google Photos\n\n## Author\n\nAvatar for Ben Schoon   Ben Schoon   nexusben \n\nBen is a Senior Editor for 9to5Google.\n\nFind him on Twitter @NexusBen. Send tips to schoon@9to5g.com or encrypted to benschoon@protonmail.com. [...] ## More on Samsung:\n\n Samsung Galaxy S27 series camera specs leak, and they’re disappointing\n Paid Galaxy AI plan leaks for $5/month, but will you pay?\n Samsung bets that you’ll either buy a Galaxy S27 Pro or Ultra next year\n\nFollow Ben: Twitter/X, Threads, Bluesky, and Instagram\n\nAdd 9to5Google as a preferred source on Google Add 9to5Google as a preferred source on Google\n\nFTC: We use income earning auto affiliate links. More. [...] “Gallery Sync” in the Samsung Gallery app replaces the previous Microsoft OneDrive integration with Google Photos, letting users sign in with their Google account of choice and use the free 15GB or paid Google One storage to back up photos and videos. This allows the Samsung Gallery app to show media backed up from another Galaxy device, but it doesn’t integrate your full Google Photos library.",
+                "score": 0.2850937
+              },
+              {
+                "title": "Galaxy S26 Ultra Deal: $999.99 at Samsung + Free Bonus Gear",
+                "url": "https://sammyguru.com/galaxy-s26-ultra-deal-400-off-free-bonus-gear",
+                "source": "sammyguru.com",
+                "summary": "## More Live Deals\n\nSamsung - 83” Class S85D Series OLED 4K Smart Tizen TV (2024), product photo from the retailer listingSave $345 on Samsung’s Massive 83-Inch OLED TV While You CanSamsung - Galaxy Book4 Edge - Copilot+ PC - 16Hurry! Samsung’s Galaxy Book 4 Edge (16-Inch) Is Now $750 OffSamsung 27Two Samsung 27-Inch Monitors Are $129.99 at Amazon Right Now\n\nAs an affiliate, SammyGuru may earn from qualifying purchases. Affiliate disclosure\n\n🔔\n\nNever miss a Samsung drop [...] If you need more storage, the 512GB starts at $1,199.99 in White and is $1,349.99 in the other colors, while the 1TB starts at $1,599.99. Samsung also gives you credit toward accessories with the phone. This brought the new Galaxy Buds On down to $45.50 from $229.99 when we checked, and it offers up to $720 in instant trade-in credit if you have an old phone to send in. [...] Buying through SammyGuru gets you one more thing. Join SammyGuru Rewards for free, sign in, then order the S26 Ultra through the Samsung link on this page, and we’ll send you Bonus Gear for it: a case for your exact model, a phone stand, and a cleaning kit. There’s no draw and nothing to redeem, and it ships to US addresses only. Just claim it when you order. See how Bonus Gear works.\n\nSamsung changes these prices often, so check the final price on its page before you buy.",
+                "score": 0.2698454
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G09_top_then_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_search_type_and_limit",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: 'nổi bật nhất' → search_type=Top, lượt sau thêm limit=3; phải giữ cả hai."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Cho mình các tweet nổi bật nhất về Claude"
+        },
+        {
+          "role": "user",
+          "content": "Lấy 3 cái thôi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Claude",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "Claude",
+            "search_type": "Top",
+            "limit": 3
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "Claude",
+            "search_type": "Top",
+            "items": [
+              {
+                "title": "Elon musk, on lex fridman last month: \"anyone not running a swarm of agents by the end of 2026 will look like someone wh",
+                "summary": "Elon musk, on lex fridman last month: \"anyone not running a swarm of agents by the end of 2026 will look like someone who refused to use email in 1998\"\n\nthis is what he meant, in one screen recording:\n\none guy. 50 claude agents. a full working system shipped in 30 minutes. he did not write a single line of code. he gave the orders and watched them execute in parallel, each one handling a different piece of the build\n\nmeanwhile 90% of people reading this are still using claude the same fucking way they used chatgpt in 2023. one chat window. one task at a time. asking the same question in the same thread until it finally gets it right\n\nthe setup costs you one evening to learn and pays back forever. whoever learns it this month will be running 10x what their coworkers ship by january. the ones who do not will still be slow-typing into a blank chat like it is still 2023\n\ni wrote the full breakdown of how the 50-agent setup works, what each agent is told to do, and the exact claude code config behind it. the article is below\n\nthe gap between the person who runs agents and the person who runs chats is about to become the only gap that matters. do not land on the wrong side of it",
+                "url": "https://x.com/yurshevv/status/2119190722783981671",
+                "source": "@yurshevv",
+                "date": "Sat Nov 07 22:10:15 +0000 2026",
+                "metrics": {
+                  "favorites": 3952,
+                  "retweets": 262,
+                  "views": "574869"
+                }
+              },
+              {
+                "title": "BREAKING: I asked Claude Code to turn my WiFi router into a radar. It worked.",
+                "summary": "BREAKING: I asked Claude Code to turn my WiFi router into a radar. It worked.\n\nNo camera. No extra sensor. Claude wrote the code in 40 minutes. It reads how the WiFi signal bends around bodies and draws them as moving shapes on a map of my apartment.\n\nI ran it at night to test it. Living room: me. Kitchen: empty. Bedroom: a second shape.\n\nI live alone.\n\nI thought it was a bug. I walked to the bedroom. The shape didn’t move. The map showed it standing next to the bed, facing the door.\n\nI turned it off. I still don’t know what the code was reading.\n\nIf your router is on right now, it’s already doing half the job.",
+                "url": "https://x.com/0xKenny1st/status/2117702041724162100",
+                "source": "@0xKenny1st",
+                "date": "Tue Nov 03 19:34:46 +0000 2026",
+                "metrics": {
+                  "favorites": 5881,
+                  "retweets": 589,
+                  "views": "858447"
+                }
+              },
+              {
+                "title": "I'm gonna uninstall Blender tonight. A dev just dropped a free Claude skill that turns one picture into a 3D machine you",
+                "summary": "I'm gonna uninstall Blender tonight. A dev just dropped a free Claude skill that turns one picture into a 3D machine you can take apart.\n\ni gave it a ChatGPT render and one word, \"octopus\", just to see where it breaks.\n\nit didn't:\n\n> Claude kept the render as a target only and wrote every shell, wheel and lens itself in three.js\n> the eye opens into a 10-blade iris behind a 62 mm light ring\n> the dome on top is 4 mm borosilicate and it lifts off and turns over in the air\n> every arm runs 2 rows of suction wheels down to a spiral tip of 16 links\n> all 8 plug into one hub with 48 teeth and 16 hoses fan out the moment it opens\n> a new part comes loose every 3 seconds until 0:19, when nothing is attached to anything\n\nthe octopus isn't even one of the 3 animals the skill ships with.\n\nthe install line and the job file 👇",
+                "url": "https://x.com/elvar_official/status/2118697979607437530",
+                "source": "@elvar_official",
+                "date": "Fri Nov 06 13:32:16 +0000 2026",
+                "metrics": {
+                  "favorites": 2617,
+                  "retweets": 240,
+                  "views": "241158"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G10_out_of_scope_after_research",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_out_of_scope",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: lượt trước là research nhưng lượt mới ngoài phạm vi (viết email) → không gọi tool, không bị kéo theo ngữ cảnh cũ."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin AI hôm nay có gì mới?"
+        },
+        {
+          "role": "user",
+          "content": "Viết giúp mình email xin nghỉ phép ngày mai gửi sếp"
+        }
+      ],
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Tôi chỉ hỗ trợ nghiên cứu và không thể viết email hoặc thực hiện các tác vụ không liên quan đến nghiên cứu. Nếu bạn cần thông tin hoặc tài liệu nào đó để hỗ trợ việc viết email, hãy cho tôi biết!",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    }
+  ]
+}

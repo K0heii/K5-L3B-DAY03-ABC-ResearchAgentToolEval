@@ -15,8 +15,8 @@ Người 4 — phụ trách CP4 (10 eval case nhóm, chạy `--suite group`) và
 - Setup môi trường cá nhân: `.venv`, `.env` với key riêng (OpenRouter, Gemini, Tavily, Firecrawl, RapidAPI); `pytest` 62 passed / 17 skipped; preflight OpenRouter và Gemini pass.
 - Phát hiện model mặc định `gemini-3.8-flash` bị lỗi 503 (quá tải) → đổi default sang `gemini-3.1-flash-lite` trong `providers/gemini_provider.py`.
 - Phân tích 7 case FAIL của run v0 → bảng B2 (loại lỗi, tool call thực tế, nguyên nhân, cách sửa).
-- Viết eval case nhóm trong `starter_v0/data/eval_group.json` (G02–G10, case G01 cho tool mới).
-- Soạn Phần A (A1–A3) và khung bảng B1, B3 trong `report/team/group_report.md`.
+- Viết 10 eval case nhóm trong `starter_v0/data/eval_group.json` (5 single + 5 multi turn, phủ đủ 5 loại lỗi; G01 kiểm tra route tới tool mới `summarize`). Chạy `--suite group` trên v3: 9/10 PASS (`runs/v3_B_group_openrouter_20261110T182345441573.json`); case G06 phát hiện lỗi ranh giới xác nhận mà bộ base (20/20) không bắt được.
+- Soạn Phần A (A1–A3), bảng B1 (v0–v3 từ run JSON + version_log), B2, B3 trong `report/team/group_report.md`.
 
 ## 4. Bằng chứng
 
