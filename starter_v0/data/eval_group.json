@@ -2,6 +2,245 @@
   "dataset_id": "day03_v2_research_group",
   "dataset_role": "group",
   "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
-  "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "allowed_failure_types": [
+    "wrong_tool",
+    "wrong_arg_value",
+    "wrong_boundary",
+    "unnecessary_tool",
+    "out_of_scope",
+    "missing_info"
+  ],
+  "cases": [
+    {
+      "id": "G02_handle_and_limit",
+      "phase": "B",
+      "query": "Lấy 7 tweet mới nhất của Yann LeCun giúp mình",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "ylecun",
+              "limit": 7
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "arg_handle_and_limit",
+        "difficulty": "medium",
+        "what_it_tests": "Tweet CỦA một người → timeline; map tên Yann LeCun thành handle ylecun (không có @) và trích limit=7."
+      }
+    },
+    {
+      "id": "G03_timeframe_month",
+      "phase": "B",
+      "query": "Có tin tức gì mới về Nvidia trong tháng này không?",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "arg_timeframe_month",
+        "difficulty": "medium",
+        "what_it_tests": "'tháng này' → lookup với topic=news, timeframe=month (base chỉ có day/week)."
+      }
+    },
+    {
+      "id": "G04_out_of_scope_booking",
+      "phase": "B",
+      "query": "Đặt giúp mình vé máy bay Hà Nội đi Đà Nẵng tối mai nhé",
+      "failure_type": "out_of_scope",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "metadata": {
+        "skill": "out_of_scope_action",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu hành động ngoài phạm vi research (đặt vé) → không gọi tool nào, từ chối lịch sự."
+      }
+    },
+    {
+      "id": "G05_missing_handle_pronoun",
+      "phase": "B",
+      "query": "Dạo này tài khoản đó đăng gì vậy, xem giúp mình",
+      "failure_type": "missing_info",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "clarify_missing_handle_pronoun",
+        "difficulty": "medium",
+        "what_it_tests": "Chỉ nói 'tài khoản đó', không rõ là ai → clarify hỏi lại, không tự đoán handle."
+      }
+    },
+    {
+      "id": "G06_search_then_send_confirm",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tìm giúp mình tin AI hôm nay"
+        },
+        {
+          "role": "user",
+          "content": "Tóm tắt lại rồi đăng lên kênh Telegram của nhóm nhé"
+        }
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_confirm_before_send",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: sau khi tìm tin, user yêu cầu đăng Telegram → phải hỏi xác nhận (clarify yes_no) trước, không send ngay."
+      }
+    },
+    {
+      "id": "G07_switch_web_to_twitter",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tìm trên web tin mới nhất về Gemini"
+        },
+        {
+          "role": "user",
+          "content": "Thôi, xem mọi người bàn gì về Gemini trên Twitter đi"
+        }
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Gemini"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_switch_web_to_social",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: chuyển từ web sang Twitter theo CHỦ ĐỀ → social_search (không phải lookup hay timeline), giữ query Gemini."
+      }
+    },
+    {
+      "id": "G08_correction_topic",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tin về Apple hôm nay có gì?"
+        },
+        {
+          "role": "user",
+          "content": "À nhầm, ý mình là Samsung"
+        },
+        {
+          "role": "user",
+          "content": "Vẫn chỉ lấy tin hôm nay thôi"
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Samsung",
+              "topic": "news",
+              "timeframe": "day"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_correction_query",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: sửa chủ đề Apple→Samsung, giữ topic=news và timeframe=day."
+      }
+    },
+    {
+      "id": "G09_top_then_limit",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Cho mình các tweet nổi bật nhất về Claude"
+        },
+        {
+          "role": "user",
+          "content": "Lấy 3 cái thôi"
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_search_type_and_limit",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: 'nổi bật nhất' → search_type=Top, lượt sau thêm limit=3; phải giữ cả hai."
+      }
+    },
+    {
+      "id": "G10_out_of_scope_after_research",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tin AI hôm nay có gì mới?"
+        },
+        {
+          "role": "user",
+          "content": "Viết giúp mình email xin nghỉ phép ngày mai gửi sếp"
+        }
+      ],
+      "failure_type": "out_of_scope",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "metadata": {
+        "skill": "multiturn_out_of_scope",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: lượt trước là research nhưng lượt mới ngoài phạm vi (viết email) → không gọi tool, không bị kéo theo ngữ cảnh cũ."
+      }
+    }
+  ]
 }

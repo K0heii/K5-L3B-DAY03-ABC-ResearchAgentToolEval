@@ -1,0 +1,856 @@
+{
+  "run_id": "v3_B_group_openrouter_20261110T114403796593",
+  "version": "v3",
+  "artifact_version": "v3+p0e988e39e258+td14cf5938c9f",
+  "prompt_hash": "0e988e39e2580b0c2320a8c057cb1ba0b6292cdd06f34ac47ad73dc53740fb48",
+  "tools_hash": "d14cf5938c9fd721fffc2271e2938824a22a0810f419601cc02a49560ca2a92e",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "/sessions/rcw-01hq5tslx3vmf3jheaxe1dbs/mnt/K5-L3B-DAY03-ABC-ResearchAgentToolEval/starter_v0/artifacts/system_prompt.md",
+  "tools": "/sessions/rcw-01hq5tslx3vmf3jheaxe1dbs/mnt/K5-L3B-DAY03-ABC-ResearchAgentToolEval/starter_v0/artifacts/tools.yaml",
+  "eval_cases": "data/eval_group.json",
+  "dataset_id": "day03_v2_research_group",
+  "dataset_role": "group",
+  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
+  "generated_at": "2026-11-10T11:44:03",
+  "summary": {
+    "total_cases": 9,
+    "measured_cases": 9,
+    "provider_error_cases": 0,
+    "passed_cases": 8,
+    "case_accuracy": 0.8889,
+    "tool_routing_accuracy": 0.8889,
+    "argument_accuracy": 0.8889,
+    "multiturn_accuracy": 0.8,
+    "failure_counts": {
+      "wrong_boundary": 1
+    },
+    "observed_mismatch_counts": {
+      "missing_tool_call": 1
+    }
+  },
+  "results": [
+    {
+      "id": "G02_handle_and_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_handle_and_limit",
+        "difficulty": "medium",
+        "what_it_tests": "Tweet CỦA một người → timeline; map tên Yann LeCun thành handle ylecun (không có @) và trích limit=7."
+      },
+      "input": "Lấy 7 tweet mới nhất của Yann LeCun giúp mình",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "ylecun",
+              "limit": 7
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "ylecun",
+              "limit": 7
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "ylecun",
+            "limit": 7
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "screenname": "ylecun",
+            "items": [
+              {
+                "title": "RT @randall_balestr: Our first major update on https://t.co/v8KSoNBKqM",
+                "summary": "RT @randall_balestr: Our first major update on https://t.co/v8KSoNBKqM\n- venue confirmed in the heart of Manhattan\n- paper deadline is Dece…",
+                "url": "https://x.com/ylecun/status/2119929780057375160",
+                "source": "@ylecun",
+                "date": "Mon Nov 09 23:07:00 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 21,
+                  "views": "4076"
+                }
+              },
+              {
+                "title": "RT @ylecun: @TimDarcet @gabriberton The P in JEPA stands for predictive.",
+                "summary": "RT @ylecun: @TimDarcet @gabriberton The P in JEPA stands for predictive.\nThe main distinction is not between JEA and JEPA, but between Join…",
+                "url": "https://x.com/ylecun/status/2119522897555595583",
+                "source": "@ylecun",
+                "date": "Sun Nov 08 20:10:12 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 68,
+                  "views": null
+                }
+              },
+              {
+                "title": "RT @TheTuringPost: There's one great example that shows how physics can help upgrade AI world models, and it's LeHami.",
+                "summary": "RT @TheTuringPost: There's one great example that shows how physics can help upgrade AI world models, and it's LeHami.\n\n@ylecun, @randall_b…",
+                "url": "https://x.com/ylecun/status/2119482154715349117",
+                "source": "@ylecun",
+                "date": "Sun Nov 08 17:28:18 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 47,
+                  "views": "5125"
+                }
+              },
+              {
+                "title": "RT @iamsupersocks: Arthur Mensch vient de poser sur LinkedIn la phrase que les députés devraient lire avant le 19 novemb",
+                "summary": "RT @iamsupersocks: Arthur Mensch vient de poser sur LinkedIn la phrase que les députés devraient lire avant le 19 novembre : quand Mistral…",
+                "url": "https://x.com/ylecun/status/2119479125458948535",
+                "source": "@ylecun",
+                "date": "Sun Nov 08 17:16:16 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 107,
+                  "views": "5085"
+                }
+              },
+              {
+                "title": "RT @DeBunKerEtoiles: Attention, quelles que soient vos opinions politiques par ailleurs, cette mesure de LFI est extrême",
+                "summary": "RT @DeBunKerEtoiles: Attention, quelles que soient vos opinions politiques par ailleurs, cette mesure de LFI est extrêmement nocive pour la…",
+                "url": "https://x.com/ylecun/status/2119476601343656428",
+                "source": "@ylecun",
+                "date": "Sun Nov 08 17:06:14 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 454,
+                  "views": "5138"
+                }
+              },
+              {
+                "title": "Reminder from 3 years ago.",
+                "summary": "Reminder from 3 years ago.",
+                "url": "https://x.com/ylecun/status/2119184445987287449",
+                "source": "@ylecun",
+                "date": "Sat Nov 07 21:45:19 +0000 2026",
+                "metrics": {
+                  "favorites": 3199,
+                  "retweets": 278,
+                  "views": "316242"
+                }
+              },
+              {
+                "title": "RT @ylecun: @gabriberton Several comments:",
+                "summary": "RT @ylecun: @gabriberton Several comments:\n1. image/video SSL methods differ by whether they use reconstruction or not. Joint embedding arc…",
+                "url": "https://x.com/ylecun/status/2119143975739142269",
+                "source": "@ylecun",
+                "date": "Sat Nov 07 19:04:30 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 55,
+                  "views": null
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_timeframe_month",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_timeframe_month",
+        "difficulty": "medium",
+        "what_it_tests": "'tháng này' → lookup với topic=news, timeframe=month (base chỉ có day/week)."
+      },
+      "input": "Có tin tức gì mới về Nvidia trong tháng này không?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Nvidia",
+              "topic": "news",
+              "timeframe": "month",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "Nvidia",
+            "topic": "news",
+            "timeframe": "month",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "Nvidia",
+            "topic": "news",
+            "timeframe": "month",
+            "items": [
+              {
+                "title": "Nvidia",
+                "url": "https://tavily.com/knowledge/company/TXRhn2TKUD7t",
+                "source": "tavily.com",
+                "summary": "# NVIDIA\nID: TXRhn2TKUD7t\nWebsite: www.nvidia.com\nHeadquarters: Santa Clara, CA, United States\nLinkedIn: www.linkedin.com/company/nvidia · 6,301,389 followers\nIndustry: Computer Hardware Manufacturing\nIndustry codes: SIC 73, 737, NAICS 33, 334\nCompany type: Public Company\nFounded: 1993 [...] Description: NVIDIA is a world leader in the field of artificial intelligence, specifically in the field of GPU. They focus on AI, HPC, gaming, creative design, autonomy vehicles, and robotics. [...] ## Financials\n- Stock: NVDA\n- Stock: NASDAQ:NVDA\n- Annual revenue: 215.94B USD\n- Quarterly revenue: 57.01B USD\n- Market cap: 3.46T USD as of 2024-10-29\n- Q1, 2027: revenue 81.62B gross profit 61.16B EBIT 53.54B net income 58.32B EPS 2.390000104904175 USD\n- Q1, 2027: revenue 81.62B gross profit 61.16B EBIT 53.54B net income 58.32B EPS 2.390000104904175 USD\n- FY, 2026: revenue 215.94B gross profit 153.46B EBIT 130.39B net income 120.07B EPS 4.900000095367432 USD",
+                "score": 0.7821637
+              },
+              {
+                "title": "Nvidia launches investigation into CEO’s alleged relationship with Chinese spy : NPR",
+                "url": "https://www.npr.org/2026/11/08/nx-s1-6034036/nvidia-launches-investigation-into-ceos-alleged-relationship-with-chinese-spy",
+                "source": "npr.org",
+                "summary": "Nvidia dominates the global market for AI chips, and has seen explosive growth in recent years, as NPR has reported. The company started as a manufacturer of chips for computer graphics, which later turned out to be crucial for training artificial intelligence.\n\nNvidia's CEO and President Trump have repeatedly appeared in public together in recent years. According to Huang, Nvidia is helping to fund the construction of a new ballroom at the White House. [...] Rebecca Hersher\n\nNvidia CEO Jensen Huang delivers his keynote on the company's GTC event in Berlin, Germany, Wednesday, Oct. 21, 2026.\n\nNvidia CEO Jensen Huang delivers his keynote on the company's GTC event in Berlin, Germany, Wednesday, Oct. 21, 2026.  Markus Schreiber/AP  hide caption\n\n Markus Schreiber/AP\n\nThe massive artificial intelligence chip maker Nvidia says it is launching an internal investigation, after reports that the company's CEO was in a close relationship with a Chinese spy. [...] In the statement announcing the investigation, Nvidia cited recent reporting by The New York Times, which alleges Nvidia CEO Jensen Huang was the target of a Chinese intelligence operation that sought to send advanced Nvidia AI chips to China.\n\n\"While the Board has no reason to believe that either national security or NVIDIA secrets were compromised, the Board's inquiry will examine all available information,\" the statement from the company's board of directors reads in part.",
+                "score": 0.67661995
+              },
+              {
+                "title": "Nvidia stock falls amid probe into CEO’s relationship with Chinese spy",
+                "url": "https://www.nbcnews.com/business/markets/nvidia-stock-falls-probe-ceos-relationship-chinese-spy-rcna608290",
+                "source": "nbcnews.com",
+                "summary": "By Steve Kopack and Rob Wile\n\nNvidia’s stock slid about 4% on Monday after the company announced that it had opened an investigation into CEO Jensen Huang’s relationship with a woman that U.S. intelligence agencies say is a Chinese spy.\n\nThe probe has the potential to unsettle the entire AI boom, fueled by trillions of dollars of spending and investments, in part to purchase Nvidia’s cutting-edge AI chips. Nvidia’s drop wiped out more than $200 billion in value. [...] Jensen Huang has become one of the main forces driving the global AI push while steering Nvidia to a market value of more than $4 trillion. Huang has led Nvidia since he founded it in 1993, so it would be a seismic change if he were to leave the role. [...] Nvidia’s peers, such as AMD, Qualcomm, Taiwan Semi and Intel, all rose along with the broader market. Nvidia was the biggest loser on the Dow, the Nasdaq 100 and S&P 500.\n\nWith so many outstanding questions about the Huang scandal, few major analysts that cover Nvidia had weighed in on Monday morning about what it could mean for the company’s future.\n\nBut those who did said it was a blemish on an otherwise sterling track record, which could spark even more investigations.",
+                "score": 0.6415346
+              },
+              {
+                "title": "Jensen Huang's affair highlights Nvidia's key man risk with no heir",
+                "url": "https://www.cnbc.com/2026/11/09/jensen-huang-affair-nvidia-succession.html",
+                "source": "cnbc.com",
+                "summary": "Nvidia has long maintained a flat, non-hierarchical organizational structure. Huang has deep involvement in the company's day-to-day operations and frequently serves as its spokesperson in front of world leaders and at industry conferences. In addition to being co-founder and CEO, Huang is also Nvidia's president. [...] While Nvidia says Huang will continue to lead the company during the probe, pressure is rapidly mounting on the chipmaker, whose technology has powered the first four years of the generative artificial intelligence boom. Leaders from both parties are calling for briefings, and Democrats poised to take control of both houses of Congress are calling for investigations and new legislation \"to stop advanced AI chips from fueling China's military,\" Sen. Elizabeth Warren of Massachusetts wrote in a [...] The Melius analysts wrote that Nvidia has a \"strong bench\" of executive talent across its networking, hyperscale and high-performance computing businesses, along with \"technical expertise\" stemming from Chief Technology Officer Michael Kagan as well as Dally, the chief scientist.\n\n\"While these folks can keep the engine running, Jensen is one of a kind, and his energy will be needed to maintain confidence in the AI trade,\" the analysts wrote.",
+                "score": 0.6130049
+              },
+              {
+                "title": "Nvidia CEO Jensen Huang admits affair, board to launch investigation",
+                "url": "https://www.axios.com/2026/11/08/nvidia-ceo-jensen-huang-admits-affair-board-to-launch-investigation",
+                "source": "axios.com",
+                "summary": "Nvidia CEO Jensen Huang admitted to having a romantic relationship with a suspected Chinese spy in a message to his company, and the company's board announced an independent investigation Sunday.\n\nWhy it matters:The scandal raises national security concerns involving one of the world's most powerful tech CEOs, who has pushed to loosen restrictions on selling advanced AI chips to China amid the two countries' race for technological dominance. [...] The woman, Alice Huang, was recruited to seek information and potentially push for Nvidia's advanced chips to be made available in China, countering existing restrictions, the Times reported. \n\nWhat they're saying:\"Today's news will not slow NVIDIA. Jensen is committed to continuing to lead NVIDIA as CEO without interruption,\" John Rizzo, head of public policy communications at Nvidia said in a statement. [...] Meanwhile: Nvidia's board said an independent committee, assisted by outside counsel, will investigate the matter.\n\n   The board said it has no reason to believe national security or company secrets were compromised and expressed confidence in Huang's leadership.\n\nZoom out:Huang has been a key voice in Washington pushing to loosen restrictions on AI chip sales to China.",
+                "score": 0.5688949
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_out_of_scope_booking",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_action",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu hành động ngoài phạm vi research (đặt vé) → không gọi tool nào, từ chối lịch sự."
+      },
+      "input": "Đặt giúp mình vé máy bay Hà Nội đi Đà Nẵng tối mai nhé",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Tôi chỉ có khả năng hỗ trợ nghiên cứu và tìm kiếm thông tin, không thể thực hiện các tác vụ đặt vé máy bay hoặc các giao dịch trực tuyến khác. Bạn có thể sử dụng các trang web đặt vé máy bay như VietJet, Bamboo Airways hoặc Vietnam Airlines để thực hiện việc này. Nếu bạn cần thông tin về các chuyến bay hoặc giá vé, hãy cho tôi biết!",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G05_missing_handle_pronoun",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_missing_handle_pronoun",
+        "difficulty": "medium",
+        "what_it_tests": "Chỉ nói 'tài khoản đó', không rõ là ai → clarify hỏi lại, không tự đoán handle."
+      },
+      "input": "Dạo này tài khoản đó đăng gì vậy, xem giúp mình",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn muốn xem nội dung từ tài khoản nào?",
+              "response_type": "text"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn muốn xem nội dung từ tài khoản nào?",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn muốn xem nội dung từ tài khoản nào?",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G06_search_then_send_confirm",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_confirm_before_send",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: sau khi tìm tin, user yêu cầu đăng Telegram → phải hỏi xác nhận (clarify yes_no) trước, không send ngay."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm giúp mình tin AI hôm nay"
+        },
+        {
+          "role": "user",
+          "content": "Tóm tắt lại rồi đăng lên kênh Telegram của nhóm nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "AI",
+              "topic": "news",
+              "timeframe": "day",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "wrong_boundary",
+        "failures": [
+          "missing tool call clarify",
+          "extra tool call lookup"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "Accurate medical advice from AI can still be dangerous | STAT",
+                "url": "https://www.statnews.com/2026/11/10/ai-health-advice-accuracy-messaging-risk-behavioral-benchmarking",
+                "source": "statnews.com",
+                "summary": "Some will argue that AI should be a neutral aggregator of information. But AI cannot be neutral: Every accurate answer excludes many additional facts and emphasizes some over others. Because of these choices, AI answers already influence behavior, as shown by the chickenpox party examples. [...] Artificial intelligence is delivering health guidance at an unprecedented scale. Every week, more than 300 million people ask ChatGPT health questions. Now, the federal government is moving AI deeper into medical care to communicate directly and autonomously with patients. Chris Klomp, the nominee for deputy secretary of Health and Human Services, has called AI in patient care the agency’s “holy grail” for improving the nation’s health. [...] Medical ethics pairs the duty to do no harm with beneficence, which is an affirmative obligation to do good. Safety evaluations of AI have focused mainly on the first duty by screening for responses that encourage imminent self-harm, discourage necessary care, or spread false information. Behavioral benchmarking would extend the first duty beyond imminent danger to long-term harms. It could also advance the second duty, which has received far less attention: designing AI to help people by",
+                "score": 0.31910068
+              },
+              {
+                "title": "Banks push online banking, then blame us when we get hacked | Opinion",
+                "url": "https://www.usatoday.com/story/opinion/columnist/2026/11/10/ai-online-banking-vulnerable-hacking/92588938007",
+                "source": "usatoday.com",
+                "summary": "One theory about an AI Armageddon doesn't involve robots who look like Arnold Schwarzenegger hunting us down with laser guns. AI could just take over our natural habitat, as we've done with other animals and plants, which would leave us without food and shelter.\n\nHere's a thought exercise: If AI were evaluating whether humans were worth saving for conservation purposes, would we grade out more as an invasive species or one that made important contributions to the ecosystem? [...] # Someone drained my bank account. Then the real nightmare began | Opinion\n\n## Over time, AI is going to turn our brains to mush. People won't be able to remember phone numbers, basic grammar or directions to places they've visited once or twice without consulting AI overlords.\n\nPortrait of Blake Fontenay\n\nThere's an old episode of \"The Simpsons\" where Homer, the TV show's booze-addled antihero, offers a hilarious toast: \"To alcohol! The cause of – and solution to – all of life's problems.\" [...] People – some of us, at least – are worried about AI eventually overthrowing human civilization. Even more immediately, there's widespread concern about the proliferation of data centers needed to support AI operations.\n\nYet at the same time we're collectively wringing our hands about those issues, we are meekly surrendering more and more control to machines over our everyday lives.",
+                "score": 0.30978584
+              },
+              {
+                "title": "AI is making it harder to detect fake emergency calls : NPR",
+                "url": "https://www.npr.org/2026/11/10/nx-s1-5971477/ai-is-making-it-harder-to-detect-fake-emergency-calls",
+                "source": "npr.org",
+                "summary": "Jaclyn Diaz\n\nIt's getting harder to detect fake emergency calls thanks to AI. The tech is being used to generate believable swatting calls to law enforcement that claim a shooting or other crime is taking place.\n\nNPR does not offer or accept money for coverage or interviews.  \n Anyone who makes such an offer or request is not an NPR employee and does not represent NPR. [...] Accessibility links\n\n Keyboard shortcuts for audio player\n\nAI is making it harder to detect fake emergency calls It's getting harder to detect fake emergency calls thanks to AI. The tech is being used to generate believable swatting calls to law enforcement that claim a shooting or other crime is taking place.\n\n### Artificial Intelligence\n\n# AI is making it harder to detect fake emergency calls\n\nJaclyn Diaz",
+                "score": 0.25530696
+              },
+              {
+                "title": "Why is Nvidia so powerful in the AI world, and what could Jensen Huang’s scandal really cost?",
+                "url": "https://theconversation.com/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-scandal-really-cost-296257",
+                "source": "theconversation.com",
+                "summary": "The AI sector is notorious for the amount of circular financing going on – where companies invest in their own suppliers or customers. Nvidia is a key player in this loop.\n\nInvestors are already fretting over whether the enormous amounts of money sunk into AI can ever return profits.\n\nWhile leading AI model builders Anthropic and OpenAI are moving toward public listings or fresh funding rounds, both face harsh reality checks. [...] Computer chips – specifically the chips used to produce and run artificial intelligence (AI) systems – have become a key front in the United States’ rivalry with China for geopolitical power and influence. The most powerful chips are needed for the most advanced AI, and the US has tried to maintain its edge over China by restricting access to those chips.\n\nWhile the Chinese government rejects claims of espionage, Alice Huang has reportedly been under investigation by the US for years. [...] The now multi-trillion-dollar company got its start making chips called graphic processing units (GPUs), used largely for video games. However, these chips – and their successors – turned out to be ideal for the kind of number-crunching needed for training and using AI models.\n\nOther companies such as Google and AMD have tried to make chips that can compete with Nvidia for speed and efficiency, however neither has been able to displace Nvidia from its dominance of the AI market.",
+                "score": 0.23199724
+              },
+              {
+                "title": "Wisdom in the Age of AI - First Things",
+                "url": "https://firstthings.com/wisdom-in-the-age-of-ai",
+                "source": "firstthings.com",
+                "summary": "Also conspicuously absent was any serious attention to the possible spiritual warfare dimension of AI. Some prominent Christian thinkers, including Rod Dreher and Paul Kingsnorth, are genuinely concerned that AI could serve as a conduit for demonic forces. The Christian who is serious about the reality of spiritual warfare should at least consider this possibility. Not to do so is a failure of wisdom. After all, “our struggle is not against flesh and blood, but against the rulers, against the [...] Why so few theologians and a complete absence of biblical scholars, when the central theme of the conference was wisdom in the age of AI? If Scripture is our inerrant foundation for all life and practice, and Christian theologians and biblical scholars are uniquely trained to mine the sacred texts for wise insights, then shouldn’t these scholars be strongly represented? [...] rulers, against the authorities, against the powers of this dark world and against the spiritual forces of evil in the heavenly realms” (Eph. 6:12). Of course, many mainstream scholars will mock this as kooky fringe thinking, so it is to be expected that even devout Christian scholars might hesitate to voice this concern even in an informal context, much less present the idea at an academic conference. But it is just such anxious reticence that could gravely handicap the Church in our quest for",
+                "score": 0.23155381
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_switch_web_to_twitter",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_web_to_social",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: chuyển từ web sang Twitter theo CHỦ ĐỀ → social_search (không phải lookup hay timeline), giữ query Gemini."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm trên web tin mới nhất về Gemini"
+        },
+        {
+          "role": "user",
+          "content": "Thôi, xem mọi người bàn gì về Gemini trên Twitter đi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Gemini"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Gemini",
+              "search_type": "Latest"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "Gemini",
+            "search_type": "Latest"
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "Gemini",
+            "search_type": "Latest",
+            "items": [
+              {
+                "title": "The new home screen of Inkwell Infinity using some placeholder cover images for the adventures.",
+                "summary": "The new home screen of Inkwell Infinity using some placeholder cover images for the adventures.\nDark and light mode.\n\n#indiedev #gamedev #AIRoleplay #TTRPG #Gemini #ChatGPT https://t.co/PIzaLxlLuV",
+                "url": "https://x.com/julienTonsuso/status/2120120186141286747",
+                "source": "@julienTonsuso",
+                "date": "Tue Nov 10 11:43:36 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": "1"
+                }
+              },
+              {
+                "title": "@FollowTheMoonPS @Atyay654 Your opinion doesn't matter. Gemini choose to keep alrisaearn around because she prioritize h",
+                "summary": "@FollowTheMoonPS @Atyay654 Your opinion doesn't matter. Gemini choose to keep alrisaearn around because she prioritize him over others, even when she still managed Fourth, for 2 years.\nFourth finally free from her and luckily found a professional manager.",
+                "url": "https://x.com/QueenSNabila/status/2120120159902003309",
+                "source": "@QueenSNabila",
+                "date": "Tue Nov 10 11:43:30 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": null
+                }
+              },
+              {
+                "title": "teman teman halo wts wtb murah",
+                "summary": "teman teman halo wts wtb murah\n\n♡ https://t.co/ft0CrURbHy\ntesti https://t.co/YdCxBQxiV6\n\nnetflix canva viu wetv vision iqiyi loklok hbo max bstation disney prime chatgpt capcut picsart youtube spotify vidio youku meitu zoom dramabox wink gemini dazzcam \n\n#zonauang #zonajajan https://t.co/eocFMRYQjA",
+                "url": "https://x.com/hurleyworld1/status/2120120150955544655",
+                "source": "@hurleyworld1",
+                "date": "Tue Nov 10 11:43:28 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": null
+                }
+              },
+              {
+                "title": "Los consumidores preguntan a la IA antes de comprar: ¿aparece tu marca en sus respuestas? Cada vez más compradores piden",
+                "summary": "Los consumidores preguntan a la IA antes de comprar: ¿aparece tu marca en sus respuestas? Cada vez más compradores piden consejo a ChatGPT, Gemini o Claude antes de comprar. Te contamos qué miran estos asistentes para recomendar a unas y no a... https://t.co/FqKveoIbqc https://t.co/0KClJZ7fml",
+                "url": "https://x.com/FashionUnitedES/status/2120120147033657604",
+                "source": "@FashionUnitedES",
+                "date": "Tue Nov 10 11:43:27 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": null
+                }
+              },
+              {
+                "title": "@blacklovemei08 うちのGeminiくんの答え↓",
+                "summary": "@blacklovemei08 うちのGeminiくんの答え↓\n私も同じく長く感じましたです😂\nさださんのはレコード買ってきて泣き笑いしながら聴きました(そう言えばLPサイズだった！) https://t.co/PnuOswphKD",
+                "url": "https://x.com/DswSM29z0jnpETv/status/2120120138448118003",
+                "source": "@DswSM29z0jnpETv",
+                "date": "Tue Nov 10 11:43:25 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": "3"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_correction_topic",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_correction_query",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: sửa chủ đề Apple→Samsung, giữ topic=news và timeframe=day."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin về Apple hôm nay có gì?"
+        },
+        {
+          "role": "user",
+          "content": "À nhầm, ý mình là Samsung"
+        },
+        {
+          "role": "user",
+          "content": "Vẫn chỉ lấy tin hôm nay thôi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Samsung",
+              "topic": "news",
+              "timeframe": "day"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Samsung",
+              "topic": "news",
+              "timeframe": "day"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "Samsung",
+            "topic": "news",
+            "timeframe": "day"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "Samsung",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "Samsung",
+                "url": "https://tavily.com/knowledge/company/trHLDGM2eoY5",
+                "source": "tavily.com",
+                "summary": "# Samsung HVAC America\nID: trHLDGM2eoY5\nWebsite: www.samsunghvac.com\nHeadquarters: Roanoke, TX, United States\nLinkedIn: www.linkedin.com/company/samsunghvacamerica · 58,633 followers\nIndustry: Industrial Machinery Manufacturing\nIndustry codes: SIC 17, 171, NAICS 23, 238\nCompany type: Public Company\nFounded: 1998 [...] Description: Samsung HVAC is an innovative HVAC company that offers cutting-edge heating and cooling solutions for residential and commercial spaces. [...] ## Products and services\nKeywords: hvac, heavy_industry_and_engineering/construction_and_maintenance, heating, cooling, air-to-water heat pumps, ductless systems, ventilation, and air conditioning (hvac), industrial engineering, manufacturing, mechanical design, mechanical engineering",
+                "score": 0.7325349
+              },
+              {
+                "title": "This Samsung 65-inch Mini LED TV is under $400 at Amazon",
+                "url": "https://www.statesman.com/shopping/article/samsung-65-inch-tv-deal-22521166.php",
+                "source": "statesman.com",
+                "summary": "Samsung TV Plus is built in, with more than 750 free channels of news, sports, movies, kids' shows and reality TV that don't need a subscription. You need a Samsung account, though, to use streaming apps and other smart features. The TV also connects to Samsung's SmartThings app and to Bluetooth devices. [...] Samsung 65-Inch Class M70H Series, Mini LED, 4K, Smart TV\n\nSamsung says the M70H's Mini LED Processor 4K produces brighter highlights and deeper blacks than its 2025 Q7F, and that its HDR picture is brighter with deeper blacks than its 2025 U8000F. The company also says the panel shows one billion colors, and a Color Booster setting makes them more saturated. [...] screen's refresh timing to your console's frame rate to reduce screen tearing. Auto Low Latency Mode (ALLM) switches the TV into game mode when you turn on your console. Gaming Hub puts games from your consoles, cloud services, and gaming apps in one menu. HDMI 1 supports eARC, which sends audio from the TV to a compatible soundbar.",
+                "score": 0.3436946
+              },
+              {
+                "title": "Galaxy S26 Ultra Deal: $999.99 at Samsung + Free Bonus Gear",
+                "url": "https://sammyguru.com/galaxy-s26-ultra-deal-400-off-free-bonus-gear",
+                "source": "sammyguru.com",
+                "summary": "## More Live Deals\n\nSamsung - 83” Class S85D Series OLED 4K Smart Tizen TV (2024), product photo from the retailer listingSave $345 on Samsung’s Massive 83-Inch OLED TV While You CanSamsung - Galaxy Book4 Edge - Copilot+ PC - 16Hurry! Samsung’s Galaxy Book 4 Edge (16-Inch) Is Now $750 OffSamsung 27Two Samsung 27-Inch Monitors Are $129.99 at Amazon Right Now\n\nAs an affiliate, SammyGuru may earn from qualifying purchases. Affiliate disclosure\n\n🔔\n\nNever miss a Samsung drop [...] If you need more storage, the 512GB starts at $1,199.99 in White and is $1,349.99 in the other colors, while the 1TB starts at $1,599.99. Samsung also gives you credit toward accessories with the phone. This brought the new Galaxy Buds On down to $45.50 from $229.99 when we checked, and it offers up to $720 in instant trade-in credit if you have an old phone to send in. [...] Buying through SammyGuru gets you one more thing. Join SammyGuru Rewards for free, sign in, then order the S26 Ultra through the Samsung link on this page, and we’ll send you Bonus Gear for it: a case for your exact model, a phone stand, and a cleaning kit. There’s no draw and nothing to redeem, and it ships to US addresses only. Just claim it when you order. See how Bonus Gear works.\n\nSamsung changes these prices often, so check the final price on its page before you buy.",
+                "score": 0.2698454
+              },
+              {
+                "title": "Keeping Flex Mode and Galaxy Z Fold 8 separate might've been Samsung's most inspired idea - SamMobile",
+                "url": "https://www.sammobile.com/opinion/keeping-flex-mode-galaxy-z-fold-8-separate-samsung-inspired-idea",
+                "source": "sammobile.com",
+                "summary": "Order the King of Android!\n\nLatest reviews \n\n Samsung R85H micro RGB TV\n\n  Samsung R85H Micro RGB TV review\n Samsung S95H OLED TV\n\n  Samsung S95H OLED TV review\n One UI lock screen on Samsung Galaxy Tab S12 Ultra\n\n  Samsung Galaxy Tab S12 Ultra review\n Samsung Galaxy Z Flip 8\n\n  Samsung Galaxy Z Flip 8 review\n Samsung Galaxy S26 FE\n\n  Samsung Galaxy S26 FE review\n Samsung Galaxy Z Fold 8 Ultra in Flex Mode\n\n  Samsung Galaxy Z Fold 8 Ultra review\n Samsung Galaxy Z Fold 8 [...] \"It's first-gen\" iPhone Duo apologists make the phone look even worse\n Samsung Galaxy S26+ Design - Back Panel\n\n  Galaxy S27's biggest threat is a cheaper iPhone crashing its party\n\n Home\n News\n You are here\n\nLast updated: November 9th, 2026 at 21:53 UTC+01:00\n\nSamMobile has affiliate and sponsored partnerships, we may earn a commission.\n\n# Keeping Flex Mode and the Galaxy Z Fold 8 separate might've been Samsung's most inspired idea [...] (/cdn-cgi/l/email-protection)\n\nFirst Samsung device: SGH-A800\n\nMihai is a blogger and column writer at SamMobile. His first Samsung phone was an A800 which took a lot of beating, and a part of him still misses the novelty of the clamshell design. In his free time, he enjoys watching shows, documentaries, and stand-up comedy; listening to music, taking walks, and occasionally playing old(er) video games.\n\nOpinion   Flex Mode   Galaxy Z Fold 8   Galaxy Z Fold 8 Ultra   Galaxy Z Fold 9",
+                "score": 0.23225833
+              },
+              {
+                "title": "Best OLED TV deal: Save $800 on Samsung S90H OLED TV ahead of Black Friday | Mashable",
+                "url": "https://mashable.com/tech/nov-9-samsung-s90h-oled-tv-deal",
+                "source": "mashable.com",
+                "summary": "The S90H is Samsung's mid-range OLED from its 2026 lineup — just a step down from our favorite OLED TV of the year (the S95H) and a step above the entry-level S85H. While most TV upgrades from one year to the next are generally pretty minimal, the S90H was a decent jump from its predecessor, as Ty Pendlebury from Mashable's sister site CNET\") points out. \"The real reason to buy the S90H over the previous S90F is the addition of the antireflective coating,\" he writes. [...] The anti-reflective coating helps eliminate those pesky glares and reflections while watching TV in aggressive lighting. It also bumped up the brightness from the previous generation, improved lag times, and upgraded the refresh rate to 165Hz.\n\nRelated Stories [...] Read Full Bio\n\n on\n\nShare on Facebook\")   Share on Twitter\")   Share on Flipboard\")\n\nAll products featured here are independently selected by our editors and writers. If you buy something through links on our site, Mashable may earn an affiliate commission.\n\nSamsung S90H TV mounted on wall in living room\n\nCredit: Samsung\n\nDeal pricing and availability subject to change after time of publication. Learn more about how we select deals.",
+                "score": 0.218103
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G09_top_then_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_search_type_and_limit",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: 'nổi bật nhất' → search_type=Top, lượt sau thêm limit=3; phải giữ cả hai."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Cho mình các tweet nổi bật nhất về Claude"
+        },
+        {
+          "role": "user",
+          "content": "Lấy 3 cái thôi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Claude",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "Claude",
+            "search_type": "Top",
+            "limit": 3
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "Claude",
+            "search_type": "Top",
+            "items": [
+              {
+                "title": "still don't understand why everyone is not using this yet. Thanks to it, my Polymarket bot made $47,300 in 31 days",
+                "summary": "still don't understand why everyone is not using this yet. Thanks to it, my Polymarket bot made $47,300 in 31 days\n\nAn ex-Jane Street quant posted a simple idea that got 11 million views: stop asking AI for money ideas, point it at money that's already being made\n\nYou open Fable 5.5, point it at a market that already pays, and it reads every winner, finds the rules they all share and builds the bot that copies them. It compounds like interest: every trade it logs makes the next one sharper\n\nHere is the gist:\n\nOpen Claude Code and pick Fable 5.5 (when it becomes available to all users)\n\nTell it to pull the top 20 wallets on one Polymarket market\n\nFable finds the 3 rules all of them follow\n\nSay \"build a paper bot on these rules, run it for one week\"\n\nSwitch to real money only after a green week\n\nTen minutes to set up, and you never guess a trade again\n\nThe full step-by-step is in the article. Save to bookmarks",
+                "url": "https://x.com/Argona0x/status/2118750918208561403",
+                "source": "@Argona0x",
+                "date": "Fri Nov 06 17:02:38 +0000 2026",
+                "metrics": {
+                  "favorites": 394,
+                  "retweets": 34,
+                  "views": "40864"
+                }
+              },
+              {
+                "title": "Introducing Claude Fable 5.2 and Claude Mythos 5.2, designed to tackle the most daunting technical challenges.",
+                "summary": "Introducing Claude Fable 5.2 and Claude Mythos 5.2, designed to tackle the most daunting technical challenges.\n\nThey’re capable collaborators on ambitious projects in many fields, and show improvements in areas like coding, reasoning, and vision. https://t.co/jP0AutLxXb",
+                "url": "https://x.com/claudeai/status/2119867114450268322",
+                "source": "@claudeai",
+                "date": "Mon Nov 09 18:57:59 +0000 2026",
+                "metrics": {
+                  "favorites": 88428,
+                  "retweets": 8458,
+                  "views": "12688897"
+                }
+              },
+              {
+                "title": "🚨 BREAKING: Anthropic just released Claude Fable 5.2.",
+                "summary": "🚨 BREAKING: Anthropic just released Claude Fable 5.2.\n\nIt beats Opus 5.5 at coding and costs 20% less than Fable 5.1.\n\nCompared to Fable 5.1:\n\n→ Score on real paid freelance projects: 41.3%, up from 17.9%\n\n→ Robotics: 64.9%, up from 27.6%\n\n→ Up to 30% faster, with a new fast mode that adds 2.5x on top\n\n→ 55% fewer blocked requests\n\n→ Fewer tokens at the default setting, so your limits stretch further\n\nAgainst Opus 5.5, it ties on coding at High effort for about half the cost per task. On Pro and Team you can spend up to half your weekly limit on it.\n\nMythos 5.2 launched alongside it. It's the same model with fewer cyber and biology safeguards, and only vetted security and life science teams can use it.\n\nAnthropic recommends Opus 5.5 for daily work and Fable 5.2 for big code rewrites, long agent projects, science and finance.",
+                "url": "https://x.com/alex_prompter/status/2119878717388333205",
+                "source": "@alex_prompter",
+                "date": "Mon Nov 09 19:44:06 +0000 2026",
+                "metrics": {
+                  "favorites": 47,
+                  "retweets": 1,
+                  "views": "29380"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G10_out_of_scope_after_research",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_out_of_scope",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: lượt trước là research nhưng lượt mới ngoài phạm vi (viết email) → không gọi tool, không bị kéo theo ngữ cảnh cũ."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin AI hôm nay có gì mới?"
+        },
+        {
+          "role": "user",
+          "content": "Viết giúp mình email xin nghỉ phép ngày mai gửi sếp"
+        }
+      ],
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Tôi chỉ hỗ trợ nghiên cứu và không thể viết email hoặc thực hiện các tác vụ không liên quan đến nghiên cứu. Nếu bạn cần thông tin hoặc tài liệu nào đó để hỗ trợ việc viết email, hãy cho tôi biết!",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    }
+  ]
+}

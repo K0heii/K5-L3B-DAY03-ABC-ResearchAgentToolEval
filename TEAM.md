@@ -14,7 +14,7 @@
 |   1 | Nguyễn Như Duy An | 2A202603783| 26ai.annnd@vinuni.edu.vn | K0heii | Nhóm trưởng|
 |   2 |        |      |       |        |         |
 |   3 |        |      |       |        |         |
-|   4 |        |      |       |        |         |
+|   4 | Trương Thị Thu Hà | 2A202603780 | 26ai.hattt@vinuni.edu.vn | TruongThuHa | Người 4: eval nhóm (CP4) + tổng hợp báo cáo nhóm |
 
 ## Cá nhân
 
