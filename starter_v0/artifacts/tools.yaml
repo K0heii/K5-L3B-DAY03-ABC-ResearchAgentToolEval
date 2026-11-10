@@ -153,3 +153,46 @@ tools:
         text: {type: string, description: "Văn bản cần tóm tắt, đã có trong hội thoại."}
         max_sentences: {type: integer, default: 3, description: "Số câu tối đa trong bản tóm tắt."}
       required: [text]
+
+  - name: keywords
+    description: >-
+      Trích các từ khóa xuất hiện nhiều nhất trong một đoạn văn bản đã có trong
+      hội thoại (ví dụ từ fetch hoặc paper_text). Không tìm kiếm hay gọi API.
+      Không dùng thay summarize để tóm tắt ý theo câu, hoặc thay lookup để tìm
+      chủ đề trên web; chỉ dùng khi user cần từ khóa/tag từ văn bản sẵn có.
+    parameters:
+      type: object
+      properties:
+        text: {type: string, description: "Văn bản cần trích từ khóa, đã có trong hội thoại."}
+        top_n: {type: integer, default: 5, description: "Số từ khóa cần trả về."}
+      required: [text]
+
+  - name: extract_links
+    description: >-
+      Trích danh sách URL (kèm tiêu đề nếu có) từ một đoạn văn bản hoặc danh sách
+      item đã có trong hội thoại. Không truy cập các URL; muốn đọc nội dung thì
+      dùng fetch sau khi có link. Không dùng khi user chưa cung cấp văn bản hoặc
+      item nào chứa link.
+    parameters:
+      type: object
+      properties:
+        text: {type: string, default: "", description: "Văn bản chứa link, đã có trong hội thoại."}
+        items: {type: array, description: "Danh sách item có trường url (từ lookup, timeline, papers...).", items: {type: object}}
+      required: [text]
+
+  - name: merge_sources
+    description: >-
+      Gộp danh sách item từ nhiều nguồn (lookup, social_search, timeline, papers)
+      và loại bỏ item trùng nhau theo một khóa (mặc định url), có thể sắp xếp theo
+      score. Chỉ làm sạch dữ liệu đã có, không tìm dữ liệu mới. Không dùng thay
+      format để trình bày bản tin, hoặc thay summarize để rút gọn nội dung.
+    parameters:
+      type: object
+      properties:
+        items:
+          type: array
+          description: "Danh sách item cần gộp, lấy từ kết quả các tool trước."
+          items: {type: object}
+        dedupe_key: {type: string, default: "url", description: "Trường dùng để nhận item trùng lặp."}
+        sort_by: {type: string, enum: [none, score], default: "none", description: "score để sắp theo điểm giảm dần; none giữ thứ tự gốc."}
+      required: [items]

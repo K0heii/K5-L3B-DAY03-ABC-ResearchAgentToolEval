@@ -12,8 +12,8 @@
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 | Nguyễn Như Duy An | 2A202603783| 26ai.annnd@vinuni.edu.vn | K0heii | Nhóm trưởng|
-|   2 |        |      |       |        |         |
-|   3 |        |      |       |        |         |
+|   2 | Nguyễn Đức Minh | 2A202603765 | 26ai.minhnd5@vinuni.edu.vn | miao1114 | Thành viên |
+|   3 | Phạm Thế Hùng | 2A202603778 | 26ai.hungpt5@vinuni.edu.vn | thehung1406 | Thành viên |
 |   4 | Trương Thị Thu Hà | 2A202603780 | 26ai.hattt@vinuni.edu.vn | TruongThuHa | Người 4: eval nhóm (CP4) + tổng hợp báo cáo nhóm |
 
 ## Cá nhân

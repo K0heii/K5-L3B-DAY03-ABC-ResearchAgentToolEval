@@ -156,3 +156,92 @@ def test_summarize_invalid_max_sentences_returns_error_dict() -> None:
     # max_sentences negative
     result = summarize_tool(text="Hello. World.", max_sentences=-5)
     assert result["error"] == "ValueError"
+
+
+# ---------------- merge_sources (new tool, CP3 bonus) ----------------
+
+merge_tool = TOOL_FUNCTIONS["merge_sources"]
+
+
+def test_merge_sources_dedupes_by_url_and_keeps_highest_score() -> None:
+    items = [
+        {"title": "A", "url": "https://x.com/a", "score": 1},
+        {"title": "B", "url": "https://x.com/b", "score": 2},
+        {"title": "A (dup)", "url": "https://x.com/a", "score": 5},
+        "not a dict",
+        {"title": "C"},  # no url -> always kept
+    ]
+    result = merge_tool(items=items)
+
+    assert result["item_count"] == 3
+    assert result["duplicates_removed"] == 1
+    assert result["skipped"] == 1
+    a = next(i for i in result["items"] if i.get("url") == "https://x.com/a")
+    assert a["score"] == 5  # bản điểm cao hơn thay bản điểm thấp
+
+
+def test_merge_sources_sort_by_score_puts_top_first() -> None:
+    items = [{"url": "u1", "score": 1}, {"url": "u2", "score": 3}, {"url": "u3", "score": 2}, {"url": "u4"}]
+    result = merge_tool(items=items, sort_by="score")
+    assert [i.get("score") for i in result["items"]] == [3, 2, 1, None]  # không có score xuống cuối
+
+
+def test_merge_sources_bad_input_returns_error_dict() -> None:
+    assert merge_tool(items=None)["error"] == "TypeError"
+    assert merge_tool(items="oops")["error"] == "TypeError"
+    assert merge_tool(items=[], dedupe_key="")["error"] == "ValueError"
+    assert merge_tool(items=[], sort_by="date")["error"] == "ValueError"
+
+
+# ---------------- keywords (new tool, CP3 bonus) ----------------
+
+keywords_tool = TOOL_FUNCTIONS["keywords"]
+
+
+def test_keywords_returns_most_frequent_words_first() -> None:
+    text = "AI agents help research. Research teams build agents. Agents use research tools."
+    result = keywords_tool(text=text, top_n=2)
+
+    assert result["keywords"][0] == {"word": "agents", "count": 3}
+    assert result["keywords"][1] == {"word": "research", "count": 3}
+    assert result["word_count"] == 11
+
+
+def test_keywords_bad_input_returns_error_dict() -> None:
+    assert keywords_tool(text=None)["error"] == "TypeError"
+    assert keywords_tool(text=123)["error"] == "TypeError"
+    assert keywords_tool(text="   ")["error"] == "ValueError"
+
+
+def test_keywords_invalid_top_n_returns_error_dict() -> None:
+    assert keywords_tool(text="hello world", top_n=0)["error"] == "ValueError"
+    assert keywords_tool(text="hello world", top_n="abc")["error"] == "ValueError"
+
+
+# ---------------- extract_links (new tool, CP3 bonus) ----------------
+
+links_tool = TOOL_FUNCTIONS["extract_links"]
+
+
+def test_extract_links_pulls_markdown_bare_and_item_urls_without_duplicates() -> None:
+    text = "Xem [bài viết](https://a.com/1) và https://b.com/2, trùng: https://a.com/1"
+    result = links_tool(text=text)
+
+    assert result["link_count"] == 2
+    assert result["links"][0] == {"url": "https://a.com/1", "title": "bài viết"}
+    assert result["links"][1] == {"url": "https://b.com/2"}
+
+    # items cũng là nguồn link
+    result = links_tool(text="", items=[{"url": "https://c.com/3", "title": "C"}])
+    assert result["links"] == [{"url": "https://c.com/3", "title": "C"}]
+
+
+def test_extract_links_bad_input_returns_error_dict() -> None:
+    assert links_tool(text=123)["error"] == "TypeError"
+    assert links_tool(text="", items="oops")["error"] == "TypeError"
+
+
+def test_extract_links_text_without_links_returns_error_dict() -> None:
+    result = links_tool(text="không có link nào ở đây")
+    assert result["error"] == "ValueError"
+    assert "no links" in result["message"]
