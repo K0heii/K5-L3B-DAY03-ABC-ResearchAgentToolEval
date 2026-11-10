@@ -25,4 +25,6 @@ Người 4 — phụ trách CP4 (10 eval case nhóm, chạy `--suite group`) và
 
 ## 5. Tự đánh giá
 
-_(Hà tự viết: mình học được gì, chỗ nào còn yếu, nếu làm lại sẽ làm khác gì.)_
+- **Học được:** cách viết eval case có đáp án rõ ràng để đo việc chọn tool và tham số của model; đọc run JSON để gán loại lỗi và truy ra nguyên nhân trong prompt; vòng lặp sửa prompt mỗi version một giả thuyết; và thao tác Git/terminal (clone, commit, pull, xử lý xung đột) lần đầu.
+- **Còn yếu:** quản lý thời gian — mình commit từ 19:58 nhưng bị kẹt khi ghép code nên push trễ, sau deadline.
+- **Nếu làm lại:** commit và push sớm, sau mỗi phần nhỏ thay vì dồn đến cuối; viết thêm các case khó kiểu G06 để bắt lỗi mà bộ base bỏ sót; và tự viết thử một tool để học thêm phần code.
