@@ -145,6 +145,8 @@ tools:
       Tóm tắt extractive một đoạn văn bản dài đã có trong hội thoại (ví dụ từ
       fetch hoặc paper_text). Chọn những câu quan trọng nhất dựa trên tần số từ.
       Không tìm kiếm hoặc gọi API; chỉ xử lý văn bản đã được cung cấp.
+      Không dùng khi user chỉ đưa URL mà chưa có văn bản; dùng fetch trước để
+      lấy nội dung, sau đó mới tóm tắt.
     parameters:
       type: object
       properties:
