@@ -139,3 +139,17 @@ tools:
         max_pages: {type: integer, default: 5, description: "Số trang"}
         max_chars: {type: integer, default: 8000, description: "Số ký tự"}
       required: [arxiv_url]
+
+  - name: summarize
+    description: >-
+      Tóm tắt extractive một đoạn văn bản dài đã có trong hội thoại (ví dụ từ
+      fetch hoặc paper_text). Chọn những câu quan trọng nhất dựa trên tần số từ.
+      Không tìm kiếm hoặc gọi API; chỉ xử lý văn bản đã được cung cấp.
+      Không dùng khi user chỉ đưa URL mà chưa có văn bản; dùng fetch trước để
+      lấy nội dung, sau đó mới tóm tắt.
+    parameters:
+      type: object
+      properties:
+        text: {type: string, description: "Văn bản cần tóm tắt, đã có trong hội thoại."}
+        max_sentences: {type: integer, default: 3, description: "Số câu tối đa trong bản tóm tắt."}
+      required: [text]

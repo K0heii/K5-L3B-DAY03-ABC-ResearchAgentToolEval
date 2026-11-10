@@ -110,13 +110,49 @@ def test_policy_instruction_like_lines_go_to_untrusted_text() -> None:
 #   2. bad / missing input from the model (empty string, wrong type, out-of-enum value)
 #   3. failure path (missing key, HTTP error, timeout) -> returns error dict, does not raise
 
-def test_my_new_tool_happy_path() -> None:
-    pytest.skip(TODO)
+summarize_tool = TOOL_FUNCTIONS["summarize"]
 
 
-def test_my_new_tool_bad_input_from_model() -> None:
-    pytest.skip(TODO)
+def test_summarize_picks_top_sentences_in_original_order() -> None:
+    # Craft text where top-scoring sentences are not the first ones
+    text = (
+        "The weather is nice today. "
+        "Artificial intelligence transforming research workflows dramatically. "
+        "I like coffee. "
+        "Machine learning models require extensive computational resources. "
+        "The sky is blue."
+    )
+    result = summarize_tool(text=text, max_sentences=2)
+
+    assert result["tool"] == "summarize"
+    assert result["sentences_used"] == 2
+    assert result["sentence_count"] == 5
+    # Top sentences should contain key terms (intelligence, machine, learning, etc.)
+    assert "intelligence" in result["summary"].lower() or "machine" in result["summary"].lower()
 
 
-def test_my_new_tool_failure_returns_error_dict() -> None:
-    pytest.skip(TODO)
+def test_summarize_bad_input_returns_error_dict() -> None:
+    # Model sends wrong type
+    result = summarize_tool(text=None)
+    assert result["error"] == "TypeError"
+    assert "string" in result["message"]
+
+    # Empty text
+    result = summarize_tool(text="")
+    assert result["error"] == "ValueError"
+    assert "empty" in result["message"]
+
+    # text as integer (wrong type)
+    result = summarize_tool(text=123)
+    assert result["error"] == "TypeError"
+
+
+def test_summarize_invalid_max_sentences_returns_error_dict() -> None:
+    # max_sentences too small
+    result = summarize_tool(text="Hello. World.", max_sentences=0)
+    assert result["error"] == "ValueError"
+    assert "must be >= 1" in result["message"]
+
+    # max_sentences negative
+    result = summarize_tool(text="Hello. World.", max_sentences=-5)
+    assert result["error"] == "ValueError"

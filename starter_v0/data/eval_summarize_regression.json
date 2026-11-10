@@ -1,0 +1,23 @@
+{
+  "dataset_id": "summarize_routing_regression",
+  "dataset_role": "group",
+  "description": "Kiểm tra riêng fetch/summarize sau khi thêm tool mới; không thay thế bộ eval_group.json của nhóm.",
+  "cases": [
+    {
+      "id": "S01_url_requires_fetch",
+      "phase": "B",
+      "query": "Tóm tắt bài này: https://example.com/",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "fetch", "args": {"url": "https://example.com/"}}]},
+      "metadata": {"what_it_tests": "Chỉ có URL, chưa có nội dung: phải dùng fetch trước; không đưa URL vào summarize."}
+    },
+    {
+      "id": "S02_existing_text_requires_summarize",
+      "phase": "B",
+      "query": "Dùng công cụ tóm tắt đoạn văn bản đã có sau đây thành tối đa 2 câu: Nhóm nghiên cứu xây dựng một trợ lý dùng công cụ. Trợ lý tìm kiếm thông tin trên web và đọc bài viết từ URL. Khi nội dung đã có, công cụ tóm tắt chọn các câu quan trọng. Nhóm kiểm tra lựa chọn công cụ bằng các ca đánh giá cố định.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "summarize", "args": {"max_sentences": 2}}]},
+      "metadata": {"what_it_tests": "Đã có văn bản và yêu cầu dùng công cụ tóm tắt: chọn summarize thay vì fetch/lookup."}
+    }
+  ]
+}

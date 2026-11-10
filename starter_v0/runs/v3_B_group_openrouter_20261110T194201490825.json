@@ -1,0 +1,146 @@
+{
+  "run_id": "v3_B_group_openrouter_20261110T194201490825",
+  "version": "v3",
+  "artifact_version": "v3+pf3580c48afa7+t91f13025db55",
+  "prompt_hash": "f3580c48afa764ba02207d4c3d24da4f64104bf6082807770d1086649ae9792f",
+  "tools_hash": "91f13025db557e784fce37f2afc75d059d287b2c7d2a4c684bf1f819965138a2",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "C:\\Users\\admin\\Downloads\\AIthucchien\\K5-L3B-DAY03-ABC-ResearchAgentToolEval\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\admin\\Downloads\\AIthucchien\\K5-L3B-DAY03-ABC-ResearchAgentToolEval\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_summarize_regression.json",
+  "dataset_id": "summarize_routing_regression",
+  "dataset_role": "group",
+  "description": "Kiểm tra riêng fetch/summarize sau khi thêm tool mới; không thay thế bộ eval_group.json của nhóm.",
+  "generated_at": "2026-11-10T19:42:01",
+  "summary": {
+    "total_cases": 2,
+    "measured_cases": 2,
+    "provider_error_cases": 0,
+    "passed_cases": 2,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": null,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "S01_url_requires_fetch",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Chỉ có URL, chưa có nội dung: phải dùng fetch trước; không đưa URL vào summarize."
+      },
+      "input": "Tóm tắt bài này: https://example.com/",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://example.com/"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://example.com/"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "fetch",
+          "args": {
+            "url": "https://example.com/"
+          },
+          "result": {
+            "tool": "read_url",
+            "url": "https://example.com/",
+            "items": [
+              {
+                "title": "Example Domain",
+                "url": "https://example.com/",
+                "source": "example.com",
+                "summary": "This domain is for use in documentation examples without needing permission. This is not a service; avoid relying on it for testing and monitoring purposes.\n\nهذا النطاق مُخصص للاستخدام في أمثلة التوثيق دون الحاجة إلى إذن. هذه ليست خدمة، يُرجى تجنب الاعتماد عليها لأغراض الاختبار والمراقبة.\n\n该域名仅用于文档示例，无需获得许可。这并非一项服务，请勿将其用于测试和监控目的。\n\nL’usage de ce domaine est réservé à des exemples de documentation, sans autorisation préalable. Il ne s’agit pas d’un service ; son utilisation à des fins de test ou de surveillance est à éviter.\n\nДанный домен предназначен для использования в примерах документации без необходимости получения предварительного разрешения. Это не сервис; не рекомендуется его использование для тестирования и мониторинга.\n\nEste dominio está destinado al uso en ejemplos de documentación sin necesidad de permiso. Esto no es un servicio; evitar utilizarlo para realizar pruebas o monitoreos.\n\n [Learn more](https://iana.org/help/example-domains)"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "S02_existing_text_requires_summarize",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Đã có văn bản và yêu cầu dùng công cụ tóm tắt: chọn summarize thay vì fetch/lookup."
+      },
+      "input": "Dùng công cụ tóm tắt đoạn văn bản đã có sau đây thành tối đa 2 câu: Nhóm nghiên cứu xây dựng một trợ lý dùng công cụ. Trợ lý tìm kiếm thông tin trên web và đọc bài viết từ URL. Khi nội dung đã có, công cụ tóm tắt chọn các câu quan trọng. Nhóm kiểm tra lựa chọn công cụ bằng các ca đánh giá cố định.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "summarize",
+            "args": {
+              "max_sentences": 2
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "summarize",
+            "args": {
+              "text": "Nhóm nghiên cứu xây dựng một trợ lý dùng công cụ. Trợ lý tìm kiếm thông tin trên web và đọc bài viết từ URL. Khi nội dung đã có, công cụ tóm tắt chọn các câu quan trọng. Nhóm kiểm tra lựa chọn công cụ bằng các ca đánh giá cố định.",
+              "max_sentences": 2
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "summarize",
+          "args": {
+            "text": "Nhóm nghiên cứu xây dựng một trợ lý dùng công cụ. Trợ lý tìm kiếm thông tin trên web và đọc bài viết từ URL. Khi nội dung đã có, công cụ tóm tắt chọn các câu quan trọng. Nhóm kiểm tra lựa chọn công cụ bằng các ca đánh giá cố định.",
+            "max_sentences": 2
+          },
+          "result": {
+            "tool": "summarize",
+            "summary": "Nhóm nghiên cứu xây dựng một trợ lý dùng công cụ. Nhóm kiểm tra lựa chọn công cụ bằng các ca đánh giá cố định.",
+            "sentences_used": 2,
+            "sentence_count": 4
+          }
+        }
+      ]
+    }
+  ]
+}
