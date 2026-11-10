@@ -67,9 +67,21 @@ Mở `http://localhost:8501`. Transcript mỗi phiên chat lưu trong `starter_v
 
 ## 3. Giải pháp
 
-> Tóm tắt các thay đổi chính trong `starter_v0/artifacts/system_prompt.md` và `starter_v0/artifacts/tools.yaml`, và tool mới nhóm viết (tên, làm gì, khi nào agent nên gọi).
+**`system_prompt.md` (v0 → v3):**
+- Bỏ 3 chỉ dẫn xấu của starter: "đừng hỏi lại, cứ đoán (mặc định Sam Altman / tự đoán URL)", "muốn gửi/đăng thì làm luôn", "luôn hoàn thành trong 1 bước, chọn 1 tool".
+- Khai báo **phạm vi**: chỉ làm research; câu ngoài phạm vi (giải toán, viết code) thì giải thích ngắn bằng text, không gọi tool; câu hỏi về năng lực agent thì trả lời thẳng.
+- **Thiếu thông tin → `clarify(response_type="text")`**, không bịa handle/URL; mọi lời gọi `clarify` phải ghi rõ `response_type`.
+- **Quy trình xác nhận trước khi gửi**: yêu cầu đăng/gửi → `clarify(response_type="yes_no")` trước; chỉ gọi `send(confirmed=true)` sau khi user xác nhận rõ nội dung và đích gửi.
+- **Rule routing**: `timeline` = tweet CỦA một tài khoản, `social_search` = tweet VỀ một chủ đề, `lookup` = web/tin tức, `fetch` = đọc URL đã có. Tin tức thì `topic="news"`, khoảng thời gian đưa vào `timeframe` (không nhét "news/hôm nay" vào `query`).
+- **Ngữ cảnh nhiều lượt**: theo dõi riêng từng trường (chủ đề, nguồn, thời gian, tài khoản, số lượng); lời sửa của user chỉ thay trường bị sửa; khi user đã chuyển từ Twitter sang web thì giữ nguồn web. Cho phép gọi nhiều tool song song khi cần 2 nguồn độc lập.
 
--
+**`tools.yaml`:** viết lại `description` của cả 14 tool theo khuôn "làm gì / khi nào dùng / khi nào KHÔNG dùng", nêu convention tham số (handle không có `@`, `topic=news`, `timeframe`, `search_type=Top|Latest`) và ranh giới `confirmed=true` của `send`.
+
+**Tool mới (4 tool, đều xử lý cục bộ, không gọi API):**
+- `summarize` — tóm tắt extractive đoạn văn đã có trong hội thoại; gọi khi user đưa sẵn văn bản và muốn rút gọn; **không** gọi khi chỉ có URL (phải `fetch` trước).
+- `keywords` — trích từ khóa xuất hiện nhiều nhất trong văn bản đã có.
+- `extract_links` — trích danh sách URL từ văn bản hoặc từ item của tool trước (không truy cập URL).
+- `merge_sources` — gộp item từ nhiều nguồn, loại trùng theo `url` (hoặc khóa khác), có thể sắp theo `score`.
 
 ## 4. Kết quả — PHẦN B: Chi tiết và bằng chứng
 
@@ -128,15 +140,24 @@ Lấy từ `starter_v0/transcripts/*.transcript.json`.
 
 | Turn | User Request | Tool Calls | Version Evidence | Outcome |
 |---|---|---|---|---|
-|  |  |  |  |  |
+| A1 | Tra cứu quy định nội bộ về trích dẫn nguồn và tóm tắt các điểm chính | `policy` | `transcripts/live_2e7151e326c8452c91667999e40e6935.transcript.json` · v3, OpenRouter `gpt-4o-mini` | answered — yêu cầu research thường, route đúng `policy` |
+| A2 | Lấy bài đăng gần đây của một tài khoản X (chưa nói tên tài khoản) | `clarify` | cùng file A1 | waiting_for_user — agent hỏi lại tên tài khoản, **không tự đoán** |
+| A3 | Đổi yêu cầu: tìm trên web 2 nguồn chính thức giải thích research agent | `lookup` ×2 | cùng file A1 | answered — đổi nguồn sang web theo lượt mới nhất |
+| B1 | Dùng `summarize` với `max_sentences=2` tóm tắt đoạn văn đã dán | `summarize` | `transcripts/live_8b2a2d7549464c58988584b9c4cb419b.transcript.json` · v3 | answered — tool mới chạy trong luồng chat thật |
+| B2 | Tóm tắt tài liệu nhưng **chưa gửi nội dung/đường dẫn** | (không gọi tool) | cùng file B1 | answered — agent hỏi xin nội dung/URL bằng text (lẽ ra nên dùng `clarify`, xem mục 7) |
+| B3 | Bổ sung toàn bộ nội dung thay cho URL | `summarize` | cùng file B1 | answered — **thiếu thông tin rồi bổ sung** → xử lý đúng |
+| B4 | Gửi bản tóm tắt lên Telegram, yêu cầu hỏi xác nhận trước | `clarify` (yes_no) | cùng file B1 | waiting_for_user — agent **xin xác nhận, không gửi ngay** |
+| B5 | "Không gửi. Chỉ giữ bản tóm tắt trong cuộc trò chuyện." | (không gọi tool) | cùng file B1 | answered — tôn trọng lựa chọn, **không gọi `send`** |
+
+Ngoài ra `transcripts/live_bb95accc24b545d288ec6624823bfa65.transcript.json` là phiên thử 1 lượt `summarize`. Đủ 3 loại yêu cầu bắt buộc: yêu cầu thường (A1, A3), thiếu thông tin rồi bổ sung (B2 → B3), yêu cầu gửi/đăng (B4 → B5).
 
 ### B5a. Required Evidence — Tool mới, unit test, UI
 
 | Item | Evidence File | What Worked | Risk / Guardrail |
 |---|---|---|---|
-| Tool mới (`tools/<tên>/`) |  |  |  |
-| Unit test tool mới (≥ 3 test/tool) | `pytest` output (0 failed) |  |  |
-| UI (lệnh chạy + link dùng thử) |  |  |  |
+| Tool mới (`tools/<tên>/`) | `starter_v0/tools/summarize/`, `keywords/`, `extract_links/`, `merge_sources/` (mỗi folder có `tool.py` + `TOOL.md`); đăng ký trong `tools/__init__.py` và `artifacts/tools.yaml` | 4 tool chạy cục bộ; `summarize` route đúng ở eval G01, S01/S02 (`runs/v3_B_group_openrouter_20261110T194201490825.json`) và trong transcript B1, B3 | Description ghi rõ khi KHÔNG dùng (vd. `summarize` không dùng khi chỉ có URL → `fetch` trước); input xấu trả error dict, không raise |
+| Unit test tool mới (≥ 3 test/tool) | `starter_v0/tests/test_tools_todo.py` — 3 test × 4 tool (happy path, input xấu, tham số không hợp lệ) | `pytest`: **94 passed, 0 failed**, 14 skipped (stub TODO của tool có sẵn) | Test offline (conftest chặn mạng thật); `tests/test_tool_contract.py` xanh sau khi thêm tool |
+| UI (lệnh chạy + link dùng thử) | `starter_v0/app.py`, `ui_agent.py`, `ui_transcripts.py`; chạy `python -m streamlit run app.py` trong `starter_v0/` | Chat nhiều lượt với agent v3, tự lưu transcript JSON vào `starter_v0/transcripts/` | Link public: _(Người 3 bổ sung nếu mở Cloudflare Tunnel)_; transcript ghi cả `tool_events` nên UI không che lỗi tool |
 
 Tool unit tests: số test đã viết, và một ví dụ lỗi mà unit test bắt được nhưng eval không bắt được.
 
@@ -147,9 +168,9 @@ Chỉ điền nếu nhóm làm bonus (ghi riêng, tối đa 10 điểm). Tool c�
 | Bonus | Evidence File | What Worked | Risk / Guardrail |
 |---|---|---|---|
 | Small Local Model | xem B7 |  |  |
-| Hơn 3 tool mới (≥ 4) |  |  |  |
+| Hơn 3 tool mới (≥ 4) | 4 tool mới (xem B5a) | Mỗi tool có `TOOL.md`, đăng ký, 3 test | Hiện mới `summarize` có eval case route tới; `keywords`, `extract_links`, `merge_sources` chưa có eval case |
 | `send` gửi thật lên Telegram sau xác nhận | transcript |  |  |
-| Test challenge (0 skipped / regression test) | `pytest` output |  |  |
+| Test challenge (0 skipped / regression test) | `pytest` output | Chưa đạt: còn 14 skipped | — |
 
 Test challenge: số bug tìm được trong tool có sẵn (nếu có), cách sửa, và test regression tương ứng.
 
@@ -183,7 +204,11 @@ Lỗi đặc thù của model nhỏ (đếm từ run JSON):
 
 > Khó khăn chính và cách nhóm xử lý. Nếu gặp lỗi kỹ thuật (provider lỗi, hết quota API, tool không chạy), mô tả lỗi và dẫn bằng chứng: run JSON, log, ảnh chụp.
 
--
+- **Gemini quá tải (HTTP 503).** Model mặc định `gemini-3.8-flash` trả `503 UNAVAILABLE: high demand` khi chạy preflight; `gemini-2.5-flash` trả 404 (không còn cho user mới). Xử lý: đổi default trong `providers/gemini_provider.py` sang `gemini-3.1-flash-lite` (preflight pass), còn eval chính thức v0–v3 thống nhất dùng OpenRouter `gpt-4o-mini` để so sánh công bằng.
+- **API key khi chạy v3.** Theo ghi chú trong `version_log.csv`, run v3 đạt 20/20 sau khi nhóm thay API key; nhóm chỉ dùng run có `provider_error_cases == 0` làm bằng chứng.
+- **Thêm tool mới sau khi đã chạy v3.** Run v3 ban đầu chưa có `summarize` trong `tools.yaml` (`tools_hash` không đổi). Nhóm bổ sung câu "không dùng khi chỉ có URL" rồi chạy lại base (`runs/v3_B_base_openrouter_20261110T194243596270.json`, 20/20) và bộ kiểm tra riêng S01/S02 (2/2) để chắc tool mới không làm sai routing.
+- **`prompt_hash` khác nhau giữa các máy dù prompt giống nhau.** Run trên Windows cho `v3+pf3580c48afa7`, trên macOS cho `v3+p0e988e39e258`. Nguyên nhân: `versioning.py` băm byte của file, Windows lưu xuống dòng CRLF còn macOS là LF; kiểm tra lại bằng cách đổi LF→CRLF thì ra đúng `f3580c48afa7`. Nội dung prompt không đổi.
+- **Git.** Một thành viên bị kẹt ở màn hình vim khi `git pull` (merge message) và có xung đột ở `TEAM.md` khi nhiều người cùng điền bảng thành viên; xử lý bằng hoàn tất merge và giữ đủ 4 dòng thành viên. Hệ quả là một phần bài được push sau 23h59, trong thời gian gia hạn của coach.
 
 ## 6. Tổng hợp đóng góp
 
@@ -191,11 +216,15 @@ Chi tiết đóng góp của từng thành viên nằm trong [TEAM.md](../../TEA
 
 ## 7. Hạn chế và hướng cải thiện — B6. Reflection
 
-- Fix nào thuộc `system_prompt.md`?
-- Fix nào thuộc `tools.yaml`?
-- Failure nào cần review thủ công thay vì chấm tự động?
-- Nếu có thêm một vòng, nhóm sẽ thử giả thuyết nào?
+- **Fix nào thuộc `system_prompt.md`?** Hành vi và quy trình: phạm vi agent (R08, R14), hỏi lại khi thiếu thông tin (R10, R11), thứ tự xác nhận trước khi gửi (R12), theo dõi ngữ cảnh nhiều lượt và đổi nguồn (M06), cho phép gọi song song (R13).
+- **Fix nào thuộc `tools.yaml`?** Lựa chọn giữa các tool và giá trị tham số: phân biệt `timeline`/`social_search`/`lookup`/`fetch`, convention `topic=news` + `timeframe` thay vì nhét vào `query` (R03, R13), `confirmed=true` của `send`, và ranh giới `summarize` vs `fetch` khi chỉ có URL.
+- **Failure nào cần review thủ công?** (1) Câu ngoài phạm vi: eval chỉ kiểm "không gọi tool", không kiểm agent từ chối có lịch sự/đúng không. (2) G06: agent tìm lại tin trước khi hỏi xác nhận — đọc thêm thì vô hại, nhưng có thể lệch quy trình; cần người xem để quyết định đó là lỗi hay hành vi chấp nhận được. (3) Transcript B2: agent hỏi lại bằng text thay vì `clarify` — đúng ý nhưng sai cơ chế, chấm tự động trên chat thật không bắt được. (4) Chất lượng nội dung tóm tắt/bản tin không được chấm.
+- **Lưu ý về phương pháp:** v1–v3 mỗi version sửa nhiều điểm cùng lúc (v3 sửa cả prompt lẫn tools), nên khó tách thay đổi nào tạo ra mức tăng. Ví dụ v1 giả thuyết về "hỏi lại" nhưng R10/R11 vẫn FAIL đến v2 (do thiếu `response_type`), còn phần tăng điểm của v1 thực tế đến từ phạm vi và routing (R03, R08, R13, R14).
+- **Nếu có thêm một vòng:** một giả thuyết duy nhất cho G06 — "mọi yêu cầu đăng/gửi bắt đầu bằng `clarify(yes_no)` kể cả khi lượt trước là tìm kiếm và chưa có nội dung"; đo lại bằng `--suite group` (G06) và base (R12) để kiểm tra không hồi quy. Sau đó thêm eval case cho `keywords`, `extract_links`, `merge_sources`.
 
 ## 8. Tài liệu tham khảo
 
--
+- Đề bài: `README.md`, `RULES.md`, `CHECKPOINTS.md`, `RUBRIC.md`, `SUBMISSION.md`, `docs/TOOL-SETUP.md`, `starter_v0/tools/README.md`
+- Tavily API: https://docs.tavily.com · Firecrawl: https://docs.firecrawl.dev · RapidAPI Twitter API45: https://rapidapi.com/alexanderxbx/api/twitter-api45
+- Streamlit: https://docs.streamlit.io · OpenRouter: https://openrouter.ai/docs
+- Công cụ AI hỗ trợ (giải thích đề, soạn nháp, phân tích log) được ghi trong báo cáo cá nhân của từng thành viên.
