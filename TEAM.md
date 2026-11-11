@@ -7,6 +7,7 @@
 - Repo nhóm: `K5-L3B-DAY03-ABC-ResearchAgentToolEval` (xem [SUBMISSION.md](SUBMISSION.md))
 - URL repo, nhánh nộp, commit chốt: https://github.com/K0heii/K5-L3B-DAY03-ABC-ResearchAgentToolEval nhánh main
 - Commit chốt code và bằng chứng v4 đã rà soát: [`9b9f4e7`](https://github.com/K0heii/K5-L3B-DAY03-ABC-ResearchAgentToolEval/commit/9b9f4e7).
+- Commit cập nhật code và bằng chứng v5: [`dddfdcd`](https://github.com/K0heii/K5-L3B-DAY03-ABC-ResearchAgentToolEval/commit/dddfdcd). Base v5 đạt 19/20; chưa chạy lại group trên v5, xem version log và báo cáo nhóm để biết giới hạn.
 
 ## Thành viên
 
