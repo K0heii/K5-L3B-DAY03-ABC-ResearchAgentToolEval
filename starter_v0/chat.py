@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from datetime import datetime
 from pathlib import Path
@@ -77,6 +78,29 @@ def assistant_tool_message(response_text: str | None, calls: list[ToolCall]) -> 
     }
 
 
+def preview_telegram_send(call: ToolCall) -> tuple[dict[str, Any], dict[str, str] | None]:
+    text = call.args.get("text")
+    chat_id = os.getenv("TELEGRAM_CHAT_ID")
+    draft = None
+    result: dict[str, Any] = {"tool": "send_telegram"}
+    if not isinstance(text, str) or not text.strip():
+        result.update(error="invalid_content", message="Nội dung gửi Telegram đang trống hoặc không hợp lệ.")
+    elif not chat_id or not os.getenv("TELEGRAM_BOT_TOKEN"):
+        result.update(error="missing_configuration", message="Chưa cấu hình bot và nhóm Telegram.")
+    else:
+        draft = {"text": text, "chat_id": chat_id}
+        result.update(
+            status="needs_confirmation",
+            awaiting_user=True,
+            response_type="yes_no",
+            question=(
+                f"**Nội dung sẽ gửi đến nhóm Telegram `{chat_id}`**\n\n{text}\n\n"
+                "Bạn xác nhận gửi bản này không? Nhập **Gửi** để xác nhận hoặc **Hủy** để dừng."
+            ),
+        )
+    return {"tool": call.name, "args": call.args, "result": result}, draft
+
+
 def run_model_tool_loop(
     *,
     provider: Any,
@@ -85,7 +109,37 @@ def run_model_tool_loop(
     model: str | None,
     max_tool_rounds: int,
     on_round: Callable[[dict[str, Any]], None] | None = None,
+    previous_turn: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    if previous_turn is not None:
+        # Consume the draft before any network call so the same approval cannot be replayed.
+        draft = previous_turn.pop("pending_telegram_send", None)
+        if draft is not None:
+            answer = messages[-1]["content"].strip().casefold().rstrip(".!?").strip()
+            if answer in {"hủy", "huỷ", "không", "không gửi", "no"}:
+                return {
+                    "status": "answered", "assistant_text": "Đã hủy gửi bản tin Telegram.",
+                    "rounds": [], "tool_events": [],
+                }
+            if answer in {"gửi", "có", "yes", "xác nhận gửi"}:
+                args = {"text": draft["text"], "confirmed": True}
+                result = TOOL_FUNCTIONS["send"](**args, expected_chat_id=draft["chat_id"])
+                event = {"tool": "send", "args": args, "result": result}
+                record = {
+                    "round": 1, "assistant_text": None,
+                    "tool_calls": [{"name": "send", "args": args}], "tool_results": [event],
+                }
+                if on_round is not None:
+                    on_round(record)
+                return {
+                    "status": "answered",
+                    "assistant_text": (
+                        "Đã gửi bản tin vào Telegram." if result.get("status") == "sent"
+                        else "Gửi bản tin Telegram thất bại. Xem chi tiết trong hoạt động tool."
+                    ),
+                    "rounds": [record], "tool_events": [event],
+                }
+
     working_messages = list(messages)
     rounds: list[dict[str, Any]] = []
     all_tool_events: list[dict[str, Any]] = []
@@ -116,7 +170,11 @@ def run_model_tool_loop(
 
         for call in calls:
             print(f"🔧 {call.name}({json.dumps(call.args, ensure_ascii=False, sort_keys=True)})")
-            event = execute_tool_call(call)
+            draft = None
+            if call.name == "send" and call.args.get("confirmed") is True:
+                event, draft = preview_telegram_send(call)
+            else:
+                event = execute_tool_call(call)
             round_record["tool_results"].append(event)
             all_tool_events.append(event)
 
@@ -126,12 +184,15 @@ def run_model_tool_loop(
             if isinstance(result, dict) and result.get("awaiting_user"):
                 question = result.get("question") or call.args.get("question") or "Bạn bổ sung thêm thông tin nhé."
                 rounds.append(round_record)
-                return {
+                waiting = {
                     "status": "waiting_for_user",
                     "assistant_text": question,
                     "rounds": rounds,
                     "tool_events": all_tool_events,
                 }
+                if draft is not None:
+                    waiting["pending_telegram_send"] = draft
+                return waiting
 
             non_clarification_events.append(event)
 
@@ -233,6 +294,7 @@ def main() -> None:
                 tools=openai_tools,
                 model=args.model,
                 max_tool_rounds=args.max_tool_rounds,
+                previous_turn=transcript["turns"][-1] if transcript["turns"] else None,
             )
             turn_record.update(result)
             assistant_text = result["assistant_text"]

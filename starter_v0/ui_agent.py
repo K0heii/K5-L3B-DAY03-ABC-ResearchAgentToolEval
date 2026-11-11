@@ -106,6 +106,7 @@ def run_live_turn(
             provider=session.provider, messages=messages, tools=session.tools,
             model=session.metadata["model"], max_tool_rounds=session.metadata["max_tool_rounds"],
             on_round=capture,
+            previous_turn=turns[-1] if turns else None,
         )
     except Exception as exc:
         return {
