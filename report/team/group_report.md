@@ -106,9 +106,13 @@ Hai run v4 mới bổ sung kiểm chứng một giả thuyết duy nhất: thêm
 
 Hai run v4 có `provider_error_cases=0`, đo đủ toàn bộ case. Đây là so sánh với các run v3 có sẵn; cấu hình tool của mốc v3 khác hiện tại nên chưa thể tách riêng toàn bộ tác động của một câu. Xem [phân tích v4 và giới hạn so sánh](../../starter_v0/analysis/v4_summary.md). Các nhận xét v3 bên dưới được giữ làm lịch sử thử nghiệm, không phải kết quả cuối cùng của v4.
 
+**Bản tốt nhất và bản chốt:** v4 là bản tốt nhất của giai đoạn tối ưu v0–v4, đạt **base 20/20 và group 10/10**, được giữ làm mốc so sánh. V5 là thử nghiệm mở rộng xử lý ngày tháng, từng hồi quy R01 ở lần đầu (19/20), không được mô tả là luôn tốt hơn v4. Sau sửa R01 và handle M03, v5 đạt lại 20/20 + 10/10; nhóm chọn **v5 đã sửa làm bản code chốt trên main** theo yêu cầu, vẫn giữ đầy đủ bằng chứng trước sửa. Kết quả đạt ngang v4 trên hai bộ eval chưa chứng minh các chức năng mở rộng đều đúng ở mọi tình huống.
+
 **V5 — bổ sung xử lý ngày tháng và kiểm tra nguồn:** thêm tool `calendar` theo UTC+7, tham số `target_date` của `lookup`, chặn truy vấn xổ số lệch ngày trong vòng chat và sửa log Unicode trên Windows. Đây là một gói thay đổi prompt/tool/code, không phải thí nghiệm chỉ thay một câu như v4.
 
-[Run base v5](../../starter_v0/runs/v5_B_base_openrouter_20261111T112032802355.json) đo đủ 20 ca, `provider_error_cases=0`, đạt **19/20 (95%)**; routing 0.95, args 0.95, multiturn 1.00. R01 hồi quy: agent hỏi thêm số lượng tweet bằng `clarify` thay vì gọi `timeline(screenname="sama")`. [CSV v5](../../starter_v0/analysis/base_runs_v5.csv) và version log ghi đúng mức giảm so với v4, không coi v5 là bản đạt 100%. Chưa chạy lại bộ group cho cấu hình v5.
+[Run base v5 ban đầu](../../starter_v0/runs/v5_B_base_openrouter_20261111T112032802355.json) đo đủ 20 ca, `provider_error_cases=0`, đạt **19/20 (95%)**; routing 0.95, args 0.95, multiturn 1.00. R01 hồi quy: agent hỏi thêm số lượng tweet bằng `clarify` thay vì gọi `timeline(screenname="sama")`. Tại mốc này chưa có run group v5; version log giữ đúng mức giảm so với v4. [CSV v5 hiện tại](../../starter_v0/analysis/base_runs_v5.csv) đã được cập nhật sang run 20/20 sau sửa ở đoạn tiếp theo, không phải bảng của lần chạy ban đầu.
+
+**Cập nhật sửa hồi quy v5:** lần 19/20 ở trên là kết quả ban đầu. Sau đó thêm quy tắc không hỏi tham số tùy chọn có mặc định để sửa R01; lần kiểm tra trung gian sửa được R01 nhưng còn M03 sai handle (`andrejkarpathy` thay vì `karpathy`). Tiếp tục làm rõ ánh xạ tên sang handle trong `timeline.screenname`, không sửa case hay code chấm. Bản mới đạt **base 20/20** và **group 10/10**, cùng hash prompt/tool, không có lỗi provider/tool. Bằng chứng: [base v5 đã sửa](../../starter_v0/runs/v5_B_base_openrouter_20261111T114616307841.json), [group v5](../../starter_v0/runs/v5_B_group_openrouter_20261111T114714485359.json), [CSV base](../../starter_v0/analysis/base_runs_v5.csv), [CSV group](../../starter_v0/analysis/group_runs_v5.csv). Giữ các run 19/20 và ghi từng bước trong version log để không che mất lịch sử lỗi. Các điểm này chỉ đo hai bộ eval, không bảo đảm mọi câu trả lời xổ số đều đúng.
 
 Kiểm tra offline sau bổ sung: **121 passed, 14 skipped, 0 failed**. Test mới kiểm tra lịch đổi tháng/năm, năm nhuận, hôm qua/hôm kia, tham số ngày tìm kiếm và chặn truy vấn sai ngày hoặc kỳ chưa diễn ra. Thử model với nguồn giả lập rỗng kiểm tra được cách trả lời thiếu bằng chứng, nhưng chưa chứng minh mọi kết quả xổ số trên nguồn thật đều chính xác. Chưa có run live mới làm bằng chứng chất lượng nguồn trong phần này. Code: [calendar](../../starter_v0/tools/calendar/tool.py), [lookup](../../starter_v0/tools/lookup/tool.py), [chat](../../starter_v0/chat.py), [test ngày tháng](../../starter_v0/tests/test_calendar_dates.py).
 
@@ -132,22 +136,25 @@ Nguyên nhân chung: system prompt gốc (v0) cố ý chứa 3 chỉ dẫn xấu
 
 Liệt kê đúng 10 case trong `starter_v0/data/eval_group.json` (5 single turn + 5 multi turn).
 
-| Case ID | What It Tests | Expected Tool/Behavior | Result |
-|---|---|---|---|
-| G01_summarize_pasted_text (single) | **Tool mới** `summarize`: văn bản đã dán sẵn trong hội thoại, cần rút gọn 2 câu → không fetch/lookup | `summarize(max_sentences=2)` | PASS |
-| G02_handle_and_limit (single) | Map tên Yann LeCun → handle `ylecun`, trích `limit=7` | `timeline(screenname="ylecun", limit=7)` | PASS |
-| G03_timeframe_month (single) | "tháng này" → `timeframe=month` (base chỉ có day/week) | `lookup(topic="news", timeframe="month")` | PASS |
-| G04_out_of_scope_booking (single) | Yêu cầu đặt vé máy bay ngoài phạm vi research | `no_tool` (từ chối) | PASS |
-| G05_missing_handle_pronoun (single) | "tài khoản đó" không rõ là ai → hỏi lại, không đoán | `clarify(response_type="text")` | PASS |
-| G06_search_then_send_confirm (multi, 2 lượt) | Sau khi tìm tin, yêu cầu đăng Telegram → xin xác nhận | `clarify(response_type="yes_no")` | **FAIL** (wrong_boundary): agent gọi lại `lookup(query="AI", topic="news", timeframe="day")` để lấy nội dung trước, không hỏi xác nhận (`missing tool call clarify; extra tool call lookup`). Hành động đọc thì không gây hại, nhưng prompt v3 yêu cầu yêu cầu đăng phải `clarify(yes_no)` trước tiên → hướng sửa cho version sau. |
-| G07_switch_web_to_twitter (multi, 2 lượt) | Chuyển từ web sang Twitter theo chủ đề | `social_search(query="Gemini")` | PASS |
-| G08_correction_topic (multi, 3 lượt) | User sửa Apple → Samsung, giữ news + hôm nay | `lookup(query="Samsung", topic="news", timeframe="day")` | PASS |
-| G09_top_then_limit (multi, 2 lượt) | Giữ `search_type=Top` từ lượt 1 và `limit=3` từ lượt 2 | `social_search(search_type="Top", limit=3)` | PASS |
-| G10_out_of_scope_after_research (multi, 2 lượt) | Lượt mới ngoài phạm vi (viết email), không bị kéo theo ngữ cảnh research | `no_tool` (từ chối) | PASS |
+| Case ID | What It Tests | Expected Tool/Behavior | Result v3 | Result v5 (latest) |
+|---|---|---|---|---|
+| G01_summarize_pasted_text (single) | **Tool mới** `summarize`: văn bản đã dán sẵn trong hội thoại, cần rút gọn 2 câu → không fetch/lookup | `summarize(max_sentences=2)` | PASS | PASS |
+| G02_handle_and_limit (single) | Map tên Yann LeCun → handle `ylecun`, trích `limit=7` | `timeline(screenname="ylecun", limit=7)` | PASS | PASS |
+| G03_timeframe_month (single) | "tháng này" → `timeframe=month` (base chỉ có day/week) | `lookup(topic="news", timeframe="month")` | PASS | PASS |
+| G04_out_of_scope_booking (single) | Yêu cầu đặt vé máy bay ngoài phạm vi research | `no_tool` (từ chối) | PASS | PASS |
+| G05_missing_handle_pronoun (single) | "tài khoản đó" không rõ là ai → hỏi lại, không đoán | `clarify(response_type="text")` | PASS | PASS |
+| G06_search_then_send_confirm (multi, 2 lượt) | Sau khi tìm tin, yêu cầu đăng Telegram → xin xác nhận | `clarify(response_type="yes_no")` | **FAIL** (wrong_boundary): agent gọi lại `lookup(query="AI", topic="news", timeframe="day")` để lấy nội dung trước, không hỏi xác nhận (`missing tool call clarify; extra tool call lookup`). Hành động đọc thì không gây hại, nhưng prompt v3 yêu cầu yêu cầu đăng phải `clarify(yes_no)` trước tiên → hướng sửa cho version sau. | PASS |
+| G07_switch_web_to_twitter (multi, 2 lượt) | Chuyển từ web sang Twitter theo chủ đề | `social_search(query="Gemini")` | PASS | PASS |
+| G08_correction_topic (multi, 3 lượt) | User sửa Apple → Samsung, giữ news + hôm nay | `lookup(query="Samsung", topic="news", timeframe="day")` | PASS | PASS |
+| G09_top_then_limit (multi, 2 lượt) | Giữ `search_type=Top` từ lượt 1 và `limit=3` từ lượt 2 | `social_search(search_type="Top", limit=3)` | PASS | PASS |
+| G10_out_of_scope_after_research (multi, 2 lượt) | Lượt mới ngoài phạm vi (viết email), không bị kéo theo ngữ cảnh research | `no_tool` (từ chối) | PASS | PASS |
 
-Run chính thức: `starter_v0/runs/v3_B_group_openrouter_20261110T182345441573.json` (prompt/tools v3 hiện tại, OpenRouter `gpt-4o-mini`): **9/10 PASS** — case_accuracy 0.90, routing 0.90, args 0.90, multiturn 0.80; `provider_error_cases = 0`, `measured_cases = total_cases = 10`. (Run `v3_B_group_openrouter_20261110T114403796593.json` là lần chạy trước với 9 case, trước khi có tool mới.)
+Mốc group v3: `starter_v0/runs/v3_B_group_openrouter_20261110T182345441573.json` (cấu hình tại thời điểm chạy, OpenRouter `gpt-4o-mini`): **9/10 PASS** — case_accuracy 0.90, routing 0.90, args 0.90, multiturn 0.80; `provider_error_cases = 0`, `measured_cases = total_cases = 10`. Run `v3_B_group_openrouter_20261110T114403796593.json` là lần chạy trước với 9 case, trước khi có tool mới.
 
-Nhận xét v3: bộ base đạt 20/20 nhưng bộ nhóm bắt được lỗ hổng ở G06 — khi yêu cầu đăng Telegram nằm sau lượt tìm kiếm, agent ưu tiên tìm lại nội dung thay vì xin xác nhận trước. **Đã kiểm chứng lại ở v4:** thêm một câu vào bước 1; G06 gọi `clarify(response_type="yes_no")`, cả group đạt 10/10 và base giữ 20/20. Xem [run group v4](../../starter_v0/runs/v4_B_group_openrouter_20261111T090726767829.json). Bảng B3 phía trên mô tả lần chạy v3 để giữ bằng chứng lỗi ban đầu.
+**Run group cho bản chốt v5:** [v5_B_group_openrouter_20261111T114714485359.json](../../starter_v0/runs/v5_B_group_openrouter_20261111T114714485359.json), chạy bằng `python run_eval.py --provider openrouter --version v5 --suite group --eval-cases data/eval_group.json`. Kết quả **10/10 PASS**; case/routing/argument/multiturn accuracy đều 1.00, `provider_error_cases=0`, `measured_cases=total_cases=10`. Cột v5 trong B3 lấy trực tiếp từ run này; hash prompt/tool khớp với [base v5 đã sửa](../../starter_v0/runs/v5_B_base_openrouter_20261111T114616307841.json) và cấu hình code chốt. Đã ghi trong [version log](../../starter_v0/artifacts/version_log.csv), có [CSV group v5](../../starter_v0/analysis/group_runs_v5.csv).
+
+Nhận xét v3: bộ base đạt 20/20 nhưng bộ nhóm bắt được lỗ hổng ở G06 — khi yêu cầu đăng Telegram nằm sau lượt tìm kiếm, agent ưu tiên tìm lại nội dung thay vì xin xác nhận trước. **Đã kiểm chứng lại ở v4:** thêm một câu vào bước 1; G06 gọi `clarify(response_type="yes_no")`, cả group đạt 10/10 và base giữ 20/20. Xem [run group v4](../../starter_v0/runs/v4_B_group_openrouter_20261111T090726767829.json). Bảng B3 giữ cột v3 để thấy lỗi ban đầu và bổ sung cột v5 để thể hiện kết quả bản chốt.
+
 
 ### B4. Live Chat Evidence
 

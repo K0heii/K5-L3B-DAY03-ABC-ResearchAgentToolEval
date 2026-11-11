@@ -26,7 +26,7 @@ tools:
     parameters:
       type: object
       properties:
-        screenname: {type: string, description: "Handle không có ký tự @ hoặc URL. Dùng tài khoản từ yêu cầu/ngữ cảnh, chỉ ánh xạ tên người sang handle khi biết chắc."}
+        screenname: {type: string, description: "Handle X/Twitter thật, không có @ hoặc URL; không tự ghép họ tên thành handle. Các ánh xạ đã biết: Sam Altman → sama; Andrej Karpathy → karpathy; Elon Musk → elonmusk; Yann LeCun → ylecun. Giữ đúng tài khoản được sửa ở lượt mới nhất; nếu không biết handle và không có trong ngữ cảnh thì hỏi clarify."}
         limit: {type: integer, default: 5, description: "Số tweet cần lấy; giữ số lượng mới nhất người dùng yêu cầu, mặc định 5."}
       required: [screenname]
 
