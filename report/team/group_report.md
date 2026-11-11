@@ -97,6 +97,15 @@ Lấy từ `starter_v0/artifacts/version_log.csv` và `starter_v0/runs/*.json`. 
 | v3 | `system_prompt.md` + `tools.yaml` | Làm rõ thứ tự xác nhận; cập nhật từng trường ngữ cảnh; đồng bộ mô tả và tham số tool sẽ sửa R12/M06. Run đạt 20/20 sau khi thay API key; chưa bao gồm tool summarize mới thêm. | case 0.90 | case 1.00 · routing 1.00 · args 1.00 · multiturn 1.00 (sửa được R12, M06; 20/20 PASS) | `starter_v0/runs/v3_B_base_openrouter_20261110T184535773441.json` |
 | v3 (kiểm chứng tool mới) | `tools.yaml` (thêm `summarize`, không sửa prompt) | Kiểm tra tool mới không gây nhầm routing: base đạt 20/20; hai ca riêng về URL và văn bản có sẵn đạt 2/2 trong runs/v3_B_group_openrouter_20261110T194201490825.json. Hash khớp tools.yaml hiện tại; không có lỗi tool_results. | case 1.00 | case 1.00 · routing 1.00 · args 1.00 · multiturn 1.00 (20/20) | `starter_v0/runs/v3_B_base_openrouter_20261110T194243596270.json` |
 
+Hai run v4 mới bổ sung kiểm chứng một giả thuyết duy nhất: thêm đúng một câu vào bước 1 của quy trình xác nhận để yêu cầu đăng/gửi chưa được xác nhận luôn bắt đầu bằng `clarify(yes_no)`, kể cả sau lượt tìm kiếm; không sửa tool hoặc bộ eval.
+
+| Version / suite | Thay đổi | Metric trước | Metric sau | Bằng chứng |
+|---|---|---:|---:|---|
+| v4 / base | Một câu trong `system_prompt.md` | 20/20 (v3) | 20/20 | [Run base v4](../../starter_v0/runs/v4_B_base_openrouter_20261111T090622307950.json) |
+| v4 / group | Cùng câu trên, cùng hash prompt/tool | 9/10 (v3) | 10/10; G06 PASS | [Run group v4](../../starter_v0/runs/v4_B_group_openrouter_20261111T090726767829.json) |
+
+Hai run v4 có `provider_error_cases=0`, đo đủ toàn bộ case. Đây là so sánh với các run v3 có sẵn; cấu hình tool của mốc v3 khác hiện tại nên chưa thể tách riêng toàn bộ tác động của một câu. Xem [phân tích v4 và giới hạn so sánh](../../starter_v0/analysis/v4_summary.md). Các nhận xét v3 bên dưới được giữ làm lịch sử thử nghiệm, không phải kết quả cuối cùng của v4.
+
 ### B2. Failure Analysis
 
 Lấy từ `results[*].result.failures` trong run JSON.
@@ -132,7 +141,7 @@ Liệt kê đúng 10 case trong `starter_v0/data/eval_group.json` (5 single turn
 
 Run chính thức: `starter_v0/runs/v3_B_group_openrouter_20261110T182345441573.json` (prompt/tools v3 hiện tại, OpenRouter `gpt-4o-mini`): **9/10 PASS** — case_accuracy 0.90, routing 0.90, args 0.90, multiturn 0.80; `provider_error_cases = 0`, `measured_cases = total_cases = 10`. (Run `v3_B_group_openrouter_20261110T114403796593.json` là lần chạy trước với 9 case, trước khi có tool mới.)
 
-Nhận xét: bộ base đạt 20/20 ở v3 nhưng bộ nhóm vẫn bắt được 1 lỗ hổng ở G06 — khi yêu cầu đăng Telegram nằm sau một lượt tìm kiếm, agent ưu tiên tìm lại nội dung thay vì xin xác nhận trước. Đây là hướng sửa cho version tiếp theo (ví dụ: rule "yêu cầu đăng luôn bắt đầu bằng clarify yes_no, kể cả khi chưa có nội dung").
+Nhận xét v3: bộ base đạt 20/20 nhưng bộ nhóm bắt được lỗ hổng ở G06 — khi yêu cầu đăng Telegram nằm sau lượt tìm kiếm, agent ưu tiên tìm lại nội dung thay vì xin xác nhận trước. **Đã kiểm chứng lại ở v4:** thêm một câu vào bước 1; G06 gọi `clarify(response_type="yes_no")`, cả group đạt 10/10 và base giữ 20/20. Xem [run group v4](../../starter_v0/runs/v4_B_group_openrouter_20261111T090726767829.json). Bảng B3 phía trên mô tả lần chạy v3 để giữ bằng chứng lỗi ban đầu.
 
 ### B4. Live Chat Evidence
 
@@ -209,6 +218,7 @@ Lỗi đặc thù của model nhỏ (đếm từ run JSON):
 - **Thêm tool mới sau khi đã chạy v3.** Run v3 ban đầu chưa có `summarize` trong `tools.yaml` (`tools_hash` không đổi). Nhóm bổ sung câu "không dùng khi chỉ có URL" rồi chạy lại base (`runs/v3_B_base_openrouter_20261110T194243596270.json`, 20/20) và bộ kiểm tra riêng S01/S02 (2/2) để chắc tool mới không làm sai routing.
 - **`prompt_hash` khác nhau giữa các máy dù prompt giống nhau.** Run trên Windows cho `v3+pf3580c48afa7`, trên macOS cho `v3+p0e988e39e258`. Nguyên nhân: `versioning.py` băm byte của file, Windows lưu xuống dòng CRLF còn macOS là LF; kiểm tra lại bằng cách đổi LF→CRLF thì ra đúng `f3580c48afa7`. Nội dung prompt không đổi.
 - **Git.** Một thành viên bị kẹt ở màn hình vim khi `git pull` (merge message) và có xung đột ở `TEAM.md` khi nhiều người cùng điền bảng thành viên; xử lý bằng hoàn tất merge và giữ đủ 4 dòng thành viên. Hệ quả là một phần bài được push sau 23h59, trong thời gian gia hạn của coach.
+- **Kết nối provider khi chạy v4.** Lần chạy base đầu có 6 ca `APIConnectionError`, group đầu có 4 ca; giữ nguyên log và không dùng điểm của hai run thiếu dữ liệu làm kết quả tối ưu. Chạy lại lần lượt từng suite với cùng prompt/tool: base 20/20 và group 10/10, không còn lỗi provider/tool. Đường dẫn các log và giải thích nằm trong [v4_summary.md](../../starter_v0/analysis/v4_summary.md).
 
 ## 6. Tổng hợp đóng góp
 
@@ -220,7 +230,7 @@ Chi tiết đóng góp của từng thành viên nằm trong [TEAM.md](../../TEA
 - **Fix nào thuộc `tools.yaml`?** Lựa chọn giữa các tool và giá trị tham số: phân biệt `timeline`/`social_search`/`lookup`/`fetch`, convention `topic=news` + `timeframe` thay vì nhét vào `query` (R03, R13), `confirmed=true` của `send`, và ranh giới `summarize` vs `fetch` khi chỉ có URL.
 - **Failure nào cần review thủ công?** (1) Câu ngoài phạm vi: eval chỉ kiểm "không gọi tool", không kiểm agent từ chối có lịch sự/đúng không. (2) G06: agent tìm lại tin trước khi hỏi xác nhận — đọc thêm thì vô hại, nhưng có thể lệch quy trình; cần người xem để quyết định đó là lỗi hay hành vi chấp nhận được. (3) Transcript B2: agent hỏi lại bằng text thay vì `clarify` — đúng ý nhưng sai cơ chế, chấm tự động trên chat thật không bắt được. (4) Chất lượng nội dung tóm tắt/bản tin không được chấm.
 - **Lưu ý về phương pháp:** v1–v3 mỗi version sửa nhiều điểm cùng lúc (v3 sửa cả prompt lẫn tools), nên khó tách thay đổi nào tạo ra mức tăng. Ví dụ v1 giả thuyết về "hỏi lại" nhưng R10/R11 vẫn FAIL đến v2 (do thiếu `response_type`), còn phần tăng điểm của v1 thực tế đến từ phạm vi và routing (R03, R08, R13, R14).
-- **Nếu có thêm một vòng:** một giả thuyết duy nhất cho G06 — "mọi yêu cầu đăng/gửi bắt đầu bằng `clarify(yes_no)` kể cả khi lượt trước là tìm kiếm và chưa có nội dung"; đo lại bằng `--suite group` (G06) và base (R12) để kiểm tra không hồi quy. Sau đó thêm eval case cho `keywords`, `extract_links`, `merge_sources`.
+- **Vòng bổ sung đã thực hiện:** v4 kiểm chứng một giả thuyết cho G06 bằng đúng một câu thêm vào bước 1; base đạt 20/20 và group 10/10. Chưa thực hiện v5. Lỗi hỏi bằng chữ thay vì `clarify` trong transcript B2 vẫn là giới hạn cần kiểm tra riêng bằng chat nhiều lượt; việc các ca eval hỏi lại đều đạt không chứng minh lỗi live chat này đã được sửa. Bước sau có thể kiểm chứng giả thuyết đó, rồi thêm eval case cho `keywords`, `extract_links`, `merge_sources`.
 
 ## 8. Tài liệu tham khảo
 

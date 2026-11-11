@@ -1,8 +1,4 @@
-# Báo cáo cá nhân — HoVaTen-MSSV
-
-Đổi tên file theo quy tắc `MSSV_HoTen.md`.
-
-Ví dụ: `20241234_NguyenVanAn.md`.
+# Báo cáo cá nhân — Nguyen Duc Minh-2A202603765
 
 ## 1. Thông tin thành viên
 
@@ -12,14 +8,14 @@ Ví dụ: `20241234_NguyenVanAn.md`.
 
 ## 2. Phần việc phụ trách
 CP1+CP2
-...
 
 ## 3. Đóng góp cụ thể
 Chạy v0 và tìm ra nhưng case bị lỗi sau đó thiết kế prompt:
 V1: Sửa prompt để agent hỏi lại khi thiếu tài khoản hoặc URL, không tự đoán thông tin và yêu cầu xác nhận trước khi gửi tin. Kết quả tăng từ 65% lên 85%.
 V2: Bổ sung quy định truyền đầy đủ tham số khi hỏi lại, giới hạn phạm vi nghiên cứu và phân biệt trả lời trong chat với gửi tin ra ngoài. Kết quả đạt 90%.
 V3: Hoàn thiện quy trình xác nhận, giúp agent nhớ đúng nguồn tìm kiếm khi người dùng đổi ý, đồng thời làm rõ mô tả và tham số của các tool. Kết quả đạt 100% trên 20 ca kiểm thử base.
-...
+
+V4: Chỉ thêm một câu vào bước 1 của quy trình xác nhận để yêu cầu đăng/gửi sau lượt tìm kiếm vẫn phải hỏi xác nhận bằng `clarify(yes_no)` trước. Chạy cả base và group: base đạt 20/20, group đạt 10/10; G06 đã chọn đúng tool xác nhận. Không sửa nội dung case hay code chấm.
 
 ## 4. Bằng chứng
 
@@ -33,7 +29,7 @@ V3: Hoàn thiện quy trình xác nhận, giúp agent nhớ đúng nguồn tìm 
 
 - AI/công cụ đã dùng và cách tự kiểm tra kết quả: ChatGPT, Gemini/ Tôi nhờ AI đọc hộ tôi base_run của từng file sau đó phân tích xem điều gì đang mắc phải. Sau đó chọn ra từng nhóm và chia nhỏ ra để xử lý. Dựa vào gợi ý prompt sau đó sửa lại một số ý rồi viết vào phi prompt để kiểm tra kết qua của từng version sau.
 
+  Bằng chứng v4: [run base 20/20](../../starter_v0/runs/v4_B_base_openrouter_20261111T090622307950.json), [run group 10/10](../../starter_v0/runs/v4_B_group_openrouter_20261111T090726767829.json) và [phân tích thay đổi, lỗi kết nối, giới hạn so sánh](../../starter_v0/analysis/v4_summary.md).
+
 ## 5. Tự đánh giá
 Đây là một phần quan trọng của bài lab cách tạo prompt và cách kiểm soát cho AI của mình sẽ áp dụng được rất nhiều vào phần build và quá trình sau này.
-
-...

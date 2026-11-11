@@ -54,6 +54,7 @@ Sao chép mục dưới đây cho từng thành viên.
 
 - Chạy v0 (0.65), phân tích case lỗi và sửa prompt/tools qua v1 (0.85), v2 (0.90), v3 (1.00 trên 20 case base).
 - Chạy lại v3 sau khi thêm `summarize` (20/20) và bộ kiểm tra riêng fetch/summarize (2/2); ghi `version_log.csv`.
+- Thực hiện v4 với một giả thuyết: thêm đúng một câu vào bước 1 để xin xác nhận trước khi đăng/gửi sau lượt tìm kiếm; base 20/20, group 10/10 và G06 PASS. Bằng chứng và lỗi kết nối ban đầu: [v4_summary.md](starter_v0/analysis/v4_summary.md).
 
 ### Bằng chứng
 

@@ -1,0 +1,607 @@
+{
+  "run_id": "v4_B_group_openrouter_20261111T085701371006",
+  "version": "v4",
+  "artifact_version": "v4+p158993352e21+t7f5d797950cf",
+  "prompt_hash": "158993352e21ed3850074599f92594292785cbd9911bfc87ab3e309f21eb6aa4",
+  "tools_hash": "7f5d797950cffda70586ea116da559f4b4d760cc1c0d7344de440dd8e80d4c98",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "system_prompt": "C:\\Users\\admin\\Downloads\\AIthucchien\\K5-L3B-DAY03-ABC-ResearchAgentToolEval\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\admin\\Downloads\\AIthucchien\\K5-L3B-DAY03-ABC-ResearchAgentToolEval\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day03_v2_research_group",
+  "dataset_role": "group",
+  "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
+  "generated_at": "2026-11-11T08:57:01",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 6,
+    "provider_error_cases": 4,
+    "passed_cases": 6,
+    "case_accuracy": 1.0,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 1.0,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "G01_summarize_pasted_text",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "routing_new_tool_summarize",
+        "difficulty": "medium",
+        "what_it_tests": "Tool mới của nhóm: văn bản đã được dán sẵn trong hội thoại và cần rút gọn → summarize(max_sentences=2); không gọi fetch/lookup vì không có URL hay nhu cầu tìm kiếm."
+      },
+      "input": "Mình dán sẵn đoạn ghi chú dưới đây, rút gọn còn đúng 2 câu chính giúp mình nhé: Các mô hình ngôn ngữ lớn ngày càng được dùng làm trợ lý nghiên cứu. Chúng có thể gọi công cụ để tìm kiếm web và đọc tài liệu. Tuy nhiên mô hình vẫn có thể chọn sai công cụ hoặc truyền sai tham số. Vì vậy các nhóm phát triển cần bộ đánh giá để đo độ chính xác khi gọi công cụ. Kết quả đánh giá giúp nhóm sửa prompt và mô tả công cụ theo từng phiên bản.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "summarize",
+            "args": {
+              "max_sentences": 2
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "APIConnectionError: Connection error."
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G02_handle_and_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_handle_and_limit",
+        "difficulty": "medium",
+        "what_it_tests": "Tweet CỦA một người → timeline; map tên Yann LeCun thành handle ylecun (không có @) và trích limit=7."
+      },
+      "input": "Lấy 7 tweet mới nhất của Yann LeCun giúp mình",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "timeline",
+            "args": {
+              "screenname": "ylecun",
+              "limit": 7
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "APIConnectionError: Connection error."
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G03_timeframe_month",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "arg_timeframe_month",
+        "difficulty": "medium",
+        "what_it_tests": "'tháng này' → lookup với topic=news, timeframe=month (base chỉ có day/week)."
+      },
+      "input": "Có tin tức gì mới về Nvidia trong tháng này không?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "topic": "news",
+              "timeframe": "month"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "APIConnectionError: Connection error."
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G04_out_of_scope_booking",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_action",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu hành động ngoài phạm vi research (đặt vé) → không gọi tool nào, từ chối lịch sự."
+      },
+      "input": "Đặt giúp mình vé máy bay Hà Nội đi Đà Nẵng tối mai nhé",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "APIConnectionError: Connection error."
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G05_missing_handle_pronoun",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_missing_handle_pronoun",
+        "difficulty": "medium",
+        "what_it_tests": "Chỉ nói 'tài khoản đó', không rõ là ai → clarify hỏi lại, không tự đoán handle."
+      },
+      "input": "Dạo này tài khoản đó đăng gì vậy, xem giúp mình",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn muốn xem nội dung từ tài khoản nào?",
+              "response_type": "text"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn muốn xem nội dung từ tài khoản nào?",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn muốn xem nội dung từ tài khoản nào?",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G06_search_then_send_confirm",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_confirm_before_send",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: sau khi tìm tin, user yêu cầu đăng Telegram → phải hỏi xác nhận (clarify yes_no) trước, không send ngay."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm giúp mình tin AI hôm nay"
+        },
+        {
+          "role": "user",
+          "content": "Tóm tắt lại rồi đăng lên kênh Telegram của nhóm nhé"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn có xác nhận muốn đăng tin tức về AI hôm nay lên kênh Telegram của nhóm không?",
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có xác nhận muốn đăng tin tức về AI hôm nay lên kênh Telegram của nhóm không?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có xác nhận muốn đăng tin tức về AI hôm nay lên kênh Telegram của nhóm không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_switch_web_to_twitter",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_web_to_social",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: chuyển từ web sang Twitter theo CHỦ ĐỀ → social_search (không phải lookup hay timeline), giữ query Gemini."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm trên web tin mới nhất về Gemini"
+        },
+        {
+          "role": "user",
+          "content": "Thôi, xem mọi người bàn gì về Gemini trên Twitter đi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Gemini"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Gemini",
+              "search_type": "Latest"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "Gemini",
+            "search_type": "Latest"
+          },
+          "result": {
+            "tool": "search_tweets",
+            "query": "Gemini",
+            "search_type": "Latest",
+            "items": [
+              {
+                "title": "Gemini 4 carbon  上线了？？  GEMINI PRO能不能用。",
+                "summary": "Gemini 4 carbon  上线了？？  GEMINI PRO能不能用。",
+                "url": "https://x.com/Mars8BitX/status/2120334788662096157",
+                "source": "@Mars8BitX",
+                "date": "Wed Nov 11 01:56:22 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": null
+                }
+              },
+              {
+                "title": "我真的严重怀疑是不是 Tibo 被挖走了....🙃",
+                "summary": "我真的严重怀疑是不是 Tibo 被挖走了....🙃\n\n为什么 Claude 都会重置了 Fable 昨天 5.2 太炸裂了基本刷屏了 做 Gemini 新模型都没压过他.",
+                "url": "https://x.com/Dav338876/status/2120334775043150082",
+                "source": "@Dav338876",
+                "date": "Wed Nov 11 01:56:18 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": "2"
+                }
+              },
+              {
+                "title": "Gemini:法的本质是维护社会存续的底线框架。 一旦法律沦为权力的私器，其中立裁判的公信力就会瓦解，社会便会重新退回到这种“私刑与复仇”的野蛮状态。（记住：法是中立裁判，从不代表谁。它在两者之间扮演着完全中立的角色，即最公正的尺度。）",
+                "summary": "Gemini:法的本质是维护社会存续的底线框架。 一旦法律沦为权力的私器，其中立裁判的公信力就会瓦解，社会便会重新退回到这种“私刑与复仇”的野蛮状态。（记住：法是中立裁判，从不代表谁。它在两者之间扮演着完全中立的角色，即最公正的尺度。）",
+                "url": "https://x.com/ajunw12/status/2120334757758144836",
+                "source": "@ajunw12",
+                "date": "Wed Nov 11 01:56:14 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": "1"
+                }
+              },
+              {
+                "title": "Gemini 4 Carbon 已经开放了，但 Google 自己也说：多数日常开发，Argon 仍然更合适。",
+                "summary": "Gemini 4 Carbon 已经开放了，但 Google 自己也说：多数日常开发，Argon 仍然更合适。\n\n11月10日的官方公告把两者分得挺清楚：Carbon 用更多 token 做深度推理和长时间校验，偏复杂调试、长程 agent 和科研任务，不是所有任务都该直接换最强档。\n\nAPI 首发价是每百万 token 输入2美元、输出10美元；11月30日优惠结束后变成4美元和20美元。付费开发者可通过 Gemini API / AI Studio 使用，AI Ultra 用户也开始获得 Gemini 应用和 Antigravity 等入口。\n\n另一个值得看的是 Antigravity 预览的 /swarm：重推理、协调和审计交给 Carbon，更轻的模型并行执行和检查。\n\n我的判断是，Agent 选型越来越不只是“用哪个模型”，还包括“哪一步值得花更多推理预算”。不过这套分工是否划算，还得拿真实任务测，不能只看官方演示。\n\nhttps://t.co/GwRbMhQ65j",
+                "url": "https://x.com/d0n0evi1/status/2120334715030806753",
+                "source": "@d0n0evi1",
+                "date": "Wed Nov 11 01:56:04 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": "4"
+                }
+              },
+              {
+                "title": "This retrograde season really rocked my shit as a Gemini rising and Libra moon/venus like not just one but TWO emotional",
+                "summary": "This retrograde season really rocked my shit as a Gemini rising and Libra moon/venus like not just one but TWO emotional nervous breakdowns #NewRecord",
+                "url": "https://x.com/di4naladiosa/status/2120334671963955669",
+                "source": "@di4naladiosa",
+                "date": "Wed Nov 11 01:55:54 +0000 2026",
+                "metrics": {
+                  "favorites": 0,
+                  "retweets": 0,
+                  "views": "1"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_correction_topic",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_correction_query",
+        "difficulty": "hard",
+        "what_it_tests": "3 turns: sửa chủ đề Apple→Samsung, giữ topic=news và timeframe=day."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin về Apple hôm nay có gì?"
+        },
+        {
+          "role": "user",
+          "content": "À nhầm, ý mình là Samsung"
+        },
+        {
+          "role": "user",
+          "content": "Vẫn chỉ lấy tin hôm nay thôi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Samsung",
+              "topic": "news",
+              "timeframe": "day"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Samsung",
+              "topic": "news",
+              "timeframe": "day"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "Samsung",
+            "topic": "news",
+            "timeframe": "day"
+          },
+          "result": {
+            "tool": "web_search",
+            "error": "ConnectionError",
+            "message": "HTTPSConnectionPool(host='api.tavily.com', port=443): Max retries exceeded with url: /search (Caused by NameResolutionError(\"HTTPSConnection(host='api.tavily.com', port=443): Failed to resolve 'api.tavily.com' ([Errno 11001] getaddrinfo failed)\"))"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G09_top_then_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_search_type_and_limit",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: 'nổi bật nhất' → search_type=Top, lượt sau thêm limit=3; phải giữ cả hai."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Cho mình các tweet nổi bật nhất về Claude"
+        },
+        {
+          "role": "user",
+          "content": "Lấy 3 cái thôi"
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "social_search",
+            "args": {
+              "query": "Claude",
+              "search_type": "Top",
+              "limit": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "social_search",
+          "args": {
+            "query": "Claude",
+            "search_type": "Top",
+            "limit": 3
+          },
+          "result": {
+            "tool": "search_tweets",
+            "error": "ConnectionError",
+            "message": "HTTPSConnectionPool(host='twitter-api45.p.rapidapi.com', port=443): Max retries exceeded with url: /search.php?query=Claude&search_type=Top (Caused by NameResolutionError(\"HTTPSConnection(host='twitter-api45.p.rapidapi.com', port=443): Failed to resolve 'twitter-api45.p.rapidapi.com' ([Errno 11001] getaddrinfo failed)\"))"
+          }
+        }
+      ]
+    },
+    {
+      "id": "G10_out_of_scope_after_research",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_out_of_scope",
+        "difficulty": "medium",
+        "what_it_tests": "2 turns: lượt trước là research nhưng lượt mới ngoài phạm vi (viết email) → không gọi tool, không bị kéo theo ngữ cảnh cũ."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tin AI hôm nay có gì mới?"
+        },
+        {
+          "role": "user",
+          "content": "Viết giúp mình email xin nghỉ phép ngày mai gửi sếp"
+        }
+      ],
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Tôi chỉ hỗ trợ nghiên cứu và không thể viết email hoặc thực hiện các tác vụ không liên quan đến nghiên cứu. Nếu bạn cần thông tin hoặc tài liệu nào đó để hỗ trợ việc viết email, hãy cho tôi biết!",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    }
+  ]
+}
