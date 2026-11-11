@@ -1,0 +1,43 @@
+{
+  "dataset_id": "merge_sources_routing_regression",
+  "dataset_role": "group",
+  "description": "Kiểm tra riêng routing cho tool merge_sources; không thay thế bộ eval_group.json của nhóm.",
+  "cases": [
+    {
+      "id": "MS01_items_requires_merge_sources",
+      "phase": "B",
+      "query": "Gộp và bỏ trùng lặp theo url giúp mình các item sau: [{\"title\": \"A\", \"url\": \"https://a.com/1\"}, {\"title\": \"A bản khác\", \"url\": \"https://a.com/1\"}, {\"title\": \"B\", \"url\": \"https://b.com/2\"}]",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "merge_sources",
+            "args": {}
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Đã có danh sách item, yêu cầu gộp bỏ trùng: chọn merge_sources, không lookup/fetch lại dữ liệu."
+      }
+    },
+    {
+      "id": "MS02_merge_sorted_by_score",
+      "phase": "B",
+      "query": "Gộp và sắp xếp theo điểm từ cao xuống thấp các item sau: [{\"title\": \"A\", \"url\": \"https://a.com/1\", \"score\": 2}, {\"title\": \"B\", \"url\": \"https://b.com/2\", \"score\": 5}]",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "merge_sources",
+            "args": {
+              "sort_by": "score"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Yêu cầu sắp theo điểm: merge_sources phải truyền sort_by=\"score\" thay vì để mặc định none."
+      }
+    }
+  ]
+}

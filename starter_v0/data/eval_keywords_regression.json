@@ -1,0 +1,45 @@
+{
+  "dataset_id": "keywords_routing_regression",
+  "dataset_role": "group",
+  "description": "Kiểm tra riêng routing cho tool keywords; không thay thế bộ eval_group.json của nhóm.",
+  "cases": [
+    {
+      "id": "KW01_text_requires_keywords",
+      "phase": "B",
+      "query": "Cho mình 3 từ khóa chính của đoạn văn bản sau: Trợ lý nghiên cứu dùng công cụ để tìm tin trên web. Công cụ tìm kiếm trả về nhiều kết quả khác nhau. Nhóm kiểm tra lựa chọn công cụ bằng bộ đánh giá cố định. Agent chọn tool phù hợp với từng yêu cầu của người dùng.",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "keywords",
+            "args": {
+              "top_n": 3
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Đã có văn bản trong câu hỏi, cần từ khóa: chọn keywords với top_n=3, không fetch/lookup."
+      }
+    },
+    {
+      "id": "KW02_url_requires_fetch_first",
+      "phase": "B",
+      "query": "Từ khóa của bài này là gì: https://example.com/article",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://example.com/article"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Chỉ có URL chưa có văn bản: phải fetch trước để lấy nội dung, không đưa URL vào keywords."
+      }
+    }
+  ]
+}

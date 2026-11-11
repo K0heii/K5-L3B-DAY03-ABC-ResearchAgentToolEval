@@ -1,4 +1,4 @@
-# Báo cáo cá nhân — HoVaTen-MSSV
+# Báo cáo cá nhân — NguyenNhuDuyAn-2A202603783
 
 Đổi tên file theo quy tắc `MSSV_HoTen.md`.
 
