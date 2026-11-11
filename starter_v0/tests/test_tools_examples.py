@@ -9,6 +9,8 @@ Patterns shown:
 """
 from __future__ import annotations
 
+import io
+
 import pytest
 import requests
 
@@ -107,6 +109,26 @@ class FakeProvider:
 
     def complete(self, messages, tools=None, *, model=None, temperature=0.0, tool_choice=None) -> ModelResponse:
         return ModelResponse(text=None, tool_calls=self.calls)
+
+
+def test_live_chat_tool_logging_works_with_legacy_windows_stdout(monkeypatch) -> None:
+    buffer = io.BytesIO()
+    console = io.TextIOWrapper(buffer, encoding="cp1252", errors="strict")
+    question = "Bạn muốn xem kết quả ngày nào? 🔧"
+    session = AgentSession(
+        FakeProvider([ToolCall("clarify", {"question": question, "response_type": "text"})]),
+        "test", [], {"history_window": 5, "model": "fake", "max_tool_rounds": 1},
+    )
+
+    with monkeypatch.context() as patch:
+        patch.setattr("sys.stdout", console)
+        result = run_live_turn(session, [], "test")
+        console.flush()
+
+    assert result["status"] == "waiting_for_user"
+    assert result["assistant_text"] == question
+    assert result["tool_events"][0]["args"]["question"] == question
+    assert "[tool]" in buffer.getvalue().decode("ascii")
 
 
 def test_agent_executes_tool_and_survives_unknown_or_bad_calls() -> None:

@@ -21,6 +21,7 @@ from .summarize.tool import summarize_text
 from .keywords.tool import extract_keywords
 from .extract_links.tool import extract_links
 from .merge_sources.tool import merge_sources
+from .calendar.tool import get_calendar_context
 
 
 # NOTE (starter_v0): tool names here are intentionally vague. These keys are the
@@ -43,6 +44,7 @@ TOOL_FUNCTIONS = {
     "keywords": extract_keywords,
     "extract_links": extract_links,
     "merge_sources": merge_sources,
+    "calendar": get_calendar_context,
 }
 
 

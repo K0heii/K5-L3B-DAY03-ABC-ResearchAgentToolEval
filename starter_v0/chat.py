@@ -12,6 +12,7 @@ from env_loader import load_lab_env
 from providers import make_provider
 from providers.base import ToolCall
 from tools import TOOL_FUNCTIONS, load_tool_declarations, to_openai_tools
+from tools.calendar.tool import lottery_turn_context
 from versioning import artifact_version_dict, build_artifact_version
 
 
@@ -141,6 +142,19 @@ def run_model_tool_loop(
                 }
 
     working_messages = list(messages)
+    calendar_context = lottery_turn_context(messages)
+    if calendar_context is not None:
+        working_messages.insert(0, {
+            "role": "system",
+            "content": (
+                "Trusted calendar for THIS turn, read from the machine clock: "
+                + json.dumps(calendar_context, ensure_ascii=False)
+                + ". The only requested draw date is target_date; do not search or report another date. "
+                "An empty result does not change that date. If is_future is true, the draw has not happened: "
+                "say no result exists yet, give no numbers, and do not search for winning numbers. "
+                "Do not say it is before today's draw time unless a source verifies that schedule."
+            ),
+        })
     rounds: list[dict[str, Any]] = []
     all_tool_events: list[dict[str, Any]] = []
 
@@ -169,9 +183,21 @@ def run_model_tool_loop(
         non_clarification_events: list[dict[str, Any]] = []
 
         for call in calls:
-            print(f"🔧 {call.name}({json.dumps(call.args, ensure_ascii=False, sort_keys=True)})")
+            # Console logging must work on Windows legacy encodings as well.
+            # Escape only the diagnostic line; tool arguments/transcripts keep Unicode.
+            print(f"[tool] {ascii(call.name)}({json.dumps(call.args, ensure_ascii=True, sort_keys=True)})")
             draft = None
-            if call.name == "send" and call.args.get("confirmed") is True:
+            if call.name == "lookup" and calendar_context is not None and (
+                calendar_context["is_future"]
+                or call.args.get("target_date") != calendar_context["target_date"]
+            ):
+                event = {"tool": call.name, "args": call.args, "result": {
+                    "error": "unpublished_future_draw" if calendar_context["is_future"] else "draw_date_mismatch",
+                    "target_date": calendar_context["target_date"],
+                    "message": "No query was made. Use only this turn's target_date; future draws have no results. Never substitute older results or invent numbers.",
+                    "items": [],
+                }}
+            elif call.name == "send" and call.args.get("confirmed") is True:
                 event, draft = preview_telegram_send(call)
             else:
                 event = execute_tool_call(call)

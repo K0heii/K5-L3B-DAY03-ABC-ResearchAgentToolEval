@@ -106,6 +106,12 @@ Hai run v4 mới bổ sung kiểm chứng một giả thuyết duy nhất: thêm
 
 Hai run v4 có `provider_error_cases=0`, đo đủ toàn bộ case. Đây là so sánh với các run v3 có sẵn; cấu hình tool của mốc v3 khác hiện tại nên chưa thể tách riêng toàn bộ tác động của một câu. Xem [phân tích v4 và giới hạn so sánh](../../starter_v0/analysis/v4_summary.md). Các nhận xét v3 bên dưới được giữ làm lịch sử thử nghiệm, không phải kết quả cuối cùng của v4.
 
+**V5 — bổ sung xử lý ngày tháng và kiểm tra nguồn:** thêm tool `calendar` theo UTC+7, tham số `target_date` của `lookup`, chặn truy vấn xổ số lệch ngày trong vòng chat và sửa log Unicode trên Windows. Đây là một gói thay đổi prompt/tool/code, không phải thí nghiệm chỉ thay một câu như v4.
+
+[Run base v5](../../starter_v0/runs/v5_B_base_openrouter_20261111T112032802355.json) đo đủ 20 ca, `provider_error_cases=0`, đạt **19/20 (95%)**; routing 0.95, args 0.95, multiturn 1.00. R01 hồi quy: agent hỏi thêm số lượng tweet bằng `clarify` thay vì gọi `timeline(screenname="sama")`. [CSV v5](../../starter_v0/analysis/base_runs_v5.csv) và version log ghi đúng mức giảm so với v4, không coi v5 là bản đạt 100%. Chưa chạy lại bộ group cho cấu hình v5.
+
+Kiểm tra offline sau bổ sung: **121 passed, 14 skipped, 0 failed**. Test mới kiểm tra lịch đổi tháng/năm, năm nhuận, hôm qua/hôm kia, tham số ngày tìm kiếm và chặn truy vấn sai ngày hoặc kỳ chưa diễn ra. Thử model với nguồn giả lập rỗng kiểm tra được cách trả lời thiếu bằng chứng, nhưng chưa chứng minh mọi kết quả xổ số trên nguồn thật đều chính xác. Chưa có run live mới làm bằng chứng chất lượng nguồn trong phần này. Code: [calendar](../../starter_v0/tools/calendar/tool.py), [lookup](../../starter_v0/tools/lookup/tool.py), [chat](../../starter_v0/chat.py), [test ngày tháng](../../starter_v0/tests/test_calendar_dates.py).
+
 ### B2. Failure Analysis
 
 Lấy từ `results[*].result.failures` trong run JSON.

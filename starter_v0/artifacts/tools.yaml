@@ -51,6 +51,9 @@ tools:
       tuân theo nguồn mới nhất. Không dùng thay social_search cho tìm tweet,
       hoặc thay fetch để đọc một URL cụ thể. Có thể gọi cùng social_search
       khi yêu cầu hiện tại cần cả web lẫn tweet.
+      Với xổ số/kết quả theo ngày cụ thể, lấy ngày từ calendar rồi truyền
+      target_date và ghi rõ miền/tỉnh trong query; kết quả tìm kiếm chưa phải
+      kết quả mở thưởng đã xác minh, phải kiểm tra ngày/miền trong nội dung nguồn.
     parameters:
       type: object
       properties:
@@ -58,6 +61,7 @@ tools:
         topic: {type: string, enum: [general, news], default: "general", description: "Truyền news tường minh khi tìm tin tức/bản tin; general cho thông tin web thông thường."}
         timeframe: {type: string, enum: [day, week, month, year], default: "week", description: "Hôm nay/24 giờ: day; tuần này/7 ngày: week; tháng này: month; năm nay: year. Kế thừa thời gian từ ngữ cảnh trừ khi có thay đổi."}
         max_results: {type: integer, default: 5, description: "Số kết quả"}
+        target_date: {type: string, description: "Ngày sự kiện/mở thưởng chính xác YYYY-MM-DD, lấy từ calendar cho ngày tương đối. Khi có target_date, tool thêm ngày vào truy vấn và bỏ bộ lọc độ mới timeframe để không nhầm ngày đăng với ngày sự kiện. Không dùng chỉ để lọc tin tức hôm nay thông thường."}
       required: [query]
 
   - name: fetch
@@ -66,6 +70,8 @@ tools:
       Dùng để đọc hay tóm tắt bài viết cụ thể; không dùng để tìm kiếm theo chủ đề.
       Nếu chỉ có tham chiếu bài viết nhưng chưa có URL, dùng clarify để hỏi,
       không tạo URL mẫu hoặc đoán địa chỉ.
+      Khi đọc bảng kết quả xổ số, kiểm tra ngày mở thưởng và miền/tỉnh ở chính
+      bảng kết quả; không lấy ngày đăng bài, ngày ở menu hoặc nhãn hôm nay làm bằng chứng.
     parameters:
       type: object
       properties:
@@ -97,6 +103,21 @@ tools:
       required: [items, template]
 
   # ---------------- Bonus tools ----------------
+  - name: calendar
+    description: >-
+      Đọc ngày giờ hiện tại từ đồng hồ máy theo Asia/Ho_Chi_Minh (UTC+7).
+      Dùng trước khi xác định ngày mở thưởng hoặc trả lời yêu cầu cần ngày lịch
+      chính xác; gọi lại ở mỗi lượt xổ số có ngày tương đối, không dùng mốc cũ.
+      dates.today=hôm nay, yesterday=hôm qua (-1 ngày),
+      day_before_yesterday=hôm kia (-2), tomorrow=ngày mai (+1),
+      day_after_tomorrow=ngày kia (+2); mỗi mục có iso và display.
+      Không cung cấp lịch mở thưởng hay kết quả. Không cần cho tìm tin theo
+      bộ lọc độ mới thông thường hoặc yêu cầu không liên quan ngày lịch.
+    parameters:
+      type: object
+      properties: {}
+      required: []
+
   - name: send
     description: >-
       Gửi nội dung nghiên cứu lên Telegram được cấu hình, không phải trả lời chat.

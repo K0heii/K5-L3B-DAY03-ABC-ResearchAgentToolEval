@@ -1,0 +1,629 @@
+{
+  "schema_version": 1,
+  "transcript_id": "live_57f93a5a4dde4ffb891578b849d0e6df",
+  "source": "streamlit",
+  "mode": "live",
+  "version": "v3",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "created_at": "2026-11-11T10:57:37+07:00",
+  "updated_at": "2026-11-11T11:01:52+07:00",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-11T10:57:45+07:00",
+      "ended_at": "2026-11-11T10:57:48+07:00",
+      "user": "xổ số kiến thiết miền bắc hôm nay",
+      "status": "waiting_for_user",
+      "assistant_text": "Bạn có thể cho biết rõ hơn về tỉnh/thành phố mà bạn muốn kiểm tra kết quả xổ số kiến thiết miền Bắc không?",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "clarify",
+              "args": {
+                "question": "Bạn có thể cho biết rõ hơn về tỉnh/thành phố mà bạn muốn kiểm tra kết quả xổ số kiến thiết miền Bắc không?",
+                "response_type": "text"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "clarify",
+              "args": {
+                "question": "Bạn có thể cho biết rõ hơn về tỉnh/thành phố mà bạn muốn kiểm tra kết quả xổ số kiến thiết miền Bắc không?",
+                "response_type": "text"
+              },
+              "result": {
+                "tool": "ask_user",
+                "question": "Bạn có thể cho biết rõ hơn về tỉnh/thành phố mà bạn muốn kiểm tra kết quả xổ số kiến thiết miền Bắc không?",
+                "response_type": "text",
+                "options": [],
+                "awaiting_user": true
+              }
+            }
+          ]
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có thể cho biết rõ hơn về tỉnh/thành phố mà bạn muốn kiểm tra kết quả xổ số kiến thiết miền Bắc không?",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có thể cho biết rõ hơn về tỉnh/thành phố mà bạn muốn kiểm tra kết quả xổ số kiến thiết miền Bắc không?",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-11-11T10:58:13+07:00",
+      "ended_at": "2026-11-11T10:58:26+07:00",
+      "user": "xổ số kiến thiết miền bắc hôm qua",
+      "status": "answered",
+      "assistant_text": "Kết quả xổ số miền Bắc hôm qua, ngày 9/11/2026, được công bố như sau:\n\n1. **Kết quả xổ số miền Bắc ngày 9/11/2026**:\n   - Đặc biệt: Trùng 5 số cuối, có 3 giải x 1 tỷ đồng (+ 50 triệu nếu ký hiệu trùng).\n   - Phụ Đặc biệt: Trùng 4 số cuối, có 12 giải x 20 triệu đồng.\n   - Kết quả được quay thưởng bởi công ty xổ số kiến thiết Quảng Ninh vào lúc 18h10.\n\nBạn có thể xem chi tiết kết quả tại các nguồn sau:\n- [VietNamNet](https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html)\n- [Sức Khỏe Đời Sống](https://suckhoedoisong.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-xsmb-10-11-169261110180237028.htm)\n\nNếu bạn cần thêm thông tin hoặc kết quả từ các ngày khác, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "lookup",
+              "args": {
+                "query": "xổ số kiến thiết miền bắc",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              }
+            },
+            {
+              "name": "lookup",
+              "args": {
+                "query": "xổ số miền bắc hôm qua",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "lookup",
+              "args": {
+                "query": "xổ số kiến thiết miền bắc",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              },
+              "result": {
+                "tool": "web_search",
+                "query": "xổ số kiến thiết miền bắc",
+                "topic": "news",
+                "timeframe": "day",
+                "items": [
+                  {
+                    "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026 - XSMB 10/11",
+                    "url": "https://suckhoedoisong.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-xsmb-10-11-169261110180237028.htm",
+                    "source": "suckhoedoisong.vn",
+                    "summary": "Kết quả xổ số miền Bắc hôm nay (XSMB thứ Ba ngày 10/11/2026) được quay thưởng vào lúc 18h15 bởi công ty xổ số kiến thiết Quảng Ninh. Kết quả xổ số Quảng Ninh (kết quả XSQN 10/11), kết quả XSMB                                 10/11, kết quả các giải thưởng của XSMB ngày                                 10/11/2026 sẽ được công bố lần lượt từ giải nhất cho đến giải bảy, cuối cùng là giải đặc biệt. [...] Nếu giải thưởng có giá trị lớn thì nên đến trực tiếp công ty xổ số kiến thiết phát hành vé số, bạn sẽ nhận đủ giá trị giải thưởng trúng sau khi trừ thuế (nếu có) và không phải tốn phí như lĩnh thưởng tại đại lý.\n\nLịch mở thưởng xổ số miền Bắc hàng ngày\n\n- Thứ hai: đài Hà Nội\n\n- Thứ ba: đài Quảng Ninh\n\n- Thứ tư: đài Bắc Ninh\n\n- Thứ năm: đài Hà Nội\n\n- Thứ sáu: đài Hải Phòng\n\n- Thứ bảy: đài Nam Định\n\n- Chủ nhật: đài Thái Bình [...] Theo dõi kết quả xổ số miền Bắc hôm nay                                10/11/2026 và kết quả XSMB mỗi ngày, kết quả xổ số miền Bắc hôm nay - XSMB thứ 3 ngày                                10/11/2026, kết quả xổ số miền Bắc ngày                                10/11, KQXSMB                                10/11                                để cập nhật kết quả sớm nhất.",
+                    "score": 0.76596165
+                  },
+                  {
+                    "title": "XSMB 11/11, Trực tiếp xổ số miền Bắc thứ 4 ngày 11/11/2026",
+                    "url": "https://voh.com.vn/xsmb-11-11-truc-tiep-xo-so-mien-bac-thu-4-ngay-11-11-2026-679134.html",
+                    "source": "voh.com.vn",
+                    "summary": "|\n\nLike\n\nDislike\n\nXSMB 11/11. Trực tiếp xổ số miền Bắc thứ 4 ngày 11/11/2026 - Kết quả xổ số miền Bắc thứ tư - Xổ số miền Bắc 11/11, KQXSMB 11/11, SXMB 11/11\n\nXổ số miền Bắc hôm nay 11/11/2026 được cập nhật trực tiếp lúc 18h10 từ trường quay của công ty xổ số kiến thiết miền Bắc.\n\nKính mời quý đọc giả theo dõi bài viết để cập nhật kết quả trực tiếp một cách nhanh chóng và chính xác.\n\n### Những lưu ý quan trọng khi trúng số (đặc biệt là các giải có giá trị lớn) [...] + Giải nhỏ: Có thể đổi trực tiếp tại các đại lý xổ số uy tín gần nơi bạn sống.\n  + Giải lớn (từ giải Nhất trở lên): Bạn phải đến lĩnh thưởng trực tiếp tại trụ sở chính hoặc văn phòng đại diện của công ty xổ số kiến thiết đã phát hành tờ vé đó. Thông tin địa chỉ và số điện thoại luôn được in trên tờ vé số.\n\n4. Chuẩn Bị Thủ Tục Lĩnh Thưởng\n\nKhi đi nhận giải, bạn cần chuẩn bị các giấy tờ sau: [...] 2. Kiểm Tra Lại Kết Quả và Thông Tin Vé\n\n Dò vé thật kỹ: Hãy dò lại kết quả trên trang web chính thức của công ty xổ số kiến thiết tỉnh/thành phố phát hành tờ vé đó hoặc các trang tin tức uy tín. Tránh dò qua các nguồn không chính thống.\n Kiểm tra ngày mở thưởng và đài: Đảm bảo tờ vé của bạn khớp đúng ngày và đúng đài quay thưởng.\n\n3. Nắm Vững Quy Định Lĩnh Thưởng",
+                    "score": 0.756376
+                  },
+                  {
+                    "title": "Dự đoán XSMB 11/11/2026 - kết quả xổ số miền Bắc hôm nay thứ 4 ngày 11/11/2026",
+                    "url": "https://baoquocte.vn/du-doan-xsmb-11-11-2026-ket-qua-xo-so-mien-bac-hom-nay-thu-4-ngay-11-11-2026-432013.html",
+                    "source": "baoquocte.vn",
+                    "summary": "Báo TGVN sẽ cập nhật trực tiếp KẾT QUẢ XỔ SỐ MIỀN BẮC THỨ 4 NGÀY 11 THÁNG 11 NĂM 2026 nhanh nhất và chính xác nhất từ trường quay. KQXSMB hôm nay bắt đầu từ giải tám cho đến giải nhất, cuối cùng là công bố giải đặc biệt.\n\nKết quả Xổ số hôm nay trực tiếp quay số vào lúc 18 giờ 15 phút ngày thứ 4 hàng tuần được mở thưởng bởi Công ty xổ số kiến thiết:\n\n- Kết quả xổ số Bắc Ninh - XSBN 11/11/2026 - XSBN thứ 4 [...] Kết quả xổ số Bắc Ninh (XSBN) ngày 11/11/2026 được cập nhật trực tiếp từ hội đồng quay thưởng xổ số kiến thiết Thủ đô Hà Nội.\n\n### XEM LẠI KẾT QUẢ XỔ SỐ MIỀN BẮC - KQXSMB\n\n- XSMB 10/11/2026\n\n|\n|  |\n| Dự đoán XSMB 10/11 - kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026 |\n\n- XSMB 9/11/2026\n\n|\n|  |\n| Dự đoán XSMB 9/11 - kết quả xổ số miền Bắc thứ 2 ngày 9/11/2026 |\n\n### NHỮNG LƯU Ý CẦN BIẾT KHI ĐỔI THƯỞNG XSMB [...] Thời gian hiệu lực cho tờ vé số trúng thưởng là 30 ngày kể từ ngày công bố kết quả xổ số. Nếu để quá thời hạn, người chơi sẽ không được nhận thưởng và không có quyền yêu cầu giải quyết việc trao thưởng.\n\nGiám đốc công ty xổ số kiến thiết sẽ là người có thẩm quyền và chịu trách nhiệm về quy trình kiểm tra vé số trúng thưởng.\n\nNgười chơi nếu trúng các giải thưởng có giá trị từ 10 triệu đồng trở lên thì sẽ phải đóng thuế 10% theo quy định.",
+                    "score": 0.70263255
+                  },
+                  {
+                    "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026: XSMB Thứ Ba 10/11",
+                    "url": "https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html",
+                    "source": "vietnamnet.vn",
+                    "summary": "Kết quả xổ số miền Bắc hôm nay thứ Ba ngày 10/11/2026 được quay bởi xổ số Quảng Ninh. Mời độc giả xem trực tiếp kết quả XSMB 10/11 được cập nhật nhanh trên VietNamNet.\n\nXem nhanh:\n\n Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026 (cập nhật)\n Kết quả XSMB 3 ngày gần đy\n\n## Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026\n\n \n\nKết quả xổ số miền Bắc (XSMB) ngày 10/11/2026 được quay thưởng và công bố vào lúc 18h10 bởi công ty xổ số kiến thiết Quảng Ninh.\n\n## Kết quả XSMB 3 ngày gần đy [...] ### Kết quả XSMB ngày 9/11/2026\n\n \n\n### Kết quả XSMB ngày 8/11/2026\n\n \n\n### Kết quả XSMB ngày 7/11/2026\n\nThông tin cần biết khi trúng thưởng xổ số miền Bắc\n\nKhi trúng thưởng xổ số miền Bắc, người chơi cần bảo quản vé nguyên hình, nguyên khổ, không rách rời, chắp vá, tẩy xóa hoặc sửa chữa. Vé phải còn trong thời hạn lĩnh thưởng và có thông tin phù hợp với kết quả do công ty xổ số kiến thiết công bố. [...] Thời hạn lĩnh thưởng là 30 ngày kể từ ngày xác định kết quả trúng thưởng. Quá thời hạn này, vé không còn giá trị nhận giải.\n\nVới những giải thưởng có giá trị nhỏ, người trúng có thể nhận tiền tại đại lý hoặc điểm trả thưởng được ủy quyền. Đối với giải thưởng lớn, người trúng nên đến trực tiếp công ty xổ số kiến thiết phát hành tờ vé để được kiểm tra và hướng dẫn làm thủ tục.",
+                    "score": 0.6847074
+                  },
+                  {
+                    "title": "XSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026",
+                    "url": "https://cafef.vn/xsmb-10-11-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-188261110175429008.chn",
+                    "source": "cafef.vn",
+                    "summary": "Diệu Hn/VTC News | 10-11-2026 - 18:30 PM | Xã hội\n\nChia sẻ\n\nXSMB 10/11/2026, kết quả xổ số miền Bắc hôm nay thứ Ba ngày 10/11 được cập nhật lúc 18h15, theo dõi XS miền Bắc hôm nay mới nhất, chính xác nhất.\n\n 09-11-2026XSMB 9/11 - Kết quả xổ số kiến thiết miền Bắc hôm nay 9/11/2026\n 08-11-2026XSMB 8/11 - Kết quả xổ số kiến thiết miền Bắc hôm nay 8/11/2026\n\nTIN MỚI [...] Việc chuẩn bị đầy đủ hồ sơ sẽ giúp công ty xổ số kiến thiết kiểm tra tính hợp lệ của vé, xác minh người nhận giải và hoàn tất việc chi trả nhanh chóng, đồng thời bảo đảm quyền lợi chính đáng của người trúng thưởng theo đúng quy định.\n\nTránh làm rách vé, nhòe mực\n\nNgay sau khi mua vé xổ số miền Bắc, người chơi nên giữ vé ở nơi khô ráo, tránh làm gấp, rách, thấm nước hoặc để mờ các thông tin in trên vé. Đy là yếu tố quan trọng để tờ vé đủ điều kiện xác minh khi lĩnh thưởng. [...] Kết quả xổ số miền Bắc ngày 5/11/2026, xổ số miền Bắc thứ Năm hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 6.\n\nKết quả xổ số miền Bắc ngày 5/11/2026.\n\n - Xổ số miền Bắc ngày 4/11/2026. Xem lại kết quả XS miền Bắc ngày 4/11/2026\n\nKết quả xổ số miền Bắc ngày 4/11/2026, xổ số miền Bắc thứ Tư hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Bắc Ninh (XSBN).",
+                    "score": 0.6601948
+                  }
+                ]
+              }
+            },
+            {
+              "tool": "lookup",
+              "args": {
+                "query": "xổ số miền bắc hôm qua",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              },
+              "result": {
+                "tool": "web_search",
+                "query": "xổ số miền bắc hôm qua",
+                "topic": "news",
+                "timeframe": "day",
+                "items": [
+                  {
+                    "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026: XSMB Thứ Ba 10/11",
+                    "url": "https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html",
+                    "source": "vietnamnet.vn",
+                    "summary": "Đặc biệt: Trùng 5 số cuối, có 3 giải x 1 tỷ đồng (+ 50 triệu nếu ký hiệu trùng)\n\nPhụ Đặc biệt: Trùng 4 số cuối, có 12 giải x 20 triệu đồng\n\nXem ngay: Kết quả xổ số miền Bắc hôm qua ngày 9/11/2026\n\nKết quả xổ số miền Trung hôm nay ngày 10/11/2026\n\nKết quả xổ số miền Trung hôm nay thứ Ba ngày 10/11/2026 gồm các xổ số Đắk Lắk và Quảng Nam. Xem trực tiếp kết quả XSMT 10/11 được cập nhật nhanh trên VietNamNet.\n\nKết quả xổ số miền Nam hôm nay ngày 10/11/2026 [...] Kết quả xổ số miền Bắc hôm nay thứ Ba ngày 10/11/2026 được quay bởi xổ số Quảng Ninh. Mời độc giả xem trực tiếp kết quả XSMB 10/11 được cập nhật nhanh trên VietNamNet.\n\nXem nhanh:\n\n Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026 (cập nhật)\n Kết quả XSMB 3 ngày gần đy\n\n## Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026\n\n \n\nKết quả xổ số miền Bắc (XSMB) ngày 10/11/2026 được quay thưởng và công bố vào lúc 18h10 bởi công ty xổ số kiến thiết Quảng Ninh.\n\n## Kết quả XSMB 3 ngày gần đy [...] Báo VietNamNet\n\n Tuần Việt Nam\n Vietnamnet global\n\nVietNamNet\n\n \n Chính trị\n Thời sự\n Kinh doanh\n Dn tộc và Tôn giáo\n Thể thao\n Giáo dục\n Thế giới\n Đời sống\n Văn hóa - Giải trí\n Sức khỏe\n Công nghệ\n Ô tô xe máy\n Du lịch\n Bất động sản\n Bạn đọc\n Tuần Việt Nam\n Công nghiệp hỗ trợ\n Giảm nghèo bền vững\n Nông thôn mới\n Dn tộc thiểu số và miền núi\n Nội dung chuyên đề\n English\n Hồ sơ\n Ảnh\n Video\n Multimedia\n Podcast\n Đính chính\n 24h qua\n\n Tuyến bài\n Sự kiện",
+                    "score": 0.8306082
+                  },
+                  {
+                    "title": "Phân tích thống kê XSMB Thứ 4 Ngày 11/11/2026 - Chốt Số Vàng May Mắn",
+                    "url": "https://homeup.vn/tin-tuc/phan-tich-thong-ke-xsmb-thu-4-ngay-11112026-chot-so-vang-may-man-p7390",
+                    "source": "homeup.vn",
+                    "summary": "Mục lục bài viết\n\nPhn tích thống kê XSMB 10/11/2026. Cập nhật thống kê xổ số miền Bắc thông qua số liệu trong các bảng kết quả gần đy. Từ đó, người chơi có cái nhìn tổng quan về kỳ quay thưởng XSKTMB hôm nay.\n\nXem trực tiếp kết quả tại:  \nKết quả Xổ Số Miền Bắc Thứ 4 hàng tuần\n\n## 1. ✔️ Xem lại bảng KQXSMB hôm qua 10/11/2026\n\nTheo dõi lại bảng kết quả xổ số miền Bắc hôm qua:\n\nBảng kết quả xổ số miền Bắc 10/11/2026 hôm qua\n\nThống kê XSMB hôm trước ngày 10/11/2026",
+                    "score": 0.7672197
+                  },
+                  {
+                    "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026 - XSMB 10/11",
+                    "url": "https://suckhoedoisong.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-xsmb-10-11-169261110180237028.htm",
+                    "source": "suckhoedoisong.vn",
+                    "summary": "Kết quả xổ số miền Bắc hôm nay (XSMB thứ Ba ngày 10/11/2026) được quay thưởng vào lúc 18h15 bởi công ty xổ số kiến thiết Quảng Ninh. Kết quả xổ số Quảng Ninh (kết quả XSQN 10/11), kết quả XSMB                                 10/11, kết quả các giải thưởng của XSMB ngày                                 10/11/2026 sẽ được công bố lần lượt từ giải nhất cho đến giải bảy, cuối cùng là giải đặc biệt. [...] Theo dõi kết quả xổ số miền Bắc hôm nay                                10/11/2026 và kết quả XSMB mỗi ngày, kết quả xổ số miền Bắc hôm nay - XSMB thứ 3 ngày                                10/11/2026, kết quả xổ số miền Bắc ngày                                10/11, KQXSMB                                10/11                                để cập nhật kết quả sớm nhất. [...] ## XSMB 10/11 - Kết quả xổ số miền Bắc hôm nay - Trực tiếp kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026 - KQXSMB ngày 10/11 - Kết quả xổ số miền Bắc 10/11.\n\nKết quả xổ số miền Bắc hôm nay ngày 10/11/2026 - XSMB 10/11 - Ảnh 1.\n\nKết quả xổ số miền Bắc ngày 10/11/2026 - Kết quả XSMB ngày 10/11.\n\nXem lại kết quả XSMB các kỳ quay số mở thưởng gần đy nhất:\n\n### - XSMB 9/11 - Kết quả xổ số miền Bắc ngày 9/11\n\n### - XSMB 8/11 - Kết quả xổ số miền Bắc ngày 8/11",
+                    "score": 0.7653308
+                  },
+                  {
+                    "title": "XSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026",
+                    "url": "https://cafef.vn/xsmb-10-11-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-188261110175429008.chn",
+                    "source": "cafef.vn",
+                    "summary": "Kết quả xổ số miền Bắc ngày 5/11/2026, xổ số miền Bắc thứ Năm hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 6.\n\nKết quả xổ số miền Bắc ngày 5/11/2026.\n\n - Xổ số miền Bắc ngày 4/11/2026. Xem lại kết quả XS miền Bắc ngày 4/11/2026\n\nKết quả xổ số miền Bắc ngày 4/11/2026, xổ số miền Bắc thứ Tư hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Bắc Ninh (XSBN). [...] - Xổ số miền Bắc ngày 2/11/2026. Xem lại kết quả XS miền Bắc ngày 2/11/2026\n\nKết quả xổ số miền Bắc ngày 2/11/2026, xổ số miền Bắc thứ Hai hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 9.\n\nKết quả xổ số miền Bắc ngày 2/11/2026.\n\n Lịch quay số mở thưởng kết quả xổ số miền Bắc hôm nay\n\n- Thứ Hai: Hà Nội (XSHN).\n\n- Thứ Ba: Quảng Ninh (XSQN).\n\n- Thứ Tư: Bắc Ninh (XSBN).\n\n- Thứ Năm: Hà Nội (XSHN). [...] Kết quả xổ số miền Bắc ngày 9/11/2026, xổ số miền Bắc thứ Hai hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 2.\n\nKết quả xổ số miền Bắc ngày 9/11/2026.\n\n - Xổ số miền Bắc ngày 8/11/2026. Xem lại kết quả XS miền Bắc ngày 8/11/2026\n\nKết quả xổ số miền Bắc ngày 8/11/2026, xổ số miền Bắc Chủ nhật hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Thái Bình (XSTB).",
+                    "score": 0.7163977
+                  },
+                  {
+                    "title": "Dự đoán XSMB 11/11/2026 - kết quả xổ số miền Bắc hôm nay thứ 4 ngày 11/11/2026",
+                    "url": "https://baoquocte.vn/du-doan-xsmb-11-11-2026-ket-qua-xo-so-mien-bac-hom-nay-thu-4-ngay-11-11-2026-432013.html",
+                    "source": "baoquocte.vn",
+                    "summary": "Báo TGVN sẽ cập nhật trực tiếp KẾT QUẢ XỔ SỐ MIỀN BẮC THỨ 4 NGÀY 11 THÁNG 11 NĂM 2026 nhanh nhất và chính xác nhất từ trường quay. KQXSMB hôm nay bắt đầu từ giải tám cho đến giải nhất, cuối cùng là công bố giải đặc biệt.\n\nKết quả Xổ số hôm nay trực tiếp quay số vào lúc 18 giờ 15 phút ngày thứ 4 hàng tuần được mở thưởng bởi Công ty xổ số kiến thiết:\n\n- Kết quả xổ số Bắc Ninh - XSBN 11/11/2026 - XSBN thứ 4 [...] Kết quả xổ số Bắc Ninh (XSBN) ngày 11/11/2026 được cập nhật trực tiếp từ hội đồng quay thưởng xổ số kiến thiết Thủ đô Hà Nội.\n\n### XEM LẠI KẾT QUẢ XỔ SỐ MIỀN BẮC - KQXSMB\n\n- XSMB 10/11/2026\n\n|\n|  |\n| Dự đoán XSMB 10/11 - kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026 |\n\n- XSMB 9/11/2026\n\n|\n|  |\n| Dự đoán XSMB 9/11 - kết quả xổ số miền Bắc thứ 2 ngày 9/11/2026 |\n\n### NHỮNG LƯU Ý CẦN BIẾT KHI ĐỔI THƯỞNG XSMB [...] - XSMB có tổng cộng 6 đài quay, mỗi ngày sẽ chỉ có duy nhất một đài được công bố kết quả mở thưởng, cụ thể như sau: Thứ 2 - Hà Nội; Thứ 3 - Quảng Ninh; Thứ 4 - Bắc Ninh, Thứ 5 - Hà Nội, Thứ 6 - Hải Phòng, Thứ 7 - Nam Định, Chủ Nhật - Thái Bình.\n\n- Khi đến ngày công bố kết quả, các đài sẽ được kinh doanh vé số trên tất cả các thành phố, quận, huyện trong khu vực miền Bắc. Thế nhưng, các đài sẽ chỉ được phép kinh doanh vé số trong phạm vi ngày đã được quy định sẵn.",
+                    "score": 0.7140107
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Kết quả xổ số miền Bắc hôm qua, ngày 9/11/2026, được công bố như sau:\n\n1. **Kết quả xổ số miền Bắc ngày 9/11/2026**:\n   - Đặc biệt: Trùng 5 số cuối, có 3 giải x 1 tỷ đồng (+ 50 triệu nếu ký hiệu trùng).\n   - Phụ Đặc biệt: Trùng 4 số cuối, có 12 giải x 20 triệu đồng.\n   - Kết quả được quay thưởng bởi công ty xổ số kiến thiết Quảng Ninh vào lúc 18h10.\n\nBạn có thể xem chi tiết kết quả tại các nguồn sau:\n- [VietNamNet](https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html)\n- [Sức Khỏe Đời Sống](https://suckhoedoisong.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-xsmb-10-11-169261110180237028.htm)\n\nNếu bạn cần thêm thông tin hoặc kết quả từ các ngày khác, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "xổ số kiến thiết miền bắc",
+            "topic": "news",
+            "timeframe": "day",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "xổ số kiến thiết miền bắc",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026 - XSMB 10/11",
+                "url": "https://suckhoedoisong.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-xsmb-10-11-169261110180237028.htm",
+                "source": "suckhoedoisong.vn",
+                "summary": "Kết quả xổ số miền Bắc hôm nay (XSMB thứ Ba ngày 10/11/2026) được quay thưởng vào lúc 18h15 bởi công ty xổ số kiến thiết Quảng Ninh. Kết quả xổ số Quảng Ninh (kết quả XSQN 10/11), kết quả XSMB                                 10/11, kết quả các giải thưởng của XSMB ngày                                 10/11/2026 sẽ được công bố lần lượt từ giải nhất cho đến giải bảy, cuối cùng là giải đặc biệt. [...] Nếu giải thưởng có giá trị lớn thì nên đến trực tiếp công ty xổ số kiến thiết phát hành vé số, bạn sẽ nhận đủ giá trị giải thưởng trúng sau khi trừ thuế (nếu có) và không phải tốn phí như lĩnh thưởng tại đại lý.\n\nLịch mở thưởng xổ số miền Bắc hàng ngày\n\n- Thứ hai: đài Hà Nội\n\n- Thứ ba: đài Quảng Ninh\n\n- Thứ tư: đài Bắc Ninh\n\n- Thứ năm: đài Hà Nội\n\n- Thứ sáu: đài Hải Phòng\n\n- Thứ bảy: đài Nam Định\n\n- Chủ nhật: đài Thái Bình [...] Theo dõi kết quả xổ số miền Bắc hôm nay                                10/11/2026 và kết quả XSMB mỗi ngày, kết quả xổ số miền Bắc hôm nay - XSMB thứ 3 ngày                                10/11/2026, kết quả xổ số miền Bắc ngày                                10/11, KQXSMB                                10/11                                để cập nhật kết quả sớm nhất.",
+                "score": 0.76596165
+              },
+              {
+                "title": "XSMB 11/11, Trực tiếp xổ số miền Bắc thứ 4 ngày 11/11/2026",
+                "url": "https://voh.com.vn/xsmb-11-11-truc-tiep-xo-so-mien-bac-thu-4-ngay-11-11-2026-679134.html",
+                "source": "voh.com.vn",
+                "summary": "|\n\nLike\n\nDislike\n\nXSMB 11/11. Trực tiếp xổ số miền Bắc thứ 4 ngày 11/11/2026 - Kết quả xổ số miền Bắc thứ tư - Xổ số miền Bắc 11/11, KQXSMB 11/11, SXMB 11/11\n\nXổ số miền Bắc hôm nay 11/11/2026 được cập nhật trực tiếp lúc 18h10 từ trường quay của công ty xổ số kiến thiết miền Bắc.\n\nKính mời quý đọc giả theo dõi bài viết để cập nhật kết quả trực tiếp một cách nhanh chóng và chính xác.\n\n### Những lưu ý quan trọng khi trúng số (đặc biệt là các giải có giá trị lớn) [...] + Giải nhỏ: Có thể đổi trực tiếp tại các đại lý xổ số uy tín gần nơi bạn sống.\n  + Giải lớn (từ giải Nhất trở lên): Bạn phải đến lĩnh thưởng trực tiếp tại trụ sở chính hoặc văn phòng đại diện của công ty xổ số kiến thiết đã phát hành tờ vé đó. Thông tin địa chỉ và số điện thoại luôn được in trên tờ vé số.\n\n4. Chuẩn Bị Thủ Tục Lĩnh Thưởng\n\nKhi đi nhận giải, bạn cần chuẩn bị các giấy tờ sau: [...] 2. Kiểm Tra Lại Kết Quả và Thông Tin Vé\n\n Dò vé thật kỹ: Hãy dò lại kết quả trên trang web chính thức của công ty xổ số kiến thiết tỉnh/thành phố phát hành tờ vé đó hoặc các trang tin tức uy tín. Tránh dò qua các nguồn không chính thống.\n Kiểm tra ngày mở thưởng và đài: Đảm bảo tờ vé của bạn khớp đúng ngày và đúng đài quay thưởng.\n\n3. Nắm Vững Quy Định Lĩnh Thưởng",
+                "score": 0.756376
+              },
+              {
+                "title": "Dự đoán XSMB 11/11/2026 - kết quả xổ số miền Bắc hôm nay thứ 4 ngày 11/11/2026",
+                "url": "https://baoquocte.vn/du-doan-xsmb-11-11-2026-ket-qua-xo-so-mien-bac-hom-nay-thu-4-ngay-11-11-2026-432013.html",
+                "source": "baoquocte.vn",
+                "summary": "Báo TGVN sẽ cập nhật trực tiếp KẾT QUẢ XỔ SỐ MIỀN BẮC THỨ 4 NGÀY 11 THÁNG 11 NĂM 2026 nhanh nhất và chính xác nhất từ trường quay. KQXSMB hôm nay bắt đầu từ giải tám cho đến giải nhất, cuối cùng là công bố giải đặc biệt.\n\nKết quả Xổ số hôm nay trực tiếp quay số vào lúc 18 giờ 15 phút ngày thứ 4 hàng tuần được mở thưởng bởi Công ty xổ số kiến thiết:\n\n- Kết quả xổ số Bắc Ninh - XSBN 11/11/2026 - XSBN thứ 4 [...] Kết quả xổ số Bắc Ninh (XSBN) ngày 11/11/2026 được cập nhật trực tiếp từ hội đồng quay thưởng xổ số kiến thiết Thủ đô Hà Nội.\n\n### XEM LẠI KẾT QUẢ XỔ SỐ MIỀN BẮC - KQXSMB\n\n- XSMB 10/11/2026\n\n|\n|  |\n| Dự đoán XSMB 10/11 - kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026 |\n\n- XSMB 9/11/2026\n\n|\n|  |\n| Dự đoán XSMB 9/11 - kết quả xổ số miền Bắc thứ 2 ngày 9/11/2026 |\n\n### NHỮNG LƯU Ý CẦN BIẾT KHI ĐỔI THƯỞNG XSMB [...] Thời gian hiệu lực cho tờ vé số trúng thưởng là 30 ngày kể từ ngày công bố kết quả xổ số. Nếu để quá thời hạn, người chơi sẽ không được nhận thưởng và không có quyền yêu cầu giải quyết việc trao thưởng.\n\nGiám đốc công ty xổ số kiến thiết sẽ là người có thẩm quyền và chịu trách nhiệm về quy trình kiểm tra vé số trúng thưởng.\n\nNgười chơi nếu trúng các giải thưởng có giá trị từ 10 triệu đồng trở lên thì sẽ phải đóng thuế 10% theo quy định.",
+                "score": 0.70263255
+              },
+              {
+                "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026: XSMB Thứ Ba 10/11",
+                "url": "https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html",
+                "source": "vietnamnet.vn",
+                "summary": "Kết quả xổ số miền Bắc hôm nay thứ Ba ngày 10/11/2026 được quay bởi xổ số Quảng Ninh. Mời độc giả xem trực tiếp kết quả XSMB 10/11 được cập nhật nhanh trên VietNamNet.\n\nXem nhanh:\n\n Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026 (cập nhật)\n Kết quả XSMB 3 ngày gần đy\n\n## Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026\n\n \n\nKết quả xổ số miền Bắc (XSMB) ngày 10/11/2026 được quay thưởng và công bố vào lúc 18h10 bởi công ty xổ số kiến thiết Quảng Ninh.\n\n## Kết quả XSMB 3 ngày gần đy [...] ### Kết quả XSMB ngày 9/11/2026\n\n \n\n### Kết quả XSMB ngày 8/11/2026\n\n \n\n### Kết quả XSMB ngày 7/11/2026\n\nThông tin cần biết khi trúng thưởng xổ số miền Bắc\n\nKhi trúng thưởng xổ số miền Bắc, người chơi cần bảo quản vé nguyên hình, nguyên khổ, không rách rời, chắp vá, tẩy xóa hoặc sửa chữa. Vé phải còn trong thời hạn lĩnh thưởng và có thông tin phù hợp với kết quả do công ty xổ số kiến thiết công bố. [...] Thời hạn lĩnh thưởng là 30 ngày kể từ ngày xác định kết quả trúng thưởng. Quá thời hạn này, vé không còn giá trị nhận giải.\n\nVới những giải thưởng có giá trị nhỏ, người trúng có thể nhận tiền tại đại lý hoặc điểm trả thưởng được ủy quyền. Đối với giải thưởng lớn, người trúng nên đến trực tiếp công ty xổ số kiến thiết phát hành tờ vé để được kiểm tra và hướng dẫn làm thủ tục.",
+                "score": 0.6847074
+              },
+              {
+                "title": "XSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026",
+                "url": "https://cafef.vn/xsmb-10-11-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-188261110175429008.chn",
+                "source": "cafef.vn",
+                "summary": "Diệu Hn/VTC News | 10-11-2026 - 18:30 PM | Xã hội\n\nChia sẻ\n\nXSMB 10/11/2026, kết quả xổ số miền Bắc hôm nay thứ Ba ngày 10/11 được cập nhật lúc 18h15, theo dõi XS miền Bắc hôm nay mới nhất, chính xác nhất.\n\n 09-11-2026XSMB 9/11 - Kết quả xổ số kiến thiết miền Bắc hôm nay 9/11/2026\n 08-11-2026XSMB 8/11 - Kết quả xổ số kiến thiết miền Bắc hôm nay 8/11/2026\n\nTIN MỚI [...] Việc chuẩn bị đầy đủ hồ sơ sẽ giúp công ty xổ số kiến thiết kiểm tra tính hợp lệ của vé, xác minh người nhận giải và hoàn tất việc chi trả nhanh chóng, đồng thời bảo đảm quyền lợi chính đáng của người trúng thưởng theo đúng quy định.\n\nTránh làm rách vé, nhòe mực\n\nNgay sau khi mua vé xổ số miền Bắc, người chơi nên giữ vé ở nơi khô ráo, tránh làm gấp, rách, thấm nước hoặc để mờ các thông tin in trên vé. Đy là yếu tố quan trọng để tờ vé đủ điều kiện xác minh khi lĩnh thưởng. [...] Kết quả xổ số miền Bắc ngày 5/11/2026, xổ số miền Bắc thứ Năm hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 6.\n\nKết quả xổ số miền Bắc ngày 5/11/2026.\n\n - Xổ số miền Bắc ngày 4/11/2026. Xem lại kết quả XS miền Bắc ngày 4/11/2026\n\nKết quả xổ số miền Bắc ngày 4/11/2026, xổ số miền Bắc thứ Tư hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Bắc Ninh (XSBN).",
+                "score": 0.6601948
+              }
+            ]
+          }
+        },
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "xổ số miền bắc hôm qua",
+            "topic": "news",
+            "timeframe": "day",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "xổ số miền bắc hôm qua",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026: XSMB Thứ Ba 10/11",
+                "url": "https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html",
+                "source": "vietnamnet.vn",
+                "summary": "Đặc biệt: Trùng 5 số cuối, có 3 giải x 1 tỷ đồng (+ 50 triệu nếu ký hiệu trùng)\n\nPhụ Đặc biệt: Trùng 4 số cuối, có 12 giải x 20 triệu đồng\n\nXem ngay: Kết quả xổ số miền Bắc hôm qua ngày 9/11/2026\n\nKết quả xổ số miền Trung hôm nay ngày 10/11/2026\n\nKết quả xổ số miền Trung hôm nay thứ Ba ngày 10/11/2026 gồm các xổ số Đắk Lắk và Quảng Nam. Xem trực tiếp kết quả XSMT 10/11 được cập nhật nhanh trên VietNamNet.\n\nKết quả xổ số miền Nam hôm nay ngày 10/11/2026 [...] Kết quả xổ số miền Bắc hôm nay thứ Ba ngày 10/11/2026 được quay bởi xổ số Quảng Ninh. Mời độc giả xem trực tiếp kết quả XSMB 10/11 được cập nhật nhanh trên VietNamNet.\n\nXem nhanh:\n\n Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026 (cập nhật)\n Kết quả XSMB 3 ngày gần đy\n\n## Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026\n\n \n\nKết quả xổ số miền Bắc (XSMB) ngày 10/11/2026 được quay thưởng và công bố vào lúc 18h10 bởi công ty xổ số kiến thiết Quảng Ninh.\n\n## Kết quả XSMB 3 ngày gần đy [...] Báo VietNamNet\n\n Tuần Việt Nam\n Vietnamnet global\n\nVietNamNet\n\n \n Chính trị\n Thời sự\n Kinh doanh\n Dn tộc và Tôn giáo\n Thể thao\n Giáo dục\n Thế giới\n Đời sống\n Văn hóa - Giải trí\n Sức khỏe\n Công nghệ\n Ô tô xe máy\n Du lịch\n Bất động sản\n Bạn đọc\n Tuần Việt Nam\n Công nghiệp hỗ trợ\n Giảm nghèo bền vững\n Nông thôn mới\n Dn tộc thiểu số và miền núi\n Nội dung chuyên đề\n English\n Hồ sơ\n Ảnh\n Video\n Multimedia\n Podcast\n Đính chính\n 24h qua\n\n Tuyến bài\n Sự kiện",
+                "score": 0.8306082
+              },
+              {
+                "title": "Phân tích thống kê XSMB Thứ 4 Ngày 11/11/2026 - Chốt Số Vàng May Mắn",
+                "url": "https://homeup.vn/tin-tuc/phan-tich-thong-ke-xsmb-thu-4-ngay-11112026-chot-so-vang-may-man-p7390",
+                "source": "homeup.vn",
+                "summary": "Mục lục bài viết\n\nPhn tích thống kê XSMB 10/11/2026. Cập nhật thống kê xổ số miền Bắc thông qua số liệu trong các bảng kết quả gần đy. Từ đó, người chơi có cái nhìn tổng quan về kỳ quay thưởng XSKTMB hôm nay.\n\nXem trực tiếp kết quả tại:  \nKết quả Xổ Số Miền Bắc Thứ 4 hàng tuần\n\n## 1. ✔️ Xem lại bảng KQXSMB hôm qua 10/11/2026\n\nTheo dõi lại bảng kết quả xổ số miền Bắc hôm qua:\n\nBảng kết quả xổ số miền Bắc 10/11/2026 hôm qua\n\nThống kê XSMB hôm trước ngày 10/11/2026",
+                "score": 0.7672197
+              },
+              {
+                "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026 - XSMB 10/11",
+                "url": "https://suckhoedoisong.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-xsmb-10-11-169261110180237028.htm",
+                "source": "suckhoedoisong.vn",
+                "summary": "Kết quả xổ số miền Bắc hôm nay (XSMB thứ Ba ngày 10/11/2026) được quay thưởng vào lúc 18h15 bởi công ty xổ số kiến thiết Quảng Ninh. Kết quả xổ số Quảng Ninh (kết quả XSQN 10/11), kết quả XSMB                                 10/11, kết quả các giải thưởng của XSMB ngày                                 10/11/2026 sẽ được công bố lần lượt từ giải nhất cho đến giải bảy, cuối cùng là giải đặc biệt. [...] Theo dõi kết quả xổ số miền Bắc hôm nay                                10/11/2026 và kết quả XSMB mỗi ngày, kết quả xổ số miền Bắc hôm nay - XSMB thứ 3 ngày                                10/11/2026, kết quả xổ số miền Bắc ngày                                10/11, KQXSMB                                10/11                                để cập nhật kết quả sớm nhất. [...] ## XSMB 10/11 - Kết quả xổ số miền Bắc hôm nay - Trực tiếp kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026 - KQXSMB ngày 10/11 - Kết quả xổ số miền Bắc 10/11.\n\nKết quả xổ số miền Bắc hôm nay ngày 10/11/2026 - XSMB 10/11 - Ảnh 1.\n\nKết quả xổ số miền Bắc ngày 10/11/2026 - Kết quả XSMB ngày 10/11.\n\nXem lại kết quả XSMB các kỳ quay số mở thưởng gần đy nhất:\n\n### - XSMB 9/11 - Kết quả xổ số miền Bắc ngày 9/11\n\n### - XSMB 8/11 - Kết quả xổ số miền Bắc ngày 8/11",
+                "score": 0.7653308
+              },
+              {
+                "title": "XSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026",
+                "url": "https://cafef.vn/xsmb-10-11-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-188261110175429008.chn",
+                "source": "cafef.vn",
+                "summary": "Kết quả xổ số miền Bắc ngày 5/11/2026, xổ số miền Bắc thứ Năm hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 6.\n\nKết quả xổ số miền Bắc ngày 5/11/2026.\n\n - Xổ số miền Bắc ngày 4/11/2026. Xem lại kết quả XS miền Bắc ngày 4/11/2026\n\nKết quả xổ số miền Bắc ngày 4/11/2026, xổ số miền Bắc thứ Tư hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Bắc Ninh (XSBN). [...] - Xổ số miền Bắc ngày 2/11/2026. Xem lại kết quả XS miền Bắc ngày 2/11/2026\n\nKết quả xổ số miền Bắc ngày 2/11/2026, xổ số miền Bắc thứ Hai hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 9.\n\nKết quả xổ số miền Bắc ngày 2/11/2026.\n\n Lịch quay số mở thưởng kết quả xổ số miền Bắc hôm nay\n\n- Thứ Hai: Hà Nội (XSHN).\n\n- Thứ Ba: Quảng Ninh (XSQN).\n\n- Thứ Tư: Bắc Ninh (XSBN).\n\n- Thứ Năm: Hà Nội (XSHN). [...] Kết quả xổ số miền Bắc ngày 9/11/2026, xổ số miền Bắc thứ Hai hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 2.\n\nKết quả xổ số miền Bắc ngày 9/11/2026.\n\n - Xổ số miền Bắc ngày 8/11/2026. Xem lại kết quả XS miền Bắc ngày 8/11/2026\n\nKết quả xổ số miền Bắc ngày 8/11/2026, xổ số miền Bắc Chủ nhật hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Thái Bình (XSTB).",
+                "score": 0.7163977
+              },
+              {
+                "title": "Dự đoán XSMB 11/11/2026 - kết quả xổ số miền Bắc hôm nay thứ 4 ngày 11/11/2026",
+                "url": "https://baoquocte.vn/du-doan-xsmb-11-11-2026-ket-qua-xo-so-mien-bac-hom-nay-thu-4-ngay-11-11-2026-432013.html",
+                "source": "baoquocte.vn",
+                "summary": "Báo TGVN sẽ cập nhật trực tiếp KẾT QUẢ XỔ SỐ MIỀN BẮC THỨ 4 NGÀY 11 THÁNG 11 NĂM 2026 nhanh nhất và chính xác nhất từ trường quay. KQXSMB hôm nay bắt đầu từ giải tám cho đến giải nhất, cuối cùng là công bố giải đặc biệt.\n\nKết quả Xổ số hôm nay trực tiếp quay số vào lúc 18 giờ 15 phút ngày thứ 4 hàng tuần được mở thưởng bởi Công ty xổ số kiến thiết:\n\n- Kết quả xổ số Bắc Ninh - XSBN 11/11/2026 - XSBN thứ 4 [...] Kết quả xổ số Bắc Ninh (XSBN) ngày 11/11/2026 được cập nhật trực tiếp từ hội đồng quay thưởng xổ số kiến thiết Thủ đô Hà Nội.\n\n### XEM LẠI KẾT QUẢ XỔ SỐ MIỀN BẮC - KQXSMB\n\n- XSMB 10/11/2026\n\n|\n|  |\n| Dự đoán XSMB 10/11 - kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026 |\n\n- XSMB 9/11/2026\n\n|\n|  |\n| Dự đoán XSMB 9/11 - kết quả xổ số miền Bắc thứ 2 ngày 9/11/2026 |\n\n### NHỮNG LƯU Ý CẦN BIẾT KHI ĐỔI THƯỞNG XSMB [...] - XSMB có tổng cộng 6 đài quay, mỗi ngày sẽ chỉ có duy nhất một đài được công bố kết quả mở thưởng, cụ thể như sau: Thứ 2 - Hà Nội; Thứ 3 - Quảng Ninh; Thứ 4 - Bắc Ninh, Thứ 5 - Hà Nội, Thứ 6 - Hải Phòng, Thứ 7 - Nam Định, Chủ Nhật - Thái Bình.\n\n- Khi đến ngày công bố kết quả, các đài sẽ được kinh doanh vé số trên tất cả các thành phố, quận, huyện trong khu vực miền Bắc. Thế nhưng, các đài sẽ chỉ được phép kinh doanh vé số trong phạm vi ngày đã được quy định sẵn.",
+                "score": 0.7140107
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "turn_index": 3,
+      "started_at": "2026-11-11T10:59:35+07:00",
+      "ended_at": "2026-11-11T10:59:46+07:00",
+      "user": "hãy viết cho tôi giải cụ thể bằng số đã chiến thắng của hôm qua",
+      "status": "answered",
+      "assistant_text": "Kết quả xổ số miền Bắc ngày 9/11/2026 như sau:\n\n- **Giải Đặc Biệt**: 03372\n- **Giải Nhất**: 38696\n- **Giải Nhì**: 30610, 92390\n- **Giải Ba**: 69375, 98904, 81351, 88131, 25712, 14883\n- **Giải Tư**: 4981, 9077, 0426, 9458\n- **Giải Năm**: 4388, 3920, 9588, 7625, 0496, 9953\n- **Giải Sáu**: 672, 386, 632\n- **Giải Bảy**: 92, 59, 52, 83\n\nBạn có thể xem thêm chi tiết tại nguồn [VOH](https://voh.com.vn/xsmb-11-11-truc-tiep-xo-so-mien-bac-thu-4-ngay-11-11-2026-679134.html). Nếu bạn cần thêm thông tin gì khác, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "lookup",
+              "args": {
+                "query": "Kết quả xổ số miền Bắc ngày 9/11/2026",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "lookup",
+              "args": {
+                "query": "Kết quả xổ số miền Bắc ngày 9/11/2026",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              },
+              "result": {
+                "tool": "web_search",
+                "query": "Kết quả xổ số miền Bắc ngày 9/11/2026",
+                "topic": "news",
+                "timeframe": "day",
+                "items": [
+                  {
+                    "title": "XSMB 11/11, Trực tiếp xổ số miền Bắc thứ 4 ngày 11/11/2026",
+                    "url": "https://voh.com.vn/xsmb-11-11-truc-tiep-xo-so-mien-bac-thu-4-ngay-11-11-2026-679134.html",
+                    "source": "voh.com.vn",
+                    "summary": "|  |  |  |  |  |  |  |  |  |  |  |\n ---  ---  ---  ---  --- \n| loto | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |\n\nKết quả xổ số miền Bắc 09/11/2026\n\n### XSMB XSMB Thứ 2 XSMB 09/11/2026\n\n|  |  |\n --- |\n| Mã | 7KZ - 8KZ - 9KZ - 10KZ - 12KZ - 13KZ - 16KZ - 19KZ |\n| ĐB | 03372 |\n| G.1 | 38696 |\n| G.2 | 30610 92390 |\n| G.3 | 69375 98904 81351 88131 25712 14883 |\n| G.4 | 4981 9077 0426 9458 |\n| G.5 | 4388 3920 9588 7625 0496 9953 |\n| G.6 | 672 386 632 |\n| G.7 | 92 59 52 83 |",
+                    "score": 0.9168945
+                  },
+                  {
+                    "title": "XSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026",
+                    "url": "https://cafef.vn/xsmb-10-11-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-188261110175429008.chn",
+                    "source": "cafef.vn",
+                    "summary": "Kết quả xổ số miền Bắc ngày 9/11/2026, xổ số miền Bắc thứ Hai hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 2.\n\nKết quả xổ số miền Bắc ngày 9/11/2026.\n\n - Xổ số miền Bắc ngày 8/11/2026. Xem lại kết quả XS miền Bắc ngày 8/11/2026\n\nKết quả xổ số miền Bắc ngày 8/11/2026, xổ số miền Bắc Chủ nhật hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Thái Bình (XSTB). [...] TIN MỚI\n\nXổ số miền Bắc 10/11. KQXSMB hôm nay 10/11/2026 được quay số mở thưởng vào lúc 18h15 bởi Công ty XSKT Quảng Ninh (XSQN). Kết quả xổ số miền Bắc hôm nay 10/11/2026 lần lượt được công bố từ giải bảy đến giải nhất, sau đó là giải đặc biệt.\n\nXem lại kết quả XS miền Bắc gần đy - Xổ số miền Bắc ngày 9/11/2026. Xem lại kết quả XS miền Bắc ngày 9/11/2026 [...] Diệu Hn/VTC News | 10-11-2026 - 18:30 PM | Xã hội\n\nChia sẻ\n\nXSMB 10/11/2026, kết quả xổ số miền Bắc hôm nay thứ Ba ngày 10/11 được cập nhật lúc 18h15, theo dõi XS miền Bắc hôm nay mới nhất, chính xác nhất.\n\n 09-11-2026XSMB 9/11 - Kết quả xổ số kiến thiết miền Bắc hôm nay 9/11/2026\n 08-11-2026XSMB 8/11 - Kết quả xổ số kiến thiết miền Bắc hôm nay 8/11/2026\n\nTIN MỚI",
+                    "score": 0.91399205
+                  },
+                  {
+                    "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026: XSMB Thứ Ba 10/11",
+                    "url": "https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html",
+                    "source": "vietnamnet.vn",
+                    "summary": "Đặc biệt: Trùng 5 số cuối, có 3 giải x 1 tỷ đồng (+ 50 triệu nếu ký hiệu trùng)\n\nPhụ Đặc biệt: Trùng 4 số cuối, có 12 giải x 20 triệu đồng\n\nXem ngay: Kết quả xổ số miền Bắc hôm qua ngày 9/11/2026\n\nKết quả xổ số miền Trung hôm nay ngày 10/11/2026\n\nKết quả xổ số miền Trung hôm nay thứ Ba ngày 10/11/2026 gồm các xổ số Đắk Lắk và Quảng Nam. Xem trực tiếp kết quả XSMT 10/11 được cập nhật nhanh trên VietNamNet.\n\nKết quả xổ số miền Nam hôm nay ngày 10/11/2026 [...] ### Kết quả XSMB ngày 9/11/2026\n\n \n\n### Kết quả XSMB ngày 8/11/2026\n\n \n\n### Kết quả XSMB ngày 7/11/2026\n\nThông tin cần biết khi trúng thưởng xổ số miền Bắc\n\nKhi trúng thưởng xổ số miền Bắc, người chơi cần bảo quản vé nguyên hình, nguyên khổ, không rách rời, chắp vá, tẩy xóa hoặc sửa chữa. Vé phải còn trong thời hạn lĩnh thưởng và có thông tin phù hợp với kết quả do công ty xổ số kiến thiết công bố. [...] Khi lĩnh thưởng, người trúng cần mang theo vé trúng thưởng và giấy tờ tùy thn hợp lệ như căn cước công dn hoặc hộ chiếu. Trường hợp không thể trực tiếp nhận giải vì nguyên nhn khách quan, người trúng có thể ủy quyền cho người đại diện hợp pháp theo quy định.\n\nCơ cấu giải thưởng xổ số miền Bắc\n\nGiải Nhất: Trùng 5 số cuối với vé giải Nhất, có 15 giải x 10 triệu đồng\n\nGiải Nhì: Trùng 5 số cuối với 1 trong 2 vé giải Nhì, có 30 giải x 5 triệu đồng",
+                    "score": 0.8997663
+                  },
+                  {
+                    "title": "Dự đoán XSMB 11/11/2026 - kết quả xổ số miền Bắc hôm nay thứ 4 ngày 11/11/2026",
+                    "url": "https://baoquocte.vn/du-doan-xsmb-11-11-2026-ket-qua-xo-so-mien-bac-hom-nay-thu-4-ngay-11-11-2026-432013.html",
+                    "source": "baoquocte.vn",
+                    "summary": "### Giá nông sản hôm nay 9/11/2026: Giá cà phê dần ổn định, Giá tiêu đảo chiều; Nga thúc đẩy hệ thống thanh toán xuyên biên giới tại chu Phi\n\nCập nhật bảng giá vàng hôm nay 9/11 chờ tín hiệu 'sức khoẻ' kinh tế Mỹ, thời kỳ của các tài sản hữu hình sắp đến \n\n### Cập nhật bảng giá vàng hôm nay 9/11 chờ tín hiệu 'sức khoẻ' kinh tế Mỹ, thời kỳ của các tài sản hữu hình sắp đến\n\nGiá heo hơi hôm nay 8/11: Trở lại đà tăng, giao dịch dần tiến sát mốc 50.000 đồng/kg [...] Kết quả xổ số Bắc Ninh (XSBN) ngày 11/11/2026 được cập nhật trực tiếp từ hội đồng quay thưởng xổ số kiến thiết Thủ đô Hà Nội.\n\n### XEM LẠI KẾT QUẢ XỔ SỐ MIỀN BẮC - KQXSMB\n\n- XSMB 10/11/2026\n\n|\n|  |\n| Dự đoán XSMB 10/11 - kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026 |\n\n- XSMB 9/11/2026\n\n|\n|  |\n| Dự đoán XSMB 9/11 - kết quả xổ số miền Bắc thứ 2 ngày 9/11/2026 |\n\n### NHỮNG LƯU Ý CẦN BIẾT KHI ĐỔI THƯỞNG XSMB [...] ### Dự đoán XSMB 11/11/2026 - kết quả xổ số miền Bắc hôm nay thứ 4 ngày 11/11/2026\n2. Dự đoán XSMB 10/11 - kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026 \n\n   ### Dự đoán XSMB 10/11 - kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026\n3. Dự đoán XSMB 9/11 - kết quả xổ số miền Bắc thứ 2 ngày 9/11/2026 \n\n   ### Dự đoán XSMB 9/11 - kết quả xổ số miền Bắc thứ 2 ngày 9/11/2026\n4. Dự đoán XSMB 8/11 - kết quả xổ số miền Bắc Chủ nhật ngày 8/11/2026",
+                    "score": 0.8967681
+                  },
+                  {
+                    "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026",
+                    "url": "https://antt.nguoiduatin.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-205261110154010473.htm",
+                    "source": "antt.nguoiduatin.vn",
+                    "summary": "16:24 10/11/2026\n\n## Kết quả xổ số miền Bắc 10/11 - KQXSMB - XSMB 10/11/2026- Tường thuật trực tiếp kết quả xổ số miền Bắc hôm nay ngày 10 tháng 11 năm 2026 nhanh và chính xác nhất.\n\n### Cảnh báo thủ đoạn lừa đảo mới nhắm vào nhà đầu tư chứng khoán\n\n### Kết quả xổ số miền Bắc hôm nay ngày 9/11/2026\n\n### Kết quả xổ số miền Nam hôm nay ngày 9/11/2026\n\nXem Kết quả xổ số miền Bắc 10/11/2026 được tường thuật trực tiếp vào hôm nay, tiến hành quay số mở thưởng xổ số miền Bắc hôm nay ngày 10 tháng 11. [...] Xổ số miền Bắc được mở thưởng với thứ tự quay số và công bố kết quả sẽ lần lượt theo thứ tự các giải, bắt đầu từ giải bảy, giải sáu,... cho đến khi có giải đặc biệt.\n\nXổ số miền Bắc có 27 giải gồm: 1 giải đặc biệt (5 số), 1 giải nhất (5 số), 2 giải nhì (5 số), 6 giải ba (5 số), 4 giải tư (4 số), 6 giải năm (4 số), 3 giải sáu (3 số), 4 giải bảy (2 số). Mỗi tờ vé số miền Bắc có giá là 10.000 đồng. [...] Kết quả xổ số (KQXS) ngày 11/11/2026 sẽ được Chuyên trang An ninh tiền tệ tiếp tục cập nhật nhanh nhất, chính xác nhất đến quý độc giả.\n\nPV\n\nXSMB XSMB hôm nay xổ số miền Bắc hôm nay Kết quả xổ số miền Bắc kết quả xổ số\n\nAn ninh Tiền tệ - Tạp chí Người Đưa Tin Pháp luật\n\n0 Thích\n\nChia sẻ \n\n Chia sẻ Facebook\n Chia sẻ Twitter\n Chia sẻ Zalo\n Chia sẻ Pinterest\n\nIn\n\n## MỚI CẬP NHẬT",
+                    "score": 0.89501935
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Kết quả xổ số miền Bắc ngày 9/11/2026 như sau:\n\n- **Giải Đặc Biệt**: 03372\n- **Giải Nhất**: 38696\n- **Giải Nhì**: 30610, 92390\n- **Giải Ba**: 69375, 98904, 81351, 88131, 25712, 14883\n- **Giải Tư**: 4981, 9077, 0426, 9458\n- **Giải Năm**: 4388, 3920, 9588, 7625, 0496, 9953\n- **Giải Sáu**: 672, 386, 632\n- **Giải Bảy**: 92, 59, 52, 83\n\nBạn có thể xem thêm chi tiết tại nguồn [VOH](https://voh.com.vn/xsmb-11-11-truc-tiep-xo-so-mien-bac-thu-4-ngay-11-11-2026-679134.html). Nếu bạn cần thêm thông tin gì khác, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "Kết quả xổ số miền Bắc ngày 9/11/2026",
+            "topic": "news",
+            "timeframe": "day",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "Kết quả xổ số miền Bắc ngày 9/11/2026",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "XSMB 11/11, Trực tiếp xổ số miền Bắc thứ 4 ngày 11/11/2026",
+                "url": "https://voh.com.vn/xsmb-11-11-truc-tiep-xo-so-mien-bac-thu-4-ngay-11-11-2026-679134.html",
+                "source": "voh.com.vn",
+                "summary": "|  |  |  |  |  |  |  |  |  |  |  |\n ---  ---  ---  ---  --- \n| loto | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |\n\nKết quả xổ số miền Bắc 09/11/2026\n\n### XSMB XSMB Thứ 2 XSMB 09/11/2026\n\n|  |  |\n --- |\n| Mã | 7KZ - 8KZ - 9KZ - 10KZ - 12KZ - 13KZ - 16KZ - 19KZ |\n| ĐB | 03372 |\n| G.1 | 38696 |\n| G.2 | 30610 92390 |\n| G.3 | 69375 98904 81351 88131 25712 14883 |\n| G.4 | 4981 9077 0426 9458 |\n| G.5 | 4388 3920 9588 7625 0496 9953 |\n| G.6 | 672 386 632 |\n| G.7 | 92 59 52 83 |",
+                "score": 0.9168945
+              },
+              {
+                "title": "XSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026",
+                "url": "https://cafef.vn/xsmb-10-11-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-188261110175429008.chn",
+                "source": "cafef.vn",
+                "summary": "Kết quả xổ số miền Bắc ngày 9/11/2026, xổ số miền Bắc thứ Hai hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 2.\n\nKết quả xổ số miền Bắc ngày 9/11/2026.\n\n - Xổ số miền Bắc ngày 8/11/2026. Xem lại kết quả XS miền Bắc ngày 8/11/2026\n\nKết quả xổ số miền Bắc ngày 8/11/2026, xổ số miền Bắc Chủ nhật hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Thái Bình (XSTB). [...] TIN MỚI\n\nXổ số miền Bắc 10/11. KQXSMB hôm nay 10/11/2026 được quay số mở thưởng vào lúc 18h15 bởi Công ty XSKT Quảng Ninh (XSQN). Kết quả xổ số miền Bắc hôm nay 10/11/2026 lần lượt được công bố từ giải bảy đến giải nhất, sau đó là giải đặc biệt.\n\nXem lại kết quả XS miền Bắc gần đy - Xổ số miền Bắc ngày 9/11/2026. Xem lại kết quả XS miền Bắc ngày 9/11/2026 [...] Diệu Hn/VTC News | 10-11-2026 - 18:30 PM | Xã hội\n\nChia sẻ\n\nXSMB 10/11/2026, kết quả xổ số miền Bắc hôm nay thứ Ba ngày 10/11 được cập nhật lúc 18h15, theo dõi XS miền Bắc hôm nay mới nhất, chính xác nhất.\n\n 09-11-2026XSMB 9/11 - Kết quả xổ số kiến thiết miền Bắc hôm nay 9/11/2026\n 08-11-2026XSMB 8/11 - Kết quả xổ số kiến thiết miền Bắc hôm nay 8/11/2026\n\nTIN MỚI",
+                "score": 0.91399205
+              },
+              {
+                "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026: XSMB Thứ Ba 10/11",
+                "url": "https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html",
+                "source": "vietnamnet.vn",
+                "summary": "Đặc biệt: Trùng 5 số cuối, có 3 giải x 1 tỷ đồng (+ 50 triệu nếu ký hiệu trùng)\n\nPhụ Đặc biệt: Trùng 4 số cuối, có 12 giải x 20 triệu đồng\n\nXem ngay: Kết quả xổ số miền Bắc hôm qua ngày 9/11/2026\n\nKết quả xổ số miền Trung hôm nay ngày 10/11/2026\n\nKết quả xổ số miền Trung hôm nay thứ Ba ngày 10/11/2026 gồm các xổ số Đắk Lắk và Quảng Nam. Xem trực tiếp kết quả XSMT 10/11 được cập nhật nhanh trên VietNamNet.\n\nKết quả xổ số miền Nam hôm nay ngày 10/11/2026 [...] ### Kết quả XSMB ngày 9/11/2026\n\n \n\n### Kết quả XSMB ngày 8/11/2026\n\n \n\n### Kết quả XSMB ngày 7/11/2026\n\nThông tin cần biết khi trúng thưởng xổ số miền Bắc\n\nKhi trúng thưởng xổ số miền Bắc, người chơi cần bảo quản vé nguyên hình, nguyên khổ, không rách rời, chắp vá, tẩy xóa hoặc sửa chữa. Vé phải còn trong thời hạn lĩnh thưởng và có thông tin phù hợp với kết quả do công ty xổ số kiến thiết công bố. [...] Khi lĩnh thưởng, người trúng cần mang theo vé trúng thưởng và giấy tờ tùy thn hợp lệ như căn cước công dn hoặc hộ chiếu. Trường hợp không thể trực tiếp nhận giải vì nguyên nhn khách quan, người trúng có thể ủy quyền cho người đại diện hợp pháp theo quy định.\n\nCơ cấu giải thưởng xổ số miền Bắc\n\nGiải Nhất: Trùng 5 số cuối với vé giải Nhất, có 15 giải x 10 triệu đồng\n\nGiải Nhì: Trùng 5 số cuối với 1 trong 2 vé giải Nhì, có 30 giải x 5 triệu đồng",
+                "score": 0.8997663
+              },
+              {
+                "title": "Dự đoán XSMB 11/11/2026 - kết quả xổ số miền Bắc hôm nay thứ 4 ngày 11/11/2026",
+                "url": "https://baoquocte.vn/du-doan-xsmb-11-11-2026-ket-qua-xo-so-mien-bac-hom-nay-thu-4-ngay-11-11-2026-432013.html",
+                "source": "baoquocte.vn",
+                "summary": "### Giá nông sản hôm nay 9/11/2026: Giá cà phê dần ổn định, Giá tiêu đảo chiều; Nga thúc đẩy hệ thống thanh toán xuyên biên giới tại chu Phi\n\nCập nhật bảng giá vàng hôm nay 9/11 chờ tín hiệu 'sức khoẻ' kinh tế Mỹ, thời kỳ của các tài sản hữu hình sắp đến \n\n### Cập nhật bảng giá vàng hôm nay 9/11 chờ tín hiệu 'sức khoẻ' kinh tế Mỹ, thời kỳ của các tài sản hữu hình sắp đến\n\nGiá heo hơi hôm nay 8/11: Trở lại đà tăng, giao dịch dần tiến sát mốc 50.000 đồng/kg [...] Kết quả xổ số Bắc Ninh (XSBN) ngày 11/11/2026 được cập nhật trực tiếp từ hội đồng quay thưởng xổ số kiến thiết Thủ đô Hà Nội.\n\n### XEM LẠI KẾT QUẢ XỔ SỐ MIỀN BẮC - KQXSMB\n\n- XSMB 10/11/2026\n\n|\n|  |\n| Dự đoán XSMB 10/11 - kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026 |\n\n- XSMB 9/11/2026\n\n|\n|  |\n| Dự đoán XSMB 9/11 - kết quả xổ số miền Bắc thứ 2 ngày 9/11/2026 |\n\n### NHỮNG LƯU Ý CẦN BIẾT KHI ĐỔI THƯỞNG XSMB [...] ### Dự đoán XSMB 11/11/2026 - kết quả xổ số miền Bắc hôm nay thứ 4 ngày 11/11/2026\n2. Dự đoán XSMB 10/11 - kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026 \n\n   ### Dự đoán XSMB 10/11 - kết quả xổ số miền Bắc thứ 3 ngày 10/11/2026\n3. Dự đoán XSMB 9/11 - kết quả xổ số miền Bắc thứ 2 ngày 9/11/2026 \n\n   ### Dự đoán XSMB 9/11 - kết quả xổ số miền Bắc thứ 2 ngày 9/11/2026\n4. Dự đoán XSMB 8/11 - kết quả xổ số miền Bắc Chủ nhật ngày 8/11/2026",
+                "score": 0.8967681
+              },
+              {
+                "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026",
+                "url": "https://antt.nguoiduatin.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-205261110154010473.htm",
+                "source": "antt.nguoiduatin.vn",
+                "summary": "16:24 10/11/2026\n\n## Kết quả xổ số miền Bắc 10/11 - KQXSMB - XSMB 10/11/2026- Tường thuật trực tiếp kết quả xổ số miền Bắc hôm nay ngày 10 tháng 11 năm 2026 nhanh và chính xác nhất.\n\n### Cảnh báo thủ đoạn lừa đảo mới nhắm vào nhà đầu tư chứng khoán\n\n### Kết quả xổ số miền Bắc hôm nay ngày 9/11/2026\n\n### Kết quả xổ số miền Nam hôm nay ngày 9/11/2026\n\nXem Kết quả xổ số miền Bắc 10/11/2026 được tường thuật trực tiếp vào hôm nay, tiến hành quay số mở thưởng xổ số miền Bắc hôm nay ngày 10 tháng 11. [...] Xổ số miền Bắc được mở thưởng với thứ tự quay số và công bố kết quả sẽ lần lượt theo thứ tự các giải, bắt đầu từ giải bảy, giải sáu,... cho đến khi có giải đặc biệt.\n\nXổ số miền Bắc có 27 giải gồm: 1 giải đặc biệt (5 số), 1 giải nhất (5 số), 2 giải nhì (5 số), 6 giải ba (5 số), 4 giải tư (4 số), 6 giải năm (4 số), 3 giải sáu (3 số), 4 giải bảy (2 số). Mỗi tờ vé số miền Bắc có giá là 10.000 đồng. [...] Kết quả xổ số (KQXS) ngày 11/11/2026 sẽ được Chuyên trang An ninh tiền tệ tiếp tục cập nhật nhanh nhất, chính xác nhất đến quý độc giả.\n\nPV\n\nXSMB XSMB hôm nay xổ số miền Bắc hôm nay Kết quả xổ số miền Bắc kết quả xổ số\n\nAn ninh Tiền tệ - Tạp chí Người Đưa Tin Pháp luật\n\n0 Thích\n\nChia sẻ \n\n Chia sẻ Facebook\n Chia sẻ Twitter\n Chia sẻ Zalo\n Chia sẻ Pinterest\n\nIn\n\n## MỚI CẬP NHẬT",
+                "score": 0.89501935
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "turn_index": 4,
+      "started_at": "2026-11-11T11:01:17+07:00",
+      "ended_at": "2026-11-11T11:01:20+07:00",
+      "user": "vậy còn kết quả xổ số kiến thiết miền bắc hôm nay",
+      "status": "answered",
+      "assistant_text": "I will call the selected tool(s).\n\nTOOL_CALLS_JSON:\n[\n  {\n    \"name\": \"lookup\",\n    \"args\": {\n      \"query\": \"Kết quả xổ số miền Bắc hôm nay\",\n      \"topic\": \"news\",\n      \"timeframe\": \"day\",\n      \"max_results\": 5\n    }\n  }\n]",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "I will call the selected tool(s).\n\nTOOL_CALLS_JSON:\n[\n  {\n    \"name\": \"lookup\",\n    \"args\": {\n      \"query\": \"Kết quả xổ số miền Bắc hôm nay\",\n      \"topic\": \"news\",\n      \"timeframe\": \"day\",\n      \"max_results\": 5\n    }\n  }\n]",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": []
+    },
+    {
+      "turn_index": 5,
+      "started_at": "2026-11-11T11:01:42+07:00",
+      "ended_at": "2026-11-11T11:01:52+07:00",
+      "user": "kết quả xổ số kiến thiết miền bắc hôm nay",
+      "status": "answered",
+      "assistant_text": "Kết quả xổ số miền Bắc hôm nay, ngày 10/11/2026, như sau:\n\n- **Giải Đặc Biệt**: 03372\n- **Giải Nhất**: 38696\n- **Giải Nhì**: 30610, 92390\n- **Giải Ba**: 69375, 98904, 81351, 88131, 25712, 14883\n- **Giải Tư**: 4981, 9077, 0426, 9458\n- **Giải Năm**: 4388, 3920, 9588, 7625, 0496, 9953\n- **Giải Sáu**: 672, 386, 632\n- **Giải Bảy**: 92, 59, 52, 83\n\nBạn có thể xem thêm chi tiết tại nguồn [TheThao247](https://thethao247.vn/63-xsmb-10-11-2026-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-c123-d444753.html) hoặc [VietNamNet](https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html). Nếu bạn cần thêm thông tin gì khác, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "lookup",
+              "args": {
+                "query": "Kết quả xổ số miền Bắc hôm nay",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "lookup",
+              "args": {
+                "query": "Kết quả xổ số miền Bắc hôm nay",
+                "topic": "news",
+                "timeframe": "day",
+                "max_results": 5
+              },
+              "result": {
+                "tool": "web_search",
+                "query": "Kết quả xổ số miền Bắc hôm nay",
+                "topic": "news",
+                "timeframe": "day",
+                "items": [
+                  {
+                    "title": "XSMB 10/11/2026 - Kết quả xổ số miền Bắc hôm nay 10/11/2026",
+                    "url": "https://thethao247.vn/63-xsmb-10-11-2026-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-c123-d444753.html",
+                    "source": "thethao247.vn",
+                    "summary": "| Giải | Kết quả |\n --- |\n| Giải ĐB | 03372 |\n| Giải nhất | 38696 |\n| Giải nhì | 30610 92390 |\n| Giải ba | 69375 98904 81351 88131 25712 14883 |\n| Giải tư | 4981 9077 0426 9458 |\n| Giải năm | 4388 3920 9588 7625 0496 9953 |\n| Giải sáu | 672 386 632 |\n| Giải bảy | 92 59 52 83 |\n\n## Cơ cấu giải thưởng xổ số miền Bắc XSMB như sau: [...] | Giải | Kết quả |\n --- |\n| Giải ĐB | 73683 |\n| Giải nhất | 25992 |\n| Giải nhì | 46401 80718 |\n| Giải ba | 34541 62689 58806 26594 11823 33335 |\n| Giải tư | 8889 8400 5739 5668 |\n| Giải năm | 6370 8957 4414 5050 6394 7747 |\n| Giải sáu | 868 593 607 |\n| Giải bảy | 14 00 83 56 |\n\n## Kết quả xổ số miền Bắc (XSMB) ngày 09/11 [...] 3 Giải đặc biệt, mỗi giải trị giá 1 tỷ Đồng\n 12 Giải phụ của giải đặc biệt, mỗi giải trị giá 20 triệu Đồng\n 15 Giải nhất, mỗi giải trị giá 10 triệu Đồng\n 30 Giải nhì, mỗi giải trị giá 5 triệu Đồng\n 90 Giải ba, mỗi giải trị giá 2 triệu Đồng\n 600 Giải tư, mỗi giải trị giá 400 nghìn Đồng\n 900 Giải năm, mỗi giải trị giá 200 nghìn Đồng\n 4.500 Giải sáu, mỗi giải trị giá 100 nghìn Đồng\n 60.000 Giải bảy, mỗi giải trị giá 40 nghìn Đồng\n 15.000 Giải khuyến khích, mỗi giải trị giá 40 nghìn Đồng",
+                    "score": 0.79755676
+                  },
+                  {
+                    "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026: XSMB Thứ Ba 10/11",
+                    "url": "https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html",
+                    "source": "vietnamnet.vn",
+                    "summary": "Giải Ba: Trùng 5 số cuối với 1 trong 6 vé giải Ba, có 90 giải x 1 triệu đồng\n\nGiải Tư: Trùng 4 số cuối với 1 trong 4 vé giải Tư, có 600 giải x 400 nghìn đồng\n\nGiải Năm: Trùng 4 số cuối với 1 trong 6 vé giải Năm, có 900 giải x 200 nghìn đồng\n\nGiải Sáu: Trùng 3 số cuối 1 trong 3 vé giải Sáu, có 4.500 giải x 100 nghìn đồng\n\nGiải Bảy: Trùng 2 số cuối 1 trong 4 vé giải Bảy, có 60.000 giải x 40 nghìn đồng\n\nKhuyến khích: Sai 1 số (ngoại trừ giải phụ Đặc biệt), có 15.000 giải x 40 nghìn đồng [...] Đặc biệt: Trùng 5 số cuối, có 3 giải x 1 tỷ đồng (+ 50 triệu nếu ký hiệu trùng)\n\nPhụ Đặc biệt: Trùng 4 số cuối, có 12 giải x 20 triệu đồng\n\nXem ngay: Kết quả xổ số miền Bắc hôm qua ngày 9/11/2026\n\nKết quả xổ số miền Trung hôm nay ngày 10/11/2026\n\nKết quả xổ số miền Trung hôm nay thứ Ba ngày 10/11/2026 gồm các xổ số Đắk Lắk và Quảng Nam. Xem trực tiếp kết quả XSMT 10/11 được cập nhật nhanh trên VietNamNet.\n\nKết quả xổ số miền Nam hôm nay ngày 10/11/2026 [...] Kết quả xổ số miền Bắc hôm nay thứ Ba ngày 10/11/2026 được quay bởi xổ số Quảng Ninh. Mời độc giả xem trực tiếp kết quả XSMB 10/11 được cập nhật nhanh trên VietNamNet.\n\nXem nhanh:\n\n Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026 (cập nhật)\n Kết quả XSMB 3 ngày gần đy\n\n## Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026\n\n \n\nKết quả xổ số miền Bắc (XSMB) ngày 10/11/2026 được quay thưởng và công bố vào lúc 18h10 bởi công ty xổ số kiến thiết Quảng Ninh.\n\n## Kết quả XSMB 3 ngày gần đy",
+                    "score": 0.7866228
+                  },
+                  {
+                    "title": "XSMB 10/11. Kết quả xổ số Miền Bắc hôm nay Thứ ba ngày 10/11/2026. Dự đoán kết quả xổ số",
+                    "url": "https://thethaovanhoa.vn/xsmb-hom-nay-10-11-2026.htm",
+                    "source": "thethaovanhoa.vn",
+                    "summary": "- Giải Nhất miền Bắc: 5 số cuối vé số của bạn trùng với số giải 1. Có 15 giải Nhất, mỗi giải trúng 10 triệu đồng.\n - Giải Nhì miền Bắc: 5 số cuối vé số của bạn trùng với 1 trong 2 số giải nhì. Có 30 giải Nhì, mỗi giải trúng 5 triệu đồng.\n - Giải Ba miền Bắc: 5 số cuối vé số của bạn trùng 1 trong 6 số giải ba. Có 9 giải Ba, mỗi giải trúng 1 triệu đồng.\n - Giải Tư miền Bắc: 4 số cuối vé số của bạn trùng 1 trong 4 số giải 4. Có 600 giải Tư, mỗi giải trúng 400 nghìn đồng. [...] - Giải Năm miền Bắc: 4 số cuối vé số của bạn trùng 1 trong 6 số giải 5. Có 900 giải Năm, mỗi giải trúng 200 nghìn đồng.\n - Giải Sáu miền Bắc: 3 số cuối vé số của bạn trùng 1 trong 3 số giải 6. Có 4.500 giải Sáu, mỗi giải trúng 100 nghìn đồng.\n - Giải Bảy miền Bắc: 2 số cuối vé số của bạn trùng 1 trong 4 số giải 7. Có 60.000 giải Bảy, mỗi giải trúng 40 nghìn đồng. [...] Giải tư:  \n   Mỗi giải trị giá 3.000.000 đồng (Ba triệu đồng)  \n   Số giải: 70  \n   Quay 1 lần: 5 số trúng\n Giải ba:  \n   Mỗi giải trị giá 10.000.000 đồng (Mười triệu đồng)  \n   Số giải: 20  \n   Quay 2 lần: 5 số trúng\n Giải nhì:  \n   Mỗi giải trị giá 15.000.000 đồng (Mười lăm triệu đồng)  \n   Số giải: 10  \n   Quay 1 lần: 5 số trúng\n Giải nhất:  \n   Mỗi giải trị giá 30.000.000 đồng (Ba mươi triệu đồng)  \n   Số giải: 10  \n   Quay 1 lần: 5 số trúng\n Giải đặc biệt:",
+                    "score": 0.73866904
+                  },
+                  {
+                    "title": "XSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026",
+                    "url": "https://cafef.vn/xsmb-10-11-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-188261110175429008.chn",
+                    "source": "cafef.vn",
+                    "summary": "- Thứ Sáu: Hải Phòng (XSHP).\n\n- Thứ Bảy: Nam Định (XSND).\n\n- Chủ nhật: Thái Bình (XSTB).\n\nChuẩn bị đầy đủ giấy tờ khi nhận thưởng\n\nĐể hoàn tất thủ tục nhận thưởng XSMB, người trúng cần mang theo tờ vé số còn nguyên vẹn cùng giấy tờ tùy thn hợp lệ như căn cước công dn, hộ chiếu hoặc các giấy tờ theo quy định của đơn vị trả thưởng. [...] - Xổ số miền Bắc ngày 2/11/2026. Xem lại kết quả XS miền Bắc ngày 2/11/2026\n\nKết quả xổ số miền Bắc ngày 2/11/2026, xổ số miền Bắc thứ Hai hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 9.\n\nKết quả xổ số miền Bắc ngày 2/11/2026.\n\n Lịch quay số mở thưởng kết quả xổ số miền Bắc hôm nay\n\n- Thứ Hai: Hà Nội (XSHN).\n\n- Thứ Ba: Quảng Ninh (XSQN).\n\n- Thứ Tư: Bắc Ninh (XSBN).\n\n- Thứ Năm: Hà Nội (XSHN). [...] Kết quả xổ số miền Bắc ngày 9/11/2026, xổ số miền Bắc thứ Hai hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 2.\n\nKết quả xổ số miền Bắc ngày 9/11/2026.\n\n - Xổ số miền Bắc ngày 8/11/2026. Xem lại kết quả XS miền Bắc ngày 8/11/2026\n\nKết quả xổ số miền Bắc ngày 8/11/2026, xổ số miền Bắc Chủ nhật hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Thái Bình (XSTB).",
+                    "score": 0.729327
+                  },
+                  {
+                    "title": "XSMB 11/11, Xổ số miền Bắc ngày 11 tháng 11, Trực tiếp Kết quả Xổ số miền Bắc hôm nay ngày 11/11/2026",
+                    "url": "https://doanhnghiephoinhap.vn/xsmb-1111-xo-so-mien-bac-ngay-11-thang-11-truc-tiep-ket-qua-xo-so-mien-bac-hom-nay-ngay-11112026-153538.html",
+                    "source": "doanhnghiephoinhap.vn",
+                    "summary": "Giải Sáu: Trùng 3 số cuối 1 trong 3 vé giải sáu, có 4.500 giải x 100 nghìn đồng\n\nGiải Bảy: Trùng 2 số cuối 1 trong 4 vé giải bảy, có 60.000 giải x 40 nghìn đồng\n\nKhuyến khích: Sai 1 số (ngoại trừ giải phụ đặc biệt), có 15.000 giải x 40 nghìn đồng\n\nĐặc biệt: Trùng 5 số cuối, có 3 giải x 1 tỷ đồng (+ 50 triệu nếu ký hiệu trùng)\n\nPhụ Đặc biệt: Trùng 4 số cuối, có 12 giải x 20 triệu đồng\n\n## Điều kiện nhận thưởng XSMB",
+                    "score": 0.70568365
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Kết quả xổ số miền Bắc hôm nay, ngày 10/11/2026, như sau:\n\n- **Giải Đặc Biệt**: 03372\n- **Giải Nhất**: 38696\n- **Giải Nhì**: 30610, 92390\n- **Giải Ba**: 69375, 98904, 81351, 88131, 25712, 14883\n- **Giải Tư**: 4981, 9077, 0426, 9458\n- **Giải Năm**: 4388, 3920, 9588, 7625, 0496, 9953\n- **Giải Sáu**: 672, 386, 632\n- **Giải Bảy**: 92, 59, 52, 83\n\nBạn có thể xem thêm chi tiết tại nguồn [TheThao247](https://thethao247.vn/63-xsmb-10-11-2026-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-c123-d444753.html) hoặc [VietNamNet](https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html). Nếu bạn cần thêm thông tin gì khác, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "Kết quả xổ số miền Bắc hôm nay",
+            "topic": "news",
+            "timeframe": "day",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "Kết quả xổ số miền Bắc hôm nay",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "XSMB 10/11/2026 - Kết quả xổ số miền Bắc hôm nay 10/11/2026",
+                "url": "https://thethao247.vn/63-xsmb-10-11-2026-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-c123-d444753.html",
+                "source": "thethao247.vn",
+                "summary": "| Giải | Kết quả |\n --- |\n| Giải ĐB | 03372 |\n| Giải nhất | 38696 |\n| Giải nhì | 30610 92390 |\n| Giải ba | 69375 98904 81351 88131 25712 14883 |\n| Giải tư | 4981 9077 0426 9458 |\n| Giải năm | 4388 3920 9588 7625 0496 9953 |\n| Giải sáu | 672 386 632 |\n| Giải bảy | 92 59 52 83 |\n\n## Cơ cấu giải thưởng xổ số miền Bắc XSMB như sau: [...] | Giải | Kết quả |\n --- |\n| Giải ĐB | 73683 |\n| Giải nhất | 25992 |\n| Giải nhì | 46401 80718 |\n| Giải ba | 34541 62689 58806 26594 11823 33335 |\n| Giải tư | 8889 8400 5739 5668 |\n| Giải năm | 6370 8957 4414 5050 6394 7747 |\n| Giải sáu | 868 593 607 |\n| Giải bảy | 14 00 83 56 |\n\n## Kết quả xổ số miền Bắc (XSMB) ngày 09/11 [...] 3 Giải đặc biệt, mỗi giải trị giá 1 tỷ Đồng\n 12 Giải phụ của giải đặc biệt, mỗi giải trị giá 20 triệu Đồng\n 15 Giải nhất, mỗi giải trị giá 10 triệu Đồng\n 30 Giải nhì, mỗi giải trị giá 5 triệu Đồng\n 90 Giải ba, mỗi giải trị giá 2 triệu Đồng\n 600 Giải tư, mỗi giải trị giá 400 nghìn Đồng\n 900 Giải năm, mỗi giải trị giá 200 nghìn Đồng\n 4.500 Giải sáu, mỗi giải trị giá 100 nghìn Đồng\n 60.000 Giải bảy, mỗi giải trị giá 40 nghìn Đồng\n 15.000 Giải khuyến khích, mỗi giải trị giá 40 nghìn Đồng",
+                "score": 0.79755676
+              },
+              {
+                "title": "Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026: XSMB Thứ Ba 10/11",
+                "url": "https://vietnamnet.vn/ket-qua-xo-so-mien-bac-hom-nay-ngay-10-11-2026-2573400.html",
+                "source": "vietnamnet.vn",
+                "summary": "Giải Ba: Trùng 5 số cuối với 1 trong 6 vé giải Ba, có 90 giải x 1 triệu đồng\n\nGiải Tư: Trùng 4 số cuối với 1 trong 4 vé giải Tư, có 600 giải x 400 nghìn đồng\n\nGiải Năm: Trùng 4 số cuối với 1 trong 6 vé giải Năm, có 900 giải x 200 nghìn đồng\n\nGiải Sáu: Trùng 3 số cuối 1 trong 3 vé giải Sáu, có 4.500 giải x 100 nghìn đồng\n\nGiải Bảy: Trùng 2 số cuối 1 trong 4 vé giải Bảy, có 60.000 giải x 40 nghìn đồng\n\nKhuyến khích: Sai 1 số (ngoại trừ giải phụ Đặc biệt), có 15.000 giải x 40 nghìn đồng [...] Đặc biệt: Trùng 5 số cuối, có 3 giải x 1 tỷ đồng (+ 50 triệu nếu ký hiệu trùng)\n\nPhụ Đặc biệt: Trùng 4 số cuối, có 12 giải x 20 triệu đồng\n\nXem ngay: Kết quả xổ số miền Bắc hôm qua ngày 9/11/2026\n\nKết quả xổ số miền Trung hôm nay ngày 10/11/2026\n\nKết quả xổ số miền Trung hôm nay thứ Ba ngày 10/11/2026 gồm các xổ số Đắk Lắk và Quảng Nam. Xem trực tiếp kết quả XSMT 10/11 được cập nhật nhanh trên VietNamNet.\n\nKết quả xổ số miền Nam hôm nay ngày 10/11/2026 [...] Kết quả xổ số miền Bắc hôm nay thứ Ba ngày 10/11/2026 được quay bởi xổ số Quảng Ninh. Mời độc giả xem trực tiếp kết quả XSMB 10/11 được cập nhật nhanh trên VietNamNet.\n\nXem nhanh:\n\n Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026 (cập nhật)\n Kết quả XSMB 3 ngày gần đy\n\n## Kết quả xổ số miền Bắc hôm nay ngày 10/11/2026\n\n \n\nKết quả xổ số miền Bắc (XSMB) ngày 10/11/2026 được quay thưởng và công bố vào lúc 18h10 bởi công ty xổ số kiến thiết Quảng Ninh.\n\n## Kết quả XSMB 3 ngày gần đy",
+                "score": 0.7866228
+              },
+              {
+                "title": "XSMB 10/11. Kết quả xổ số Miền Bắc hôm nay Thứ ba ngày 10/11/2026. Dự đoán kết quả xổ số",
+                "url": "https://thethaovanhoa.vn/xsmb-hom-nay-10-11-2026.htm",
+                "source": "thethaovanhoa.vn",
+                "summary": "- Giải Nhất miền Bắc: 5 số cuối vé số của bạn trùng với số giải 1. Có 15 giải Nhất, mỗi giải trúng 10 triệu đồng.\n - Giải Nhì miền Bắc: 5 số cuối vé số của bạn trùng với 1 trong 2 số giải nhì. Có 30 giải Nhì, mỗi giải trúng 5 triệu đồng.\n - Giải Ba miền Bắc: 5 số cuối vé số của bạn trùng 1 trong 6 số giải ba. Có 9 giải Ba, mỗi giải trúng 1 triệu đồng.\n - Giải Tư miền Bắc: 4 số cuối vé số của bạn trùng 1 trong 4 số giải 4. Có 600 giải Tư, mỗi giải trúng 400 nghìn đồng. [...] - Giải Năm miền Bắc: 4 số cuối vé số của bạn trùng 1 trong 6 số giải 5. Có 900 giải Năm, mỗi giải trúng 200 nghìn đồng.\n - Giải Sáu miền Bắc: 3 số cuối vé số của bạn trùng 1 trong 3 số giải 6. Có 4.500 giải Sáu, mỗi giải trúng 100 nghìn đồng.\n - Giải Bảy miền Bắc: 2 số cuối vé số của bạn trùng 1 trong 4 số giải 7. Có 60.000 giải Bảy, mỗi giải trúng 40 nghìn đồng. [...] Giải tư:  \n   Mỗi giải trị giá 3.000.000 đồng (Ba triệu đồng)  \n   Số giải: 70  \n   Quay 1 lần: 5 số trúng\n Giải ba:  \n   Mỗi giải trị giá 10.000.000 đồng (Mười triệu đồng)  \n   Số giải: 20  \n   Quay 2 lần: 5 số trúng\n Giải nhì:  \n   Mỗi giải trị giá 15.000.000 đồng (Mười lăm triệu đồng)  \n   Số giải: 10  \n   Quay 1 lần: 5 số trúng\n Giải nhất:  \n   Mỗi giải trị giá 30.000.000 đồng (Ba mươi triệu đồng)  \n   Số giải: 10  \n   Quay 1 lần: 5 số trúng\n Giải đặc biệt:",
+                "score": 0.73866904
+              },
+              {
+                "title": "XSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026",
+                "url": "https://cafef.vn/xsmb-10-11-ket-qua-xo-so-mien-bac-hom-nay-10-11-2026-188261110175429008.chn",
+                "source": "cafef.vn",
+                "summary": "- Thứ Sáu: Hải Phòng (XSHP).\n\n- Thứ Bảy: Nam Định (XSND).\n\n- Chủ nhật: Thái Bình (XSTB).\n\nChuẩn bị đầy đủ giấy tờ khi nhận thưởng\n\nĐể hoàn tất thủ tục nhận thưởng XSMB, người trúng cần mang theo tờ vé số còn nguyên vẹn cùng giấy tờ tùy thn hợp lệ như căn cước công dn, hộ chiếu hoặc các giấy tờ theo quy định của đơn vị trả thưởng. [...] - Xổ số miền Bắc ngày 2/11/2026. Xem lại kết quả XS miền Bắc ngày 2/11/2026\n\nKết quả xổ số miền Bắc ngày 2/11/2026, xổ số miền Bắc thứ Hai hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 9.\n\nKết quả xổ số miền Bắc ngày 2/11/2026.\n\n Lịch quay số mở thưởng kết quả xổ số miền Bắc hôm nay\n\n- Thứ Hai: Hà Nội (XSHN).\n\n- Thứ Ba: Quảng Ninh (XSQN).\n\n- Thứ Tư: Bắc Ninh (XSBN).\n\n- Thứ Năm: Hà Nội (XSHN). [...] Kết quả xổ số miền Bắc ngày 9/11/2026, xổ số miền Bắc thứ Hai hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Hà Nội (XSHN).\n\nXSMB 10/11 - Kết quả xổ số miền Bắc hôm nay 10/11/2026 - Ảnh 2.\n\nKết quả xổ số miền Bắc ngày 9/11/2026.\n\n - Xổ số miền Bắc ngày 8/11/2026. Xem lại kết quả XS miền Bắc ngày 8/11/2026\n\nKết quả xổ số miền Bắc ngày 8/11/2026, xổ số miền Bắc Chủ nhật hằng tuần đầy đủ, chính xác nhất, được quay thưởng bởi Công ty XSKT Thái Bình (XSTB).",
+                "score": 0.729327
+              },
+              {
+                "title": "XSMB 11/11, Xổ số miền Bắc ngày 11 tháng 11, Trực tiếp Kết quả Xổ số miền Bắc hôm nay ngày 11/11/2026",
+                "url": "https://doanhnghiephoinhap.vn/xsmb-1111-xo-so-mien-bac-ngay-11-thang-11-truc-tiep-ket-qua-xo-so-mien-bac-hom-nay-ngay-11112026-153538.html",
+                "source": "doanhnghiephoinhap.vn",
+                "summary": "Giải Sáu: Trùng 3 số cuối 1 trong 3 vé giải sáu, có 4.500 giải x 100 nghìn đồng\n\nGiải Bảy: Trùng 2 số cuối 1 trong 4 vé giải bảy, có 60.000 giải x 40 nghìn đồng\n\nKhuyến khích: Sai 1 số (ngoại trừ giải phụ đặc biệt), có 15.000 giải x 40 nghìn đồng\n\nĐặc biệt: Trùng 5 số cuối, có 3 giải x 1 tỷ đồng (+ 50 triệu nếu ký hiệu trùng)\n\nPhụ Đặc biệt: Trùng 4 số cuối, có 12 giải x 20 triệu đồng\n\n## Điều kiện nhận thưởng XSMB",
+                "score": 0.70568365
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "requested_configuration": {
+    "provider_name": "openrouter",
+    "model": "",
+    "version": "v3",
+    "history_window": 5,
+    "max_tool_rounds": 4
+  },
+  "artifact_version": "v3+p718b3e8136df+t7f5d797950cf",
+  "prompt_hash": "718b3e8136df0e335bfffbe78aa5d13384275e17848936bb1fc1bc747edc962d",
+  "tools_hash": "7f5d797950cffda70586ea116da559f4b4d760cc1c0d7344de440dd8e80d4c98",
+  "system_prompt": "C:\\Users\\admin\\Downloads\\AIthucchien\\K5-L3B-DAY03-ABC-ResearchAgentToolEval\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\admin\\Downloads\\AIthucchien\\K5-L3B-DAY03-ABC-ResearchAgentToolEval\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4
+}

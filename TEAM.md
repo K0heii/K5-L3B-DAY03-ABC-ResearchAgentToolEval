@@ -56,6 +56,7 @@ Sao chép mục dưới đây cho từng thành viên.
 - Chạy v0 (0.65), phân tích case lỗi và sửa prompt/tools qua v1 (0.85), v2 (0.90), v3 (1.00 trên 20 case base).
 - Chạy lại v3 sau khi thêm `summarize` (20/20) và bộ kiểm tra riêng fetch/summarize (2/2); ghi `version_log.csv`.
 - Thực hiện v4 với một giả thuyết: thêm đúng một câu vào bước 1 để xin xác nhận trước khi đăng/gửi sau lượt tìm kiếm; base 20/20, group 10/10 và G06 PASS. Bằng chứng và lỗi kết nối ban đầu: [v4_summary.md](starter_v0/analysis/v4_summary.md).
+- Bổ sung v5 xử lý ngày tháng: tool `calendar`, `target_date` cho `lookup`, kiểm tra ngày đích trong chat và sửa log Unicode. Test 121 passed, 14 skipped; base v5 19/20, còn hồi quy R01. Bằng chứng: [run v5](starter_v0/runs/v5_B_base_openrouter_20261111T112032802355.json), [CSV v5](starter_v0/analysis/base_runs_v5.csv).
 
 ### Bằng chứng
 

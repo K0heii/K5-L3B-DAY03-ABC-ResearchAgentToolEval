@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "transcript_id": "live_d3c2d6f4ab814c7fbe2b0d40cca504da",
+  "source": "streamlit",
+  "mode": "live",
+  "version": "v3",
+  "provider": "openrouter",
+  "model": "openai/gpt-4o-mini",
+  "created_at": "2026-11-11T10:54:05+07:00",
+  "updated_at": "2026-11-11T10:54:17+07:00",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-11-11T10:54:14+07:00",
+      "ended_at": "2026-11-11T10:54:17+07:00",
+      "user": "kết quả xổ số hôm qua",
+      "status": "provider_error",
+      "assistant_text": "Chưa nhận được câu trả lời từ model. Xem chi tiết lỗi bên dưới.",
+      "error": "APIConnectionError: Connection error.",
+      "rounds": [],
+      "tool_events": []
+    }
+  ],
+  "requested_configuration": {
+    "provider_name": "openrouter",
+    "model": "",
+    "version": "v3",
+    "history_window": 5,
+    "max_tool_rounds": 4
+  },
+  "artifact_version": "v3+p718b3e8136df+t7f5d797950cf",
+  "prompt_hash": "718b3e8136df0e335bfffbe78aa5d13384275e17848936bb1fc1bc747edc962d",
+  "tools_hash": "7f5d797950cffda70586ea116da559f4b4d760cc1c0d7344de440dd8e80d4c98",
+  "system_prompt": "C:\\Users\\admin\\Downloads\\AIthucchien\\K5-L3B-DAY03-ABC-ResearchAgentToolEval\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Users\\admin\\Downloads\\AIthucchien\\K5-L3B-DAY03-ABC-ResearchAgentToolEval\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4
+}
