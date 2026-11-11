@@ -28,11 +28,11 @@ python -m streamlit run app.py
 
 Mở `http://localhost:8501`. Transcript mỗi phiên chat lưu trong `starter_v0/transcripts/`.
 
+Trên PowerShell, nếu dùng môi trường ảo `.venv` có sẵn trong `starter_v0/`, chạy `.\.venv\Scripts\python.exe -m streamlit run app.py` từ thư mục đó.
+
 **Link dùng thử (deploy):**
 
-> Dán link public để team khác mở thử ngay. Cách deploy nhanh bằng Cloudflare Tunnel xem README. Nếu deploy Vercel/Streamlit Cloud thì dán link đó.
->
-> URL:
+[Mở Research Desk](https://impact-prohibited-emerald-overcome.trycloudflare.com). Link Cloudflare Quick Tunnel hoạt động khi Streamlit và `cloudflared` đang chạy.
 
 ### A2. Tool agent có
 
@@ -166,7 +166,7 @@ Ngoài ra `transcripts/live_bb95accc24b545d288ec6624823bfa65.transcript.json` l�
 |---|---|---|---|
 | Tool mới (`tools/<tên>/`) | `starter_v0/tools/summarize/`, `keywords/`, `extract_links/`, `merge_sources/` (mỗi folder có `tool.py` + `TOOL.md`); đăng ký trong `tools/__init__.py` và `artifacts/tools.yaml` | 4 tool chạy cục bộ; `summarize` route đúng ở eval G01, S01/S02 (`runs/v3_B_group_openrouter_20261110T194201490825.json`) và trong transcript B1, B3 | Description ghi rõ khi KHÔNG dùng (vd. `summarize` không dùng khi chỉ có URL → `fetch` trước); input xấu trả error dict, không raise |
 | Unit test tool mới (≥ 3 test/tool) | `starter_v0/tests/test_tools_todo.py` — 3 test × 4 tool (happy path, input xấu, tham số không hợp lệ) | `pytest`: **94 passed, 0 failed**, 14 skipped (stub TODO của tool có sẵn) | Test offline (conftest chặn mạng thật); `tests/test_tool_contract.py` xanh sau khi thêm tool |
-| UI (lệnh chạy + link dùng thử) | `starter_v0/app.py`, `ui_agent.py`, `ui_transcripts.py`; chạy `python -m streamlit run app.py` trong `starter_v0/` | Chat nhiều lượt với agent v3, tự lưu transcript JSON vào `starter_v0/transcripts/` | Link public: _(Người 3 bổ sung nếu mở Cloudflare Tunnel)_; transcript ghi cả `tool_events` nên UI không che lỗi tool |
+| UI (lệnh chạy + link dùng thử) | `starter_v0/app.py`, `ui_agent.py`, `ui_transcripts.py`. Chạy `python -m streamlit run app.py` trong `starter_v0/`. [Link dùng thử](https://impact-prohibited-emerald-overcome.trycloudflare.com) | URL công khai trả HTTP 200. Phiên chat nhiều lượt với agent v3 tự lưu transcript JSON vào `starter_v0/transcripts/`. | Giữ Streamlit và `cloudflared` chạy trong lúc demo. Cập nhật URL ở A1 và B5a nếu tạo tunnel mới. Transcript ghi `tool_events` để kiểm tra lỗi tool. |
 
 Tool unit tests: số test đã viết, và một ví dụ lỗi mà unit test bắt được nhưng eval không bắt được.
 

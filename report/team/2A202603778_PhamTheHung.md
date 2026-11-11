@@ -38,8 +38,18 @@ Kiểm tra tích hợp tool mới `summarize` qua giao diện: nhận đoạn v�
 
   Sử dụng Codex hỗ trợ đọc đề, xây dựng code và kiểm tra ứng dụng. Việc kiểm chứng được thực hiện bằng pytest, Streamlit AppTest, chạy hội thoại thật qua OpenRouter, xem hoạt động tool và đối chiếu file JSON đã lưu. Sau khi bỏ hai file test UI bổ sung và đồng bộ code mới của nhóm, kết quả suite còn lại là 70 passed, 14 skipped, 0 failed; các test skip là TODO có sẵn của starter.
 
+### Triển khai giao diện dùng thử
+
+Tôi chạy Streamlit trên máy Windows và dùng Cloudflare Quick Tunnel để chia sẻ giao diện với nhóm và người chấm. Sau khi Streamlit chạy ở cổng `8501`, tôi mở PowerShell thứ hai và chạy:
+
+```powershell
+& "C:\Program Files (x86)\cloudflared\cloudflared.exe" tunnel --url http://localhost:8501
+```
+
+Endpoint `/_stcore/health` qua URL công khai trả về HTTP 200 (`ok`). Link dùng thử đã được điền vào A1 và B5a trong [báo cáo nhóm](group_report.md). Link hoạt động khi cả Streamlit và `cloudflared` đang chạy. [Mở Research Desk](https://impact-prohibited-emerald-overcome.trycloudflare.com)
+
 ## 5. Tự đánh giá
 
 Phần việc đã có giao diện chạy local, kết nối Agent thật, hiển thị hoạt động tool và lưu/tải transcript làm bằng chứng. Phiên 5 lượt thể hiện được các tình huống yêu cầu thường, bổ sung thông tin và hỏi xác nhận trước khi gửi.
 
-Các điểm còn cần hoàn thiện là link dùng thử public và cập nhật phần UI vào báo cáo nhóm/TEAM.md. Cần phối hợp với thành viên phụ trách prompt để xem lại trường hợp hỏi thiếu thông tin nhưng chưa gọi `clarify`. Khi trình bày, cần nắm được luồng giao diện → Agent → tool và cách kiểm tra kết quả từ transcript.
+Cần phối hợp với thành viên phụ trách prompt để xem lại trường hợp hỏi thiếu thông tin nhưng chưa gọi `clarify`. Khi trình bày, cần nắm được luồng giao diện → Agent → tool và cách kiểm tra kết quả từ transcript.
